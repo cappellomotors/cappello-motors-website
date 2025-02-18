@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars for Sale - Cappello Motors LLC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            background-color: #2c3e50;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color: #e74c3c;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+        }
+        .car-list {
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .car-item {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .car-item img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .car-info {
+            flex: 1;
+        }
+        .car-info h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .car-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 14px;
+        }
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Sell Your Car</a>
+        <a href="cars-for-sale.html">Cars for Sale</a>
+    </nav>
+    <h1>Cars for Sale at Cappello Motors LLC</h1>
+    <div class="car-list">
+        <div class="car-item">
+            <img src="https://via.placeholder.com/200x150?text=2019+Toyota+Camry" alt="2019 Toyota Camry">
+            <div class="car-info">
+                <h3>2019 Toyota Camry</h3>
+                <p>Mileage: 35,000 | Condition: Excellent | Price: $22,000</p>
+                <button onclick="alert('Contact us at cappellomotorsllc@gmail.com or call 586-453-5924 to inquire about this car!')">Contact Us</button>
+            </div>
+        </div>
+        <div class="car-item">
+            <img src="https://via.placeholder.com/200x150?text=2017+Ford+F-150" alt="2017 Ford F-150">
+            <div class="car-info">
+                <h3>2017 Ford F-150</h3>
+                <p>Mileage: 60,000 | Condition: Good | Price: $28,000</p>
+                <button onclick="alert('Contact us at cappellomotorsllc@gmail.com or call 586-453-5924 to inquire about this car!')">Contact Us</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+</body>
+</html>
