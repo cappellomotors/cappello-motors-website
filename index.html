@@ -6,206 +6,153 @@
     <title>Sell Your Car to Cappello Motors LLC</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 50px;
-            background-color: #f4f4f4;
+            padding: 0;
+            background-color: #f7f7f7;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
         }
         nav {
-            background-color: #2c3e50;
-            padding: 15px;
+            background-color: #1a2a44;
+            padding: 20px;
             position: fixed;
             top: 0;
             width: 100%;
-            left: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         nav a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 25px;
             font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         nav a:hover {
-            color: #e74c3c;
+            color: #d32f2f;
+        }
+        header {
+            margin-top: 100px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a2a44 0%, #d32f2f 100%);
+            color: #fff;
         }
         h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 3em;
+            margin: 0;
         }
         .highlight {
-            color: #e74c3c;
-            font-size: 1.5em;
+            font-size: 1.8em;
+            font-weight: 500;
             margin: 20px 0;
-            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        p {
-            color: #666;
+        .how-it-works {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
-        .input-container, .car-details {
-            margin-top: 30px;
-            background: white;
+        .step {
+            width: 22%;
+            margin: 20px 1%;
+            background: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        input[type="text"], select, textarea, input[type="file"] {
-            padding: 12px;
-            width: 80%;
-            max-width: 300px;
-            font-size: 16px;
-            margin: 10px auto;
-            display: block;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .step img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
         }
-        textarea {
-            resize: vertical;
+        .step h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 1.4em;
+            margin: 0;
+            text-transform: uppercase;
         }
-        button {
-            padding: 12px 25px;
-            font-size: 16px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #c0392b;
-        }
-        .car-details {
-            display: none;
-        }
-        .error {
-            color: #e74c3c;
-            font-size: 14px;
-            display: none;
-        }
-        .note {
-            font-size: 12px;
-            color: #888;
+        .step p {
+            color: #555;
+            font-size: 1em;
+            margin: 10px 0 0;
         }
         footer {
             margin-top: auto;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
             font-size: 14px;
         }
         footer a {
-            color: #e74c3c;
+            color: #d32f2f;
             text-decoration: none;
         }
         footer a:hover {
             text-decoration: underline;
         }
+        @media (max-width: 768px) {
+            .step {
+                width: 45%;
+            }
+        }
+        @media (max-width: 480px) {
+            .step {
+                width: 100%;
+            }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
-<nav>
-    <a href="https://cappellomotors.com">Sell Your Car</a>
-    <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-    <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
-    <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
-</nav>
+        <a href="https://cappellomotors.com">Sell Your Car</a>
+        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
+        <a href="https://cappellomotors.com/how-it-works.html">How It Works</a>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
     </nav>
-    <h1>Sell Your Car to Cappello Motors LLC</h1>
-    <div class="highlight">We Come to You, Pay Cash on the Spot, and Pick Up Your Car!</div>
-    <p>No hassle, no waiting—enter your car's VIN or license plate to get started.</p>
-    <div class="input-container">
-        <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <p class="error" id="vinError">Please enter a VIN or license plate.</p>
-        <button onclick="checkVin()">Submit</button>
+    <header>
+        <h1>Cappello Motors LLC</h1>
+        <div class="highlight">Sell Your Car Fast—Cash on the Spot, No Hassle!</div>
+    </header>
+    <div class="how-it-works">
+        <div class="step">
+            <img src="https://via.placeholder.com/80x80.png?text=Truck" alt="We Show Up">
+            <h2>We Show Up</h2>
+            <p>Enter your VIN, and we’ll come to your driveway—faster than the big guys.</p>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/80x80.png?text=Check" alt="Check It Out">
+            <h2>Check It Out</h2>
+            <p>We inspect your car on the spot with a quick, fair review.</p>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/80x80.png?text=Cash" alt="Pay Cash">
+            <h2>Pay Cash</h2>
+            <p>Get paid instantly—cash in hand, no delays.</p>
+        </div>
+        <div class="step">
+            <img src="https://via.placeholder.com/80x80.png?text=Take+Away" alt="Take It Away">
+            <h2>Take It Away</h2>
+            <p>We take the car and title—done deal, no extra trips.</p>
+        </div>
     </div>
-
-    <div class="car-details" id="carDetails">
-        <h2>Tell Us About Your Car</h2>
-        <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="VIN" id="hiddenVin">
-            <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
-            <p class="error" id="mileageError">Please enter the mileage.</p>
-            <select id="condition" name="Condition" required>
-                <option value="">Select Condition</option>
-                <option value="excellent">Excellent</option>
-                <option value="good">Good</option>
-                <option value="fair">Fair</option>
-                <option value="poor">Poor</option>
-            </select>
-            <p class="error" id="conditionError">Please select a condition.</p>
-            <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
-            <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
-            <p>Upload up to 5 photos of your car (optional)</p>
-            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
-            <p class="error" id="contactError">Please provide contact info.</p>
-            <button type="submit">Send to Cappello Motors LLC</button>
-        </form>
-    </div>
-
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
-
-    <script>
-        function checkVin() {
-            const carInput = document.getElementById('carInput').value;
-            const vinError = document.getElementById('vinError');
-            if (carInput.trim() === '') {
-                vinError.style.display = 'block';
-            } else {
-                vinError.style.display = 'none';
-                document.getElementById('hiddenVin').value = carInput;
-                document.getElementById('carDetails').style.display = 'block';
-                document.querySelector('.input-container').style.display = 'none';
-            }
-        }
-
-        document.getElementById('detailsForm').addEventListener('submit', function(event) {
-            const mileage = document.getElementById('mileage').value;
-            const condition = document.getElementById('condition').value;
-            const contact = document.getElementById('contact').value;
-
-            const mileageError = document.getElementById('mileageError');
-            const conditionError = document.getElementById('conditionError');
-            const contactError = document.getElementById('contactError');
-
-            let hasError = false;
-
-            if (!mileage) {
-                mileageError.style.display = 'block';
-                hasError = true;
-            } else {
-                mileageError.style.display = 'none';
-            }
-            if (!condition) {
-                conditionError.style.display = 'block';
-                hasError = true;
-            } else {
-                conditionError.style.display = 'none';
-            }
-            if (!contact) {
-                contactError.style.display = 'block';
-                hasError = true;
-            } else {
-                contactError.style.display = 'none';
-            }
-
-            if (hasError) {
-                event.preventDefault();
-            } else {
-                alert('Thank you! Your submission is being sent to Cappello Motors LLC.');
-            }
-        });
-    </script>
 </body>
 </html>
