@@ -6,100 +6,130 @@
     <title>Dealer Login - Cappello Motors LLC</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 50px;
-            background-color: #f4f4f4;
+            background-color: #f7f7f7;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
         }
         nav {
-            background-color: #2c3e50;
-            padding: 15px;
+            background-color: #1a2a44;
+            padding: 20px;
             position: fixed;
             top: 0;
             width: 100%;
             left: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         nav a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 25px;
             font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         nav a:hover {
-            color: #e74c3c;
+            color: #d32f2f;
         }
         header {
-            margin-top: 80px;
+            margin-top: 100px;
         }
         h1 {
-            font-family: 'Arial Black', Arial, sans-serif;
-            color: #e74c3c;
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #d32f2f;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 2.5em;
+            letter-spacing: 3px;
+            font-size: 2.8em;
+            margin: 0;
         }
         .auction-list {
-            margin-top: 30px;
-            max-width: 800px;
+            margin-top: 40px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
-            display: none; /* Hidden until password entered */
+            display: none; /* Hidden until login */
         }
         .auction-item {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             text-align: left;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-left: 5px solid #d32f2f;
         }
         .auction-item h3 {
             margin: 0;
-            color: #2c3e50;
+            color: #1a2a44;
+            font-size: 1.5em;
         }
         .auction-item p {
-            margin: 5px 0;
-            color: #666;
+            margin: 8px 0;
+            color: #555;
+            font-size: 1.1em;
+        }
+        .timer {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .status-not-started {
+            color: #888;
+            font-weight: bold;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
-            background-color: #e74c3c;
+            background-color: #d32f2f;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #c0392b;
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #b71c1c;
         }
         footer {
             margin-top: auto;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
             font-size: 14px;
         }
         footer a {
-            color: #e74c3c;
+            color: #d32f2f;
             text-decoration: none;
         }
         footer a:hover {
             text-decoration: underline;
         }
         #login-prompt {
-            margin-top: 100px;
+            margin-top: 120px;
+        }
+        #login-prompt input {
+            padding: 12px;
+            width: 220px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
@@ -113,24 +143,26 @@
     </header>
     <div id="login-prompt">
         <p>Enter password to access dealer auction:</p>
-        <input type="password" id="password" style="padding: 10px; width: 200px; margin: 10px;">
+        <input type="password" id="password">
         <button onclick="checkPassword()">Login</button>
     </div>
     <div class="auction-list" id="auction-content">
         <p><strong>Dealer Access Only:</strong> Contact us at <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> or 586-453-5924 for details or to bid.</p>
-        <div class="auction-item">
+        <div class="auction-item" data-start="2025-02-25T09:00:00" data-end="2025-03-01T17:00:00">
             <div>
                 <h3>2020 Honda Accord</h3>
                 <p>VIN: 1HGCV1F30LA123456 | Mileage: 25,000 | Starting Bid: $18,000</p>
+                <p class="timer" id="timer-1">Status: Calculating...</p>
             </div>
-            <button onclick="alert('Email cappellomotorsllc@gmail.com with your bid!')">Place Bid</button>
+            <button id="bid-1" onclick="placeBid('2020 Honda Accord')">Place Bid</button>
         </div>
-        <div class="auction-item">
+        <div class="auction-item" data-start="2025-02-26T10:00:00" data-end="2025-03-02T15:00:00">
             <div>
                 <h3>2018 Chevy Silverado</h3>
                 <p>VIN: 3GCUKREC9JG654321 | Mileage: 45,000 | Starting Bid: $25,000</p>
+                <p class="timer" id="timer-2">Status: Calculating...</p>
             </div>
-            <button onclick="alert('Email cappellomotorsllc@gmail.com with your bid!')">Place Bid</button>
+            <button id="bid-2" onclick="placeBid('2018 Chevy Silverado')">Place Bid</button>
         </div>
     </div>
     <footer>
@@ -140,12 +172,61 @@
     <script>
         function checkPassword() {
             const password = document.getElementById('password').value;
-            if (password === 'dealer123') { // Change this to a secure password
+            if (password === 'dealer2025') {
                 document.getElementById('login-prompt').style.display = 'none';
                 document.getElementById('auction-content').style.display = 'block';
+                startTimers();
             } else {
                 alert('Incorrect password. Contact us for access.');
             }
+        }
+
+        function startTimers() {
+            const items = document.querySelectorAll('.auction-item');
+            items.forEach((item, index) => {
+                const startTime = new Date(item.getAttribute('data-start')).getTime();
+                const endTime = new Date(item.getAttribute('data-end')).getTime();
+                const timerId = `timer-${index + 1}`;
+                const bidButtonId = `bid-${index + 1}`;
+
+                function updateTimer() {
+                    const now = new Date().getTime();
+                    const startDistance = startTime - now;
+                    const endDistance = endTime - now;
+
+                    const timerElement = document.getElementById(timerId);
+                    const bidButton = document.getElementById(bidButtonId);
+
+                    if (startDistance > 0) {
+                        const days = Math.floor(startDistance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((startDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((startDistance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((startDistance % (1000 * 60)) / 1000);
+                        timerElement.innerText = `Auction Starts: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                        timerElement.className = 'status-not-started';
+                        bidButton.disabled = true;
+                    } else if (endDistance > 0) {
+                        const days = Math.floor(endDistance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((endDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((endDistance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((endDistance % (1000 * 60)) / 1000);
+                        timerElement.innerText = `Auction Ends: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                        timerElement.className = 'timer';
+                        bidButton.disabled = false;
+                    } else {
+                        timerElement.innerText = 'Auction Ended';
+                        timerElement.className = 'status-not-started';
+                        bidButton.disabled = true;
+                    }
+                }
+
+                updateTimer();
+                setInterval(updateTimer, 1000);
+            });
+        }
+
+        function placeBid(carName) {
+            alert(`Email your bid for "${carName}" to cappellomotorsllc@gmail.com!`);
         }
     </script>
 </body>
