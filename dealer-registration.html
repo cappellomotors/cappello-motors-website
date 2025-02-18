@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Registration - Cappello Motors LLC</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            background-color: #f7f7f7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #1a2a44;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #d32f2f;
+        }
+        header {
+            margin-top: 100px;
+        }
+        h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #d32f2f;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 2.8em;
+            margin: 0;
+        }
+        .registration-form {
+            margin-top: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .registration-form label {
+            display: block;
+            text-align: left;
+            margin: 15px 0 5px;
+            color: #1a2a44;
+            font-weight: 500;
+        }
+        .registration-form input, .registration-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .registration-form textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 14px;
+        }
+        footer a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="https://cappellomotors.com">Sell Your Car</a>
+        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
+    </nav>
+    <header>
+        <img src="logo.png" alt="Cappello Motors LLC" style="max-width: 200px; margin-bottom: 20px;" onerror="this.style.display='none';">
+        <h1>Dealer Registration - Cappello Motors LLC</h1>
+    </header>
+    <div class="registration-form">
+        <p>Register to participate in our dealer-only auctions. All fields are required unless noted.</p>
+        <form action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
+            <label for="dealer-name">Dealership Name</label>
+            <input type="text" id="dealer-name" name="Dealership Name" required>
+            
+            <label for="contact-name">Contact Name</label>
+            <input type="text" id="contact-name" name="Contact Name" required>
+            
+            <label for="address">Address</label>
+            <textarea id="address" name="Address" required></textarea>
+            
+            <label for="license-number">Dealer License Number</label>
+            <input type="text" id="license-number" name="Dealer License Number" required>
+            
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="Phone Number" required>
+            
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="Email Address" required>
+            
+            <label for="additional-info">Additional Information (Optional)</label>
+            <textarea id="additional-info" name="Additional Information"></textarea>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+</body>
+</html>
