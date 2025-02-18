@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealer Auction - Cappello Motors LLC</title>
+    <title>Dealer Login - Cappello Motors LLC</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,6 +48,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            display: none; /* Hidden until password entered */
         }
         .auction-item {
             background: white;
@@ -56,6 +57,9 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .auction-item h3 {
             margin: 0;
@@ -92,6 +96,9 @@
         footer a:hover {
             text-decoration: underline;
         }
+        #login-prompt {
+            margin-top: 100px;
+        }
     </style>
 </head>
 <body>
@@ -104,22 +111,42 @@
         <img src="logo.png" alt="Cappello Motors LLC" style="max-width: 200px; margin-bottom: 20px;" onerror="this.style.display='none';">
         <h1>Dealer-Only Auction - Cappello Motors LLC</h1>
     </header>
-    <div class="auction-list">
-        <p><strong>Dealer Access Only:</strong> Contact us at <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> or 586-453-5924 for login details.</p>
+    <div id="login-prompt">
+        <p>Enter password to access dealer auction:</p>
+        <input type="password" id="password" style="padding: 10px; width: 200px; margin: 10px;">
+        <button onclick="checkPassword()">Login</button>
+    </div>
+    <div class="auction-list" id="auction-content">
+        <p><strong>Dealer Access Only:</strong> Contact us at <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> or 586-453-5924 for details or to bid.</p>
         <div class="auction-item">
-            <h3>2020 Honda Accord</h3>
-            <p>VIN: 1HGCV1F30LA123456 | Mileage: 25,000 | Starting Bid: $18,000</p>
-            <button onclick="alert('Contact us to place a bid!')">Place Bid</button>
+            <div>
+                <h3>2020 Honda Accord</h3>
+                <p>VIN: 1HGCV1F30LA123456 | Mileage: 25,000 | Starting Bid: $18,000</p>
+            </div>
+            <button onclick="alert('Email cappellomotorsllc@gmail.com with your bid!')">Place Bid</button>
         </div>
         <div class="auction-item">
-            <h3>2018 Chevy Silverado</h3>
-            <p>VIN: 3GCUKREC9JG654321 | Mileage: 45,000 | Starting Bid: $25,000</p>
-            <button onclick="alert('Contact us to place a bid!')">Place Bid</button>
+            <div>
+                <h3>2018 Chevy Silverado</h3>
+                <p>VIN: 3GCUKREC9JG654321 | Mileage: 45,000 | Starting Bid: $25,000</p>
+            </div>
+            <button onclick="alert('Email cappellomotorsllc@gmail.com with your bid!')">Place Bid</button>
         </div>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'dealer123') { // Change this to a secure password
+                document.getElementById('login-prompt').style.display = 'none';
+                document.getElementById('auction-content').style.display = 'block';
+            } else {
+                alert('Incorrect password. Contact us for access.');
+            }
+        }
+    </script>
 </body>
 </html>
