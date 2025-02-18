@@ -109,12 +109,25 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
         }
-        .step img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #d32f2f;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            flex: 1;
         }
         .step h2 {
             font-family: 'Montserrat', Arial, sans-serif;
@@ -183,24 +196,32 @@
     </div>
     <div class="how-it-works">
         <div class="step">
-            <img src="https://cdn-icons-png.flaticon.com/128/3063/3063175.png" alt="Truck Icon">
-            <h2>We Show Up</h2>
-            <p>We come to your driveway—faster than the big guys.</p>
+            <div class="step-number">1</div>
+            <div class="step-text">
+                <h2>We Show Up</h2>
+                <p>We come to your driveway—faster than the big guys.</p>
+            </div>
         </div>
         <div class="step">
-            <img src="https://cdn-icons-png.flaticon.com/128/149/149852.png" alt="Magnifying Glass Icon">
-            <h2>Check It Out</h2>
-            <p>We inspect your car with a quick, fair review.</p>
+            <div class="step-number">2</div>
+            <div class="step-text">
+                <h2>Check It Out</h2>
+                <p>We inspect your car with a quick, fair review.</p>
+            </div>
         </div>
         <div class="step">
-            <img src="https://cdn-icons-png.flaticon.com/128/149/149135.png" alt="Cash Icon">
-            <h2>Pay Cash</h2>
-            <p>Get paid instantly—cash in hand, no delays.</p>
+            <div class="step-number">3</div>
+            <div class="step-text">
+                <h2>Pay Cash</h2>
+                <p>Get paid instantly—cash in hand, no delays.</p>
+            </div>
         </div>
         <div class="step">
-            <img src="https://cdn-icons-png.flaticon.com/128/159/159693.png" alt="Arrow Icon">
-            <h2>Take It Away</h2>
-            <p>We take the car and title—done deal.</p>
+            <div class="step-number">4</div>
+            <div class="step-text">
+                <h2>Take It Away</h2>
+                <p>We take the car and title—done deal.</p>
+            </div>
         </div>
     </div>
     <footer>
