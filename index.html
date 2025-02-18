@@ -56,6 +56,44 @@
             color: #fff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+        .input-container {
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        input[type="text"] {
+            padding: 12px;
+            width: 70%;
+            max-width: 300px;
+            font-size: 16px;
+            margin: 10px 10px 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 14px;
+            display: none;
+            margin-top: 10px;
+        }
         .how-it-works {
             margin: 40px auto;
             max-width: 1200px;
@@ -107,6 +145,14 @@
             .step {
                 width: 45%;
             }
+            input[type="text"] {
+                width: 100%;
+                margin: 10px 0;
+            }
+            button {
+                width: 100%;
+                margin: 0;
+            }
         }
         @media (max-width: 480px) {
             .step {
@@ -128,16 +174,22 @@
         <h1>Cappello Motors LLC</h1>
         <div class="highlight">Sell Your Car Fast—Cash on the Spot, No Hassle!</div>
     </header>
+    <div class="input-container">
+        <p>Start now—enter your VIN or license plate for a quick response!</p>
+        <input type="text" placeholder="VIN or License Plate" id="carInput">
+        <button onclick="checkVin()">Submit</button>
+        <p class="error" id="vinError">Please enter a VIN or license plate.</p>
+    </div>
     <div class="how-it-works">
         <div class="step">
             <img src="https://via.placeholder.com/80x80.png?text=Truck" alt="We Show Up">
             <h2>We Show Up</h2>
-            <p>Enter your VIN, and we’ll come to your driveway—faster than the big guys.</p>
+            <p>We come to your driveway—faster than the big guys.</p>
         </div>
         <div class="step">
             <img src="https://via.placeholder.com/80x80.png?text=Check" alt="Check It Out">
             <h2>Check It Out</h2>
-            <p>We inspect your car on the spot with a quick, fair review.</p>
+            <p>We inspect your car with a quick, fair review.</p>
         </div>
         <div class="step">
             <img src="https://via.placeholder.com/80x80.png?text=Cash" alt="Pay Cash">
@@ -147,12 +199,24 @@
         <div class="step">
             <img src="https://via.placeholder.com/80x80.png?text=Take+Away" alt="Take It Away">
             <h2>Take It Away</h2>
-            <p>We take the car and title—done deal, no extra trips.</p>
+            <p>We take the car and title—done deal.</p>
         </div>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
+    <script>
+        function checkVin() {
+            const carInput = document.getElementById('carInput').value;
+            const vinError = document.getElementById('vinError');
+            if (carInput.trim() === '') {
+                vinError.style.display = 'block';
+            } else {
+                vinError.style.display = 'none';
+                alert('Thanks! We’ll respond faster than the big companies—expect a call or email soon!');
+            }
+        }
+    </script>
 </body>
 </html>
