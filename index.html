@@ -24,6 +24,9 @@
             width: 100%;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         nav a {
             color: #fff;
@@ -56,7 +59,7 @@
             color: #fff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .input-container {
+        .input-container, .car-details {
             margin: 30px auto;
             max-width: 600px;
             padding: 20px;
@@ -64,16 +67,19 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        input[type="text"] {
+        input[type="text"], select, textarea, input[type="file"] {
             padding: 12px;
             width: 70%;
             max-width: 300px;
             font-size: 16px;
-            margin: 10px 10px 10px 0;
-            display: inline-block;
+            margin: 10px 0;
+            display: block;
             border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
+        }
+        input[type="text"], select, textarea, input[type="file"] {
+            width: 100%;
         }
         button {
             padding: 12px 25px;
@@ -141,6 +147,9 @@
             font-size: 1em;
             margin: 10px 0 0;
         }
+        .car-details {
+            display: none; /* Hidden until VIN entered */
+        }
         footer {
             margin-top: auto;
             padding: 25px;
@@ -165,7 +174,7 @@
             }
             button {
                 width: 100%;
-                margin: 0;
+                margin: 10px 0 0 0;
             }
         }
         @media (max-width: 480px) {
@@ -192,6 +201,28 @@
         <input type="text" placeholder="VIN or License Plate" id="carInput">
         <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
+    </div>
+    <div class="car-details" id="carDetails">
+        <h2>Tell Us About Your Car</h2>
+        <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="VIN" id="hiddenVin">
+            <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
+            <p class="error" id="mileageError">Please enter the mileage.</p>
+            <select id="condition" name="Condition" required>
+                <option value="">Select Condition</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
+            </select>
+            <p class="error" id="conditionError">Please select a condition.</p>
+            <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
+            <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
+            <p>Upload up to 5 photos of your car (optional)</p>
+            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
+            <p class="error" id="contactError">Please provide contact info.</p>
+            <button type="submit">Send to Cappello Motors LLC</button>
+        </form>
     </div>
     <div class="how-it-works">
         <div class="step">
@@ -235,9 +266,48 @@
                 vinError.style.display = 'block';
             } else {
                 vinError.style.display = 'none';
-                alert('Thanks! We’ll respond faster than the big companies—expect a call or email soon!');
+                document.getElementById('hiddenVin').value = carInput;
+                document.getElementById('carDetails').style.display = 'block';
+                document.querySelector('.input-container').style.display = 'none';
             }
         }
+
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            const mileage = document.getElementById('mileage').value;
+            const condition = document.getElementById('condition').value;
+            const contact = document.getElementById('contact').value;
+
+            const mileageError = document.getElementById('mileageError');
+            const conditionError = document.getElementById('conditionError');
+            const contactError = document.getElementById('contactError');
+
+            let hasError = false;
+
+            if (!mileage) {
+                mileageError.style.display = 'block';
+                hasError = true;
+            } else {
+                mileageError.style.display = 'none';
+            }
+            if (!condition) {
+                conditionError.style.display = 'block';
+                hasError = true;
+            } else {
+                conditionError.style.display = 'none';
+            }
+            if (!contact) {
+                contactError.style.display = 'block';
+                hasError = true;
+            } else {
+                contactError.style.display = 'none';
+            }
+
+            if (hasError) {
+                event.preventDefault();
+            } else {
+                alert('Thank you! Your submission is being sent to Cappello Motors LLC.');
+            }
+        });
     </script>
 </body>
 </html>
