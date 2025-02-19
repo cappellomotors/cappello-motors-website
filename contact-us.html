@@ -104,6 +104,50 @@
         .contact-container a:hover {
             text-decoration: underline;
         }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="email"], textarea {
+            padding: 14px;
+            width: 100%;
+            font-size: 16px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #6b48ff;
+            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 14px;
+            display: none;
+            margin-top: 10px;
+        }
         footer {
             margin-top: auto;
             padding: 30px;
@@ -160,10 +204,57 @@
         <p><strong>Phone:</strong> <a href="tel:5864535924">586-453-5924</a></p>
         <p><strong>Email:</strong> <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a></p>
         <p><strong>Address:</strong> 49170 Van Dyke, Shelby Township, MI 48317</p>
+        <form id="contactForm" action="https://formspree.io/f/xyzklgvk" method="POST">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <p class="error" id="nameError">Please enter your name.</p>
+            <input type="email" name="email" id="email" placeholder="Your Email" required>
+            <p class="error" id="emailError">Please enter a valid email.</p>
+            <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+            <p class="error" id="messageError">Please enter your message.</p>
+            <button type="submit">Send Message</button>
+        </form>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const messageError = document.getElementById('messageError');
+
+            let hasError = false;
+
+            if (!name) {
+                nameError.style.display = 'block';
+                hasError = true;
+            } else {
+                nameError.style.display = 'none';
+            }
+            if (!email || !email.includes('@')) {
+                emailError.style.display = 'block';
+                hasError = true;
+            } else {
+                emailError.style.display = 'none';
+            }
+            if (!message) {
+                messageError.style.display = 'block';
+                hasError = true;
+            } else {
+                messageError.style.display = 'none';
+            }
+
+            if (hasError) {
+                event.preventDefault();
+            } else {
+                alert('Thank you! Your message is being sent to Cappello Motors LLC.');
+            }
+        });
+    </script>
 </body>
 </html>
