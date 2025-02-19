@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play a fun racing game at Cappello Motors LLC! Race sports cars around a track and avoid obstacles.">
+    <meta name="description" content="Play a fun racing game at Cappello Motors LLC! Race a sleek sports car to the finish line.">
     <meta name="keywords" content="car racing game, realistic sports cars, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
@@ -83,6 +83,7 @@
             border-radius: 8px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #b71c1c;
@@ -127,10 +128,10 @@
     </nav>
     <header>
         <h1>Racing Game</h1>
-        <p>Race a sports car around the track—avoid obstacles and reach the finish line!</p>
+        <p>Race a sleek sports car to the finish line—avoid obstacles and feel the speed!</p>
     </header>
     <section class="game-section">
-        <p>Use arrow keys (or tap left/right on mobile) to steer. Complete the lap!</p>
+        <p>Use arrow keys (or tap left/right on mobile) to steer. Reach the finish line!</p>
         <canvas id="gameCanvas" width="400" height="600"></canvas>
         <button onclick="restartGame()">Restart Race</button>
     </section>
@@ -143,89 +144,75 @@
         const ctx = canvas.getContext('2d');
 
         // Car Setup
-        const cars = [{ name: "Sports Car", speed: 4, handling: 5, color: '#d32f2f', width: 40, height: 60 }];
+        const cars = [{ name: "Sports Car", speed: 6, handling: 5, color: '#d32f2f', width: 40, height: 60 }];
         let currentCar = cars[0];
-        let carAngle = 0; // Angle in radians
-        let carX = canvas.width / 2;
-        let carY = canvas.height - 100;
+        let carX = canvas.width / 2 - currentCar.width / 2;
+        let carY = canvas.height - currentCar.height - 20;
         let velocity = 0;
         const maxSpeed = currentCar.speed;
-        const acceleration = 0.1;
-        const turningSpeed = 0.05;
-
-        // Track Setup (Oval inspired by TrackMania)
-        const trackCenterX = canvas.width / 2;
-        const trackCenterY = canvas.height / 2;
-        const trackRadiusX = 150;
-        const trackRadiusY = 250;
-        const finishLineAngle = Math.PI / 2; // Top of the track
+        const acceleration = 0.2;
+        const braking = 0.3;
+        const friction = 0.1;
 
         let obstacles = [];
         let score = 0;
         let gameOver = false;
         let gameWon = false;
-        let lapCompleted = false;
+        const finishLineY = 50;
 
-        // Car Object
+        // Car Object (Enhanced Visuals)
         const car = {
             x: carX,
             y: carY,
             width: currentCar.width,
             height: currentCar.height,
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(carAngle);
+                // Car Body
                 ctx.fillStyle = currentCar.color;
-                ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y + this.height);
+                ctx.lineTo(this.x + this.width / 2, this.y);
+                ctx.lineTo(this.x + this.width, this.y + this.height);
+                ctx.closePath();
+                ctx.fill();
+                // Windows
                 ctx.fillStyle = '#000';
-                ctx.fillRect(-10, -this.height / 2 - 5, 20, 5); // Spoiler
-                ctx.fillRect(-this.width / 2, -this.height / 2 + 10, 5, 10); // Wheels
-                ctx.fillRect(this.width / 2 - 5, -this.height / 2 + 10, 5, 10);
-                ctx.fillRect(-this.width / 2, this.height / 2 - 20, 5, 10);
-                ctx.fillRect(this.width / 2 - 5, this.height / 2 - 20, 5, 10);
-                ctx.restore();
+                ctx.fillRect(this.x + this.width / 4, this.y + this.height / 4, this.width / 2, this.height / 4);
+                // Spoiler
+                ctx.fillRect(this.x + this.width / 4, this.y - 5, this.width / 2, 5);
+                // Wheels
+                ctx.fillStyle = '#333';
+                ctx.fillRect(this.x - 5, this.y + this.height / 4, 5, this.height / 2);
+                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 5, this.height / 2);
             }
         };
 
-        // Obstacle Object
+        // Obstacle Object (Traffic Cones)
         function createObstacle() {
-            const angle = Math.random() * 2 * Math.PI;
-            const x = trackCenterX + trackRadiusX * Math.cos(angle);
-            const y = trackCenterY + trackRadiusY * Math.sin(angle);
-            obstacles.push({ x, y, width: 30, height: 30 });
+            const x = Math.random() * (canvas.width - currentCar.width);
+            obstacles.push({ x, y: -currentCar.height, width: 20, height: 40 });
         }
 
-        // Draw Track
-        function drawTrack() {
-            ctx.beginPath();
-            ctx.ellipse(trackCenterX, trackCenterY, trackRadiusX + 20, trackRadiusY + 20, 0, 0, 2 * Math.PI);
-            ctx.strokeStyle = '#1a2a44';
-            ctx.lineWidth = 40;
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.ellipse(trackCenterX, trackCenterY, trackRadiusX, trackRadiusY, 0, 0, 2 * Math.PI);
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 5;
-            ctx.stroke();
-
-            // Finish Line
-            ctx.save();
-            ctx.translate(trackCenterX, trackCenterY);
-            ctx.rotate(finishLineAngle);
+        // Draw Road and Background
+        function drawBackground() {
+            // Road
+            ctx.fillStyle = '#555';
+            ctx.fillRect(canvas.width / 4, 0, canvas.width / 2, canvas.height);
+            // Lane Lines
             ctx.fillStyle = '#fff';
-            ctx.fillRect(-trackRadiusX, -5, trackRadiusX * 2, 10);
-            ctx.fillStyle = '#000';
-            for (let i = -trackRadiusX; i < trackRadiusX; i += 20) {
-                ctx.fillRect(i, -5, 10, 10);
+            for (let y = 0; y < canvas.height; y += 40) {
+                ctx.fillRect(canvas.width / 2 - 5, y, 10, 20);
             }
-            ctx.restore();
+            // Trackside
+            ctx.fillStyle = '#88cc88';
+            ctx.fillRect(0, 0, canvas.width / 4, canvas.height);
+            ctx.fillRect(canvas.width * 3 / 4, 0, canvas.width / 4, canvas.height);
         }
 
         // Game Loop
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawTrack();
+            drawBackground();
 
             if (gameOver) {
                 ctx.fillStyle = '#1a2a44';
@@ -236,46 +223,60 @@
             if (gameWon) {
                 ctx.fillStyle = '#1a2a44';
                 ctx.font = '30px Montserrat';
-                ctx.fillText('Lap Complete! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
+                ctx.fillText('You Win! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
                 return;
             }
 
-            // Auto-move car around track
-            velocity = Math.min(velocity + acceleration, maxSpeed);
-            const targetAngle = Math.atan2(trackCenterY - car.y, trackCenterX - car.x) + Math.PI;
-            carAngle += (targetAngle - carAngle) * turningSpeed;
-            car.x += velocity * Math.cos(carAngle);
-            car.y += velocity * Math.sin(carAngle);
-
-            // Keep car on track
-            const distanceFromCenter = Math.sqrt((car.x - trackCenterX) ** 2 / trackRadiusX ** 2 + (car.y - trackCenterY) ** 2 / trackRadiusY ** 2);
-            if (distanceFromCenter > 1.1 || distanceFromCenter < 0.9) {
-                gameOver = true; // Off track
+            // Draw Finish Line
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, finishLineY, canvas.width, 10);
+            ctx.fillStyle = '#000';
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.fillRect(i, finishLineY, 10, 10);
             }
+
+            // Update Car Physics
+            velocity = Math.min(velocity, maxSpeed);
+            if (velocity > 0) velocity -= friction;
+            if (velocity < 0) velocity = 0;
+            car.y -= velocity;
 
             // Draw Car
             car.draw();
 
-            // Obstacles
+            // Move and Draw Obstacles (Cones)
             for (let i = obstacles.length - 1; i >= 0; i--) {
-                ctx.fillStyle = '#6b48ff';
-                ctx.fillRect(obstacles[i].x - 15, obstacles[i].y - 15, obstacles[i].width, obstacles[i].height);
+                obstacles[i].y += 3;
+                ctx.fillStyle = '#ff6600';
+                ctx.beginPath();
+                ctx.moveTo(obstacles[i].x + obstacles[i].width / 2, obstacles[i].y);
+                ctx.lineTo(obstacles[i].x, obstacles[i].y + obstacles[i].height);
+                ctx.lineTo(obstacles[i].x + obstacles[i].width, obstacles[i].y + obstacles[i].height);
+                ctx.closePath();
+                ctx.fill();
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(obstacles[i].x + 2, obstacles[i].y + 10, obstacles[i].width - 4, 10);
+
+                // Collision Detection
                 if (
-                    car.x - car.width / 2 < obstacles[i].x + obstacles[i].width / 2 &&
-                    car.x + car.width / 2 > obstacles[i].x - obstacles[i].width / 2 &&
-                    car.y - car.height / 2 < obstacles[i].y + obstacles[i].height / 2 &&
-                    car.y + car.height / 2 > obstacles[i].y - obstacles[i].height / 2
+                    car.x < obstacles[i].x + obstacles[i].width &&
+                    car.x + car.width > obstacles[i].x &&
+                    car.y < obstacles[i].y + obstacles[i].height &&
+                    car.y + car.height > obstacles[i].y
                 ) {
                     gameOver = true;
                 }
+
+                // Remove off-screen obstacles
+                if (obstacles[i].y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    score += 10;
+                }
             }
 
-            // Finish Line Check
-            const carAngleNorm = (carAngle + 2 * Math.PI) % (2 * Math.PI);
-            if (Math.abs(carAngleNorm - finishLineAngle) < 0.1 && !lapCompleted) {
+            // Check Finish Line
+            if (car.y <= finishLineY + 10) {
                 gameWon = true;
-                lapCompleted = true;
-                score += 100;
             }
 
             // Score Display
@@ -284,33 +285,39 @@
             ctx.fillText('Score: ' + score, 10, 30);
 
             // Spawn Obstacles
-            if (Math.random() < 0.02 && obstacles.length < 5) createObstacle();
+            if (Math.random() < 0.02 && car.y > finishLineY + 50) createObstacle();
 
             requestAnimationFrame(gameLoop);
         }
 
         // Controls
+        let keys = {};
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') carAngle += turningSpeed;
-            if (e.key === 'ArrowRight') carAngle -= turningSpeed;
+            keys[e.key] = true;
+            if (e.key === 'ArrowLeft' && car.x > 0) car.x -= currentCar.handling;
+            if (e.key === 'ArrowRight' && car.x < canvas.width - car.width) car.x += currentCar.handling;
+            if (e.key === 'ArrowUp') velocity += acceleration;
+            if (e.key === 'ArrowDown') velocity -= braking;
+        });
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
         });
         canvas.addEventListener('touchstart', (e) => {
             const touchX = e.touches[0].clientX - canvas.offsetLeft;
-            if (touchX < canvas.width / 2) carAngle += turningSpeed * 2;
-            if (touchX > canvas.width / 2) carAngle -= turningSpeed * 2;
+            if (touchX < canvas.width / 2 && car.x > 0) car.x -= currentCar.handling * 2;
+            if (touchX > canvas.width / 2 && car.x < canvas.width - car.width) car.x += currentCar.handling * 2;
+            velocity += acceleration;
         });
 
         // Restart Game
         function restartGame() {
-            car.x = canvas.width / 2;
-            car.y = canvas.height - 100;
-            carAngle = 0;
+            car.x = canvas.width / 2 - currentCar.width / 2;
+            car.y = canvas.height - currentCar.height - 20;
             velocity = 0;
             obstacles = [];
             score = 0;
             gameOver = false;
             gameWon = false;
-            lapCompleted = false;
             gameLoop();
         }
 
