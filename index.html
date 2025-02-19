@@ -213,6 +213,7 @@
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a> <!-- New nav link -->
     </nav>
     <header>
         <h1>Cappello Motors LLC</h1>
@@ -221,7 +222,7 @@
     <div class="input-container">
         <p>Start now—enter your VIN or license plate for a quick response!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <button class="pulse" onclick="checkVin()">Submit</button> <!-- Added pulse class here -->
+        <button class="pulse" onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
@@ -330,42 +331,12 @@
 
             let hasError = false;
 
-            if (!mileage) {
-                mileageError.style.display = 'block';
-                hasError = true;
-            } else {
-                mileageError.style.display = 'none';
-            }
-            if (!condition) {
-                conditionError.style.display = 'block';
-                hasError = true;
-            } else {
-                conditionError.style.display = 'none';
-            }
-            if (!titleStatus) {
-                titleStatusError.style.display = 'block';
-                hasError = true;
-            } else {
-                titleStatusError.style.display = 'none';
-            }
-            if (!lienStatus) {
-                lienStatusError.style.display = 'block';
-                hasError = true;
-            } else {
-                lienStatusError.style.display = 'none';
-            }
-            if (!smokerStatus) {
-                smokerStatusError.style.display = 'block';
-                hasError = true;
-            } else {
-                smokerStatusError.style.display = 'none';
-            }
-            if (!contact) {
-                contactError.style.display = 'block';
-                hasError = true;
-            } else {
-                contactError.style.display = 'none';
-            }
+            if (!mileage) { mileageError.style.display = 'block'; hasError = true; } else { mileageError.style.display = 'none'; }
+            if (!condition) { conditionError.style.display = 'block'; hasError = true; } else { conditionError.style.display = 'none'; }
+            if (!titleStatus) { titleStatusError.style.display = 'block'; hasError = true; } else { titleStatusError.style.display = 'none'; }
+            if (!lienStatus) { lienStatusError.style.display = 'block'; hasError = true; } else { lienStatusError.style.display = 'none'; }
+            if (!smokerStatus) { smokerStatusError.style.display = 'block'; hasError = true; } else { smokerStatusError.style.display = 'none'; }
+            if (!contact) { contactError.style.display = 'block'; hasError = true; } else { contactError.style.display = 'none'; }
 
             if (hasError) {
                 event.preventDefault();

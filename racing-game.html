@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play a fun racing game at Cappello Motors LLC! Avoid obstacles and test your skills.">
+    <meta name="keywords" content="car racing game, fun game, Cappello Motors">
+    <meta name="author" content="Cappello Motors LLC">
+    <meta name="robots" content="index, follow">
+    <title>Racing Game | Cappello Motors LLC</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #1a2a44;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.2s;
+        }
+        nav a:hover {
+            color: #6b48ff;
+            transform: translateY(-2px);
+        }
+        header {
+            margin-top: 60px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .game-section {
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        canvas {
+            border: 2px solid #1a2a44;
+            border-radius: 8px;
+            background: #e6e9ff;
+        }
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 14px;
+        }
+        footer a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="https://cappellomotors.com">Sell Your Car</a>
+        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
+        <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
+        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
+    </nav>
+    <header>
+        <h1>Racing Game</h1>
+        <p>Test your skills—avoid obstacles and race to the finish!</p>
+    </header>
+    <section class="game-section">
+        <p>Use arrow keys (or tap left/right on mobile) to dodge obstacles!</p>
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+    </section>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const carWidth = 40;
+        const carHeight = 60;
+        let carX = canvas.width / 2 - carWidth / 2;
+        const carSpeed = 5;
+        let obstacles = [];
+        let score = 0;
+        let gameOver = false;
+
+        // Car Object
+        const car = {
+            x: carX,
+            y: canvas.height - carHeight - 20,
+            width: carWidth,
+            height: carHeight,
+            draw() {
+                ctx.fillStyle = '#d32f2f';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        };
+
+        // Obstacle Object
+        function createObstacle() {
+            const x = Math.random() * (canvas.width - carWidth);
+            obstacles.push({ x, y: -carHeight, width: carWidth, height: carHeight });
+        }
+
+        // Game Loop
+        function gameLoop() {
+            if (gameOver) {
+                ctx.fillStyle = '#1a2a44';
+                ctx.font = '30px Montserrat';
+                ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Car
+            car.draw();
+
+            // Move and Draw Obstacles
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].y += 3;
+                ctx.fillStyle = '#6b48ff';
+                ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacles[i].width, obstacles[i].height);
+
+                // Collision Detection
+                if (
+                    car.x < obstacles[i].x + obstacles[i].width &&
+                    car.x + car.width > obstacles[i].x &&
+                    car.y < obstacles[i].y + obstacles[i].height &&
+                    car.y + car.height > obstacles[i].y
+                ) {
+                    gameOver = true;
+                }
+
+                // Remove off-screen obstacles
+                if (obstacles[i].y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    score += 10;
+                }
+            }
+
+            // Score Display
+            ctx.fillStyle = '#1a2a44';
+            ctx.font = '20px Roboto';
+            ctx.fillText('Score: ' + score, 10, 30);
+
+            // Spawn Obstacles
+            if (Math.random() < 0.02) createObstacle();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && car.x > 0) car.x -= carSpeed;
+            if (e.key === 'ArrowRight' && car.x < canvas.width - carWidth) car.x += carSpeed;
+        });
+
+        // Mobile Touch Controls
+        canvas.addEventListener('touchstart', (e) => {
+            const touchX = e.touches[0].clientX - canvas.offsetLeft;
+            if (touchX < canvas.width / 2 && car.x > 0) car.x -= carSpeed * 2;
+            if (touchX > canvas.width / 2 && car.x < canvas.width - carWidth) car.x += carSpeed * 2;
+        });
+
+        // Start Game
+        gameLoop();
+    </script>
+</body>
+</html>
