@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Metro Detroit. Instant payment, free pickup—Metro Detroit’s top car buyer!">
+    <meta name="description" content="Sell your car fast to Cappello Motors LLC, Metro Detroit’s largest car buyer. Instant payment, free pickup—top local service!">
     <meta name="keywords" content="sell my car Metro Detroit, instant payment for cars, car buyer Shelby Township, fast car sale Detroit, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
@@ -13,7 +13,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffe8e1 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,13 +40,13 @@
             transition: color 0.3s, transform 0.2s;
         }
         nav a:hover {
-            color: #6b48ff;
+            color: #ff6f61;
             transform: translateY(-2px);
         }
         header {
             margin-top: 80px;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            background: linear-gradient(135deg, #1a2a44 0%, #ff6f61 100%);
             color: #fff;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
@@ -70,10 +70,11 @@
             color: #fff;
             margin: 10px 0;
             font-weight: 300;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             padding: 8px 20px;
             border-radius: 20px;
             display: inline-block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         .input-container, .car-details {
             margin: 40px auto;
@@ -100,8 +101,8 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         input:focus, select:focus, textarea:focus {
-            border-color: #6b48ff;
-            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+            border-color: #ff6f61;
+            box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
             outline: none;
         }
         select {
@@ -115,17 +116,23 @@
         button {
             padding: 16px 35px;
             font-size: 18px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            background: linear-gradient(135deg, #ff6f61 0%, #e65a50 100%);
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
+            animation: pulse 2s infinite;
         }
         button:hover {
             transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.6);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
         .error {
             color: #d32f2f;
@@ -151,6 +158,16 @@
             display: flex;
             align-items: flex-start;
             transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .step:hover {
             transform: translateY(-8px);
@@ -159,7 +176,7 @@
         .step-number {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            background: linear-gradient(135deg, #ff6f61 0%, #e65a50 100%);
             color: #fff;
             font-size: 24px;
             font-weight: bold;
@@ -169,7 +186,7 @@
             justify-content: center;
             margin-right: 20px;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(107, 72, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(255, 111, 97, 0.3);
         }
         .step-text {
             flex: 1;
@@ -197,7 +214,7 @@
             font-size: 16px;
         }
         footer a {
-            color: #6b48ff;
+            color: #ff6f61;
             text-decoration: none;
         }
         footer a:hover {
@@ -250,7 +267,7 @@
     <header>
         <h1>Get Paid Fast!</h1>
         <div class="highlight">Sell Your Car to Metro Detroit’s Top Buyer!</div>
-        <p class="trust-signal">Thousands of Cars Bought Since 1970</p>
+        <p class="trust-signal">Largest Car Buyer in Metro Detroit</p>
     </header>
     <div class="input-container">
         <p>Sell your car in Metro Detroit—start here!</p>
