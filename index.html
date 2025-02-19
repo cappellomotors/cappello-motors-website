@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Shelby Township, MI. Get paid instantly with free pickup—better than anyone else!">
-    <meta name="keywords" content="sell my car fast, cash for cars Shelby Township, instant payment for cars, car buyer Michigan, Cappello Motors">
+    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Shelby Township, MI. Instant payment, free pickup—better than the rest!">
+    <meta name="keywords" content="sell my car fast, instant payment for cars, car buyer Shelby Township, fast car sale Michigan, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
     <style>
@@ -40,7 +40,7 @@
             transition: color 0.3s;
         }
         nav a:hover {
-            color: #00c4b4; /* Teal hover */
+            color: #00c4b4;
         }
         header {
             margin-top: 80px;
@@ -59,9 +59,15 @@
         .highlight {
             font-size: 2.2em;
             font-weight: 600;
-            margin: 25px 0;
+            margin: 25px 0 15px;
             color: #fff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .trust-signal {
+            font-size: 1.2em;
+            color: #fff;
+            margin: 10px 0;
+            font-weight: 300;
         }
         .input-container, .car-details {
             margin: 40px auto;
@@ -132,6 +138,10 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: flex-start;
+            transition: transform 0.2s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
         }
         .step-number {
             width: 50px;
@@ -181,11 +191,18 @@
         }
         @media (max-width: 768px) {
             .step {
-                width: 45%;
+                width: 47%;
+                margin: 15px 1%;
             }
             input[type="text"], button {
                 width: 100%;
                 margin: 12px 0;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            .highlight {
+                font-size: 1.8em;
             }
         }
         @media (max-width: 480px) {
@@ -193,10 +210,17 @@
                 width: 100%;
             }
             h1 {
-                font-size: 2.5em;
+                font-size: 2.2em;
             }
             .highlight {
-                font-size: 1.6em;
+                font-size: 1.4em;
+            }
+            .trust-signal {
+                font-size: 1em;
+            }
+            nav a {
+                margin: 10px 15px;
+                font-size: 16px;
             }
         }
     </style>
@@ -212,16 +236,17 @@
     <header>
         <h1>Get Paid Fast!</h1>
         <div class="highlight">Sell Your Car to Cappello Motors—Instant Payment, Free Pickup!</div>
+        <p class="trust-signal">Trusted Local Buyer | Over 100 Cars Bought | Same-Day Offers</p>
     </header>
     <div class="input-container">
-        <p>Sell your car today—enter your VIN or license plate!</p>
+        <p>Sell your car in minutes—start here!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
         <button onclick="checkVin()">Sell My Car Now</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
-        <h2>Your Instant Offer Awaits!</h2>
-        <p>Give us the details—we’ll pay you fast!</p>
+        <h2>Your Instant Offer Starts Here!</h2>
+        <p>Tell us about your car—we’ll get you paid fast!</p>
         <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="hiddenVin">
             <input type="text" placeholder="Mileage (e.g., 50,000 miles)" id="mileage" name="Mileage" required>
@@ -248,7 +273,7 @@
             <p class="error" id="modelError">Please enter the model.</p>
             <textarea placeholder="Additional Details (e.g., accidents, repairs, upgrades)" rows="4" id="details" name="Details"></textarea>
             <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
-            <p>Upload photos for a better offer (optional, up to 5)</p>
+            <p>Upload photos for a higher offer (optional, up to 5)</p>
             <input type="tel" placeholder="Your Phone Number" id="phone" name="Phone" required>
             <p class="error" id="phoneError">Please provide a phone number.</p>
             <input type="email" placeholder="Your Email Address" id="email" name="Email" required>
