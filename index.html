@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Shelby Township, MI. Instant cash, free pickup—no hassle, no waiting!">
-    <meta name="keywords" content="sell my car fast, cash for cars Shelby Township, car buyer Michigan, instant car sale, Cappello Motors">
+    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Shelby Township, MI. Get paid instantly with free pickup—better than anyone else!">
+    <meta name="keywords" content="sell my car fast, cash for cars Shelby Township, instant payment for cars, car buyer Michigan, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
     <style>
@@ -13,7 +13,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
+            background-color: #f5f7fa;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,12 +40,12 @@
             transition: color 0.3s;
         }
         nav a:hover {
-            color: #d32f2f;
+            color: #00c4b4; /* Teal hover */
         }
         header {
             margin-top: 80px;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #d32f2f 100%);
+            background: linear-gradient(135deg, #1a2a44 0%, #00c4b4 100%);
             color: #fff;
         }
         h1 {
@@ -65,7 +65,7 @@
         }
         .input-container, .car-details {
             margin: 40px auto;
-            max-width: 700px;
+            max-width: 750px;
             padding: 30px;
             background: #fff;
             border-radius: 15px;
@@ -81,6 +81,11 @@
             border-radius: 8px;
             box-sizing: border-box;
             background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #00c4b4;
+            outline: none;
         }
         select {
             appearance: none;
@@ -93,7 +98,7 @@
         button {
             padding: 16px 35px;
             font-size: 18px;
-            background-color: #d32f2f;
+            background-color: #00c4b4;
             color: white;
             border: none;
             border-radius: 10px;
@@ -101,7 +106,7 @@
             transition: background-color 0.3s, transform 0.2s;
         }
         button:hover {
-            background-color: #b71c1c;
+            background-color: #00a394;
             transform: scale(1.05);
         }
         .error {
@@ -131,7 +136,7 @@
         .step-number {
             width: 50px;
             height: 50px;
-            background-color: #d32f2f;
+            background-color: #00c4b4;
             color: #fff;
             font-size: 24px;
             font-weight: bold;
@@ -168,7 +173,7 @@
             font-size: 16px;
         }
         footer a {
-            color: #d32f2f;
+            color: #00c4b4;
             text-decoration: none;
         }
         footer a:hover {
@@ -205,18 +210,18 @@
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
     </nav>
     <header>
-        <h1>Cash for Your Car Now!</h1>
-        <div class="highlight">Sell to Cappello Motors LLC—Instant Payment, Free Pickup!</div>
+        <h1>Get Paid Fast!</h1>
+        <div class="highlight">Sell Your Car to Cappello Motors—Instant Payment, Free Pickup!</div>
     </header>
     <div class="input-container">
-        <p>Enter your VIN or license plate to sell your car today!</p>
+        <p>Sell your car today—enter your VIN or license plate!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <button onclick="checkVin()">Sell My Car</button>
+        <button onclick="checkVin()">Sell My Car Now</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
-        <h2>Let’s Get Your Cash Ready!</h2>
-        <p>Fill out the details below—we’ll make you an offer fast!</p>
+        <h2>Your Instant Offer Awaits!</h2>
+        <p>Give us the details—we’ll pay you fast!</p>
         <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="hiddenVin">
             <input type="text" placeholder="Mileage (e.g., 50,000 miles)" id="mileage" name="Mileage" required>
@@ -230,13 +235,11 @@
             </select>
             <p class="error" id="conditionError">Please select a condition.</p>
             <select id="titleStatus" name="Title Status" required>
-                <option value="">Title Status</option>
-                <option value="clean">Clean Title</option>
-                <option value="salvage">Salvage Title</option>
-                <option value="rebuilt">Rebuilt Title</option>
-                <option value="lien">Lien (Owed Money)</option>
+                <option value="">Loan Status</option>
+                <option value="free">Free and Clear (No Loan)</option>
+                <option value="loan">Loan on Vehicle (Owe Money)</option>
             </select>
-            <p class="error" id="titleError">Please select title status.</p>
+            <p class="error" id="titleError">Please select loan status.</p>
             <input type="text" placeholder="Year (e.g., 2018)" id="year" name="Year" required>
             <p class="error" id="yearError">Please enter the year.</p>
             <input type="text" placeholder="Make (e.g., Toyota)" id="make" name="Make" required>
@@ -245,12 +248,12 @@
             <p class="error" id="modelError">Please enter the model.</p>
             <textarea placeholder="Additional Details (e.g., accidents, repairs, upgrades)" rows="4" id="details" name="Details"></textarea>
             <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
-            <p>Upload up to 5 photos of your car (optional, but helps us offer more!)</p>
+            <p>Upload photos for a better offer (optional, up to 5)</p>
             <input type="tel" placeholder="Your Phone Number" id="phone" name="Phone" required>
             <p class="error" id="phoneError">Please provide a phone number.</p>
             <input type="email" placeholder="Your Email Address" id="email" name="Email" required>
             <p class="error" id="emailError">Please provide an email address.</p>
-            <button type="submit">Get Your Cash Offer!</button>
+            <button type="submit">Claim Your Instant Payment!</button>
         </form>
     </div>
     <div class="how-it-works">
@@ -258,28 +261,28 @@
             <div class="step-number">1</div>
             <div class="step-text">
                 <h2>We Show Up</h2>
-                <p>We come to your driveway—fast and free.</p>
+                <p>We come to you—fast and free.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">2</div>
             <div class="step-text">
                 <h2>Check It Out</h2>
-                <p>We inspect your car quickly and fairly.</p>
+                <p>We review your car on the spot.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">3</div>
             <div class="step-text">
-                <h2>Pay Cash</h2>
-                <p>You get cash on the spot—no delays.</p>
+                <h2>Get Paid Fast</h2>
+                <p>Instant payment—no waiting around.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">4</div>
             <div class="step-text">
-                <h2>Take It Away</h2>
-                <p>We handle pickup and title—done!</p>
+                <h2>We Pick It Up</h2>
+                <p>Free pickup, title handled—easy!</p>
             </div>
         </div>
     </div>
@@ -298,6 +301,7 @@
                 document.getElementById('hiddenVin').value = carInput;
                 document.getElementById('carDetails').style.display = 'block';
                 document.querySelector('.input-container').style.display = 'none';
+                window.scrollTo({ top: document.getElementById('carDetails').offsetTop - 100, behavior: 'smooth' });
             }
         }
 
@@ -334,7 +338,7 @@
             if (hasError) {
                 event.preventDefault();
             } else {
-                alert('Thank you! Your details are being sent—we’ll get you a cash offer fast!');
+                alert('Thank you! We’re processing your details—expect an instant payment offer soon!');
             }
         });
     </script>
