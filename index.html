@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Shelby Township, MI. Instant payment, free pickup—better than the rest!">
-    <meta name="keywords" content="sell my car fast, instant payment for cars, car buyer Shelby Township, fast car sale Michigan, Cappello Motors">
+    <meta name="description" content="Sell your car fast to Cappello Motors LLC in Metro Detroit. Instant payment, free pickup—Metro Detroit’s top car buyer!">
+    <meta name="keywords" content="sell my car Metro Detroit, instant payment for cars, car buyer Shelby Township, fast car sale Detroit, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
     <style>
@@ -26,7 +26,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -37,16 +37,18 @@
             margin: 0 20px;
             font-size: 18px;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.2s;
         }
         nav a:hover {
-            color: #00c4b4;
+            color: #6b48ff;
+            transform: translateY(-2px);
         }
         header {
             margin-top: 80px;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #00c4b4 100%);
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
             color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
@@ -54,20 +56,24 @@
             letter-spacing: 4px;
             font-size: 4em;
             margin: 0;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
         .highlight {
             font-size: 2.2em;
             font-weight: 600;
             margin: 25px 0 15px;
             color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
         .trust-signal {
             font-size: 1.2em;
             color: #fff;
             margin: 10px 0;
             font-weight: 300;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
         }
         .input-container, .car-details {
             margin: 40px auto;
@@ -75,7 +81,11 @@
             padding: 30px;
             background: #fff;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+        .input-container:hover, .car-details:hover {
+            transform: translateY(-5px);
         }
         input[type="text"], select, textarea, input[type="file"], input[type="tel"], input[type="email"] {
             padding: 14px;
@@ -87,10 +97,11 @@
             border-radius: 8px;
             box-sizing: border-box;
             background-color: #f9f9f9;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         input:focus, select:focus, textarea:focus {
-            border-color: #00c4b4;
+            border-color: #6b48ff;
+            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
             outline: none;
         }
         select {
@@ -104,16 +115,17 @@
         button {
             padding: 16px 35px;
             font-size: 18px;
-            background-color: #00c4b4;
+            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
         }
         button:hover {
-            background-color: #00a394;
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
         }
         .error {
             color: #d32f2f;
@@ -135,18 +147,19 @@
             background: #fff;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: flex-start;
-            transition: transform 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .step:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         .step-number {
             width: 50px;
             height: 50px;
-            background-color: #00c4b4;
+            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
             color: #fff;
             font-size: 24px;
             font-weight: bold;
@@ -156,6 +169,7 @@
             justify-content: center;
             margin-right: 20px;
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(107, 72, 255, 0.3);
         }
         .step-text {
             flex: 1;
@@ -183,7 +197,7 @@
             font-size: 16px;
         }
         footer a {
-            color: #00c4b4;
+            color: #6b48ff;
             text-decoration: none;
         }
         footer a:hover {
@@ -235,18 +249,18 @@
     </nav>
     <header>
         <h1>Get Paid Fast!</h1>
-        <div class="highlight">Sell Your Car to Cappello Motors—Instant Payment, Free Pickup!</div>
-        <p class="trust-signal">Trusted Local Buyer | Over 100 Cars Bought | Same-Day Offers</p>
+        <div class="highlight">Sell Your Car to Metro Detroit’s Top Buyer!</div>
+        <p class="trust-signal">Thousands of Cars Bought Since 1970</p>
     </header>
     <div class="input-container">
-        <p>Sell your car in minutes—start here!</p>
+        <p>Sell your car in Metro Detroit—start here!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
         <button onclick="checkVin()">Sell My Car Now</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
         <h2>Your Instant Offer Starts Here!</h2>
-        <p>Tell us about your car—we’ll get you paid fast!</p>
+        <p>Give us your car details—we’ll pay you fast in Metro Detroit!</p>
         <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="hiddenVin">
             <input type="text" placeholder="Mileage (e.g., 50,000 miles)" id="mileage" name="Mileage" required>
@@ -286,7 +300,7 @@
             <div class="step-number">1</div>
             <div class="step-text">
                 <h2>We Show Up</h2>
-                <p>We come to you—fast and free.</p>
+                <p>We come to you anywhere in Metro Detroit.</p>
             </div>
         </div>
         <div class="step">
@@ -307,7 +321,7 @@
             <div class="step-number">4</div>
             <div class="step-text">
                 <h2>We Pick It Up</h2>
-                <p>Free pickup, title handled—easy!</p>
+                <p>Free pickup across Metro Detroit—easy!</p>
             </div>
         </div>
     </div>
