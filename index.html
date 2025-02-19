@@ -22,7 +22,7 @@
         }
         nav {
             background-color: #1a2a44;
-            padding: 15px;
+            padding: 10px;
             position: fixed;
             top: 0;
             width: 100%;
@@ -30,13 +30,15 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
         }
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
+            margin: 0 10px;
+            font-size: 16px;
             font-weight: 500;
             transition: color 0.3s, transform 0.2s;
         }
@@ -45,7 +47,7 @@
             transform: translateY(-2px);
         }
         header {
-            margin-top: 80px;
+            margin-top: 60px;
             padding: 60px 20px;
             background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
             color: #fff;
@@ -54,99 +56,49 @@
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 4em;
+            letter-spacing: 3px;
+            font-size: 3em;
             margin: 0;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .highlight {
-            font-size: 2.2em;
-            font-weight: 600;
-            margin: 25px 0 15px;
-            color: #fff;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-        }
-        .trust-signal {
-            font-size: 1.2em;
-            color: #fff;
-            margin: 10px 0;
-            font-weight: 300;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 20px;
-            border-radius: 20px;
-            display: inline-block;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .intro {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 0 20px;
-            font-size: 1.1em;
-            color: #555;
-        }
-        .intro h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #1a2a44;
             font-size: 1.8em;
-            margin: 0 0 15px;
+            font-weight: 500;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .input-container, .car-details {
-            margin: 40px auto;
-            max-width: 750px;
-            padding: 30px;
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 20px;
             background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        .input-container:hover, .car-details:hover {
-            transform: translateY(-5px);
-        }
-        input[type="text"], select, textarea, input[type="file"], input[type="tel"], input[type="email"] {
-            padding: 14px;
-            width: 100%;
+        input[type="text"], select, textarea, input[type="file"] {
+            padding: 12px;
+            width: 70%;
+            max-width: 300px;
             font-size: 16px;
-            margin: 12px 0;
-            display: block;
-            border: 1px solid #ddd;
+            margin: 10px 10px 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: #6b48ff;
-            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
-            outline: none;
-        }
-        select {
-            appearance: none;
-            background: #f9f9f9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon fill="%23555" points="0,0 12,0 6,12"/></svg>') no-repeat right 10px center;
-        }
-        textarea {
-            resize: vertical;
-            height: 120px;
         }
         button {
-            padding: 16px 35px;
-            font-size: 18px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #d32f2f;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
-            animation: pulse 2s infinite;
+            transition: background-color 0.3s;
         }
         button:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+            background-color: #b71c1c;
         }
         .error {
             color: #d32f2f;
@@ -166,41 +118,25 @@
             width: 22%;
             margin: 20px 1%;
             background: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: flex-start;
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
-        }
-        .step:nth-child(1) { animation-delay: 0.1s; }
-        .step:nth-child(2) { animation-delay: 0.2s; }
-        .step:nth-child(3) { animation-delay: 0.3s; }
-        .step:nth-child(4) { animation-delay: 0.4s; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .step:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         .step-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            width: 40px;
+            height: 40px;
+            background-color: #d32f2f;
             color: #fff;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 20px;
+            margin-right: 15px;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(107, 72, 255, 0.3);
         }
         .step-text {
             flex: 1;
@@ -208,27 +144,24 @@
         .step h2 {
             font-family: 'Montserrat', Arial, sans-serif;
             color: #1a2a44;
-            font-size: 1.6em;
+            font-size: 1.4em;
             margin: 0;
             text-transform: uppercase;
         }
         .step p {
             color: #555;
-            font-size: 1.1em;
-            margin: 12px 0 0;
-        }
-        .car-details {
-            display: none;
+            font-size: 1em;
+            margin: 10px 0 0;
         }
         footer {
             margin-top: auto;
-            padding: 30px;
+            padding: 25px;
             background-color: #1a2a44;
             color: #fff;
-            font-size: 16px;
+            font-size: 14px;
         }
         footer a {
-            color: #6b48ff;
+            color: #d32f2f;
             text-decoration: none;
         }
         footer a:hover {
@@ -236,18 +169,15 @@
         }
         @media (max-width: 768px) {
             .step {
-                width: 47%;
-                margin: 15px 1%;
+                width: 45%;
             }
-            input[type="text"], button {
+            input[type="text"] {
                 width: 100%;
-                margin: 12px 0;
+                margin: 10px 0;
             }
-            h1 {
-                font-size: 3em;
-            }
-            .highlight {
-                font-size: 1.8em;
+            button {
+                width: 100%;
+                margin: 0;
             }
         }
         @media (max-width: 480px) {
@@ -259,13 +189,6 @@
             }
             .highlight {
                 font-size: 1.4em;
-            }
-            .trust-signal {
-                font-size: 1em;
-            }
-            nav a {
-                margin: 10px 15px;
-                font-size: 16px;
             }
         }
     </style>
@@ -279,57 +202,38 @@
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/blog.html">Blog</a>
     </nav>
     <header>
-        <h1>Get Paid Fast!</h1>
-        <div class="highlight">Sell Your Car with Instant Payment & Free Pickup!</div>
-        <p class="trust-signal">Largest Car Buyer in Metro Detroit</p>
+        <h1>Cappello Motors LLC</h1>
+        <div class="highlight">Sell Your Car Fast—Cash on the Spot, No Hassle!</div>
     </header>
-    <div class="intro">
-        <h2>Sell Your Car Fast</h2>
-        <p>Looking to sell your car quickly? Cappello Motors LLC offers instant payment and free pickup as the largest local car buyer. Enjoy personalized, hassle-free service.</p>
-    </div>
     <div class="input-container">
-        <p>Sell your car today—start here!</p>
+        <p>Start now—enter your VIN or license plate for a quick response!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <button onclick="checkVin()">Sell My Car Now</button>
+        <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
-        <h2>Your Instant Offer Starts Here!</h2>
-        <p>Tell us about your car—we’ll pay you fast!</p>
+        <h2>Tell Us About Your Car</h2>
         <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="hiddenVin">
-            <input type="text" placeholder="Mileage (e.g., 50,000 miles)" id="mileage" name="Mileage" required>
+            <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
             <p class="error" id="mileageError">Please enter the mileage.</p>
             <select id="condition" name="Condition" required>
                 <option value="">Select Condition</option>
-                <option value="excellent">Excellent (Like New)</option>
-                <option value="good">Good (Minor Wear)</option>
-                <option value="fair">Fair (Some Issues)</option>
-                <option value="poor">Poor (Needs Work)</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
             </select>
             <p class="error" id="conditionError">Please select a condition.</p>
-            <select id="titleStatus" name="Title Status" required>
-                <option value="">Loan Status</option>
-                <option value="free">Free and Clear (No Loan)</option>
-                <option value="loan">Loan on Vehicle (Owe Money)</option>
-            </select>
-            <p class="error" id="titleError">Please select loan status.</p>
-            <input type="text" placeholder="Year (e.g., 2018)" id="year" name="Year" required>
-            <p class="error" id="yearError">Please enter the year.</p>
-            <input type="text" placeholder="Make (e.g., Toyota)" id="make" name="Make" required>
-            <p class="error" id="makeError">Please enter the make.</p>
-            <input type="text" placeholder="Model (e.g., Camry)" id="model" name="Model" required>
-            <p class="error" id="modelError">Please enter the model.</p>
-            <textarea placeholder="Additional Details (e.g., accidents, repairs, upgrades)" rows="4" id="details" name="Details"></textarea>
+            <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
             <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
-            <p>Upload photos for a higher offer (optional, up to 5)</p>
-            <input type="tel" placeholder="Your Phone Number" id="phone" name="Phone" required>
-            <p class="error" id="phoneError">Please provide a phone number.</p>
-            <input type="email" placeholder="Your Email Address" id="email" name="Email" required>
-            <p class="error" id="emailError">Please provide an email address.</p>
-            <button type="submit">Claim Your Instant Payment!</button>
+            <p>Upload up to 5 photos of your car (optional)</p>
+            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
+            <p class="error" id="contactError">Please provide contact info.</p>
+            <button type="submit">Send to Cappello Motors LLC</button>
         </form>
     </div>
     <div class="how-it-works">
@@ -337,28 +241,28 @@
             <div class="step-number">1</div>
             <div class="step-text">
                 <h2>We Show Up</h2>
-                <p>We come to you with free pickup.</p>
+                <p>We come to your driveway—faster than the big guys.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">2</div>
             <div class="step-text">
                 <h2>Check It Out</h2>
-                <p>We review your car on the spot.</p>
+                <p>We inspect your car with a quick, fair review.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">3</div>
             <div class="step-text">
-                <h2>Get Paid Fast</h2>
-                <p>Instant payment—no delays.</p>
+                <h2>Pay Cash</h2>
+                <p>Get paid instantly—cash in hand, no delays.</p>
             </div>
         </div>
         <div class="step">
             <div class="step-number">4</div>
             <div class="step-text">
-                <h2>We Pick It Up</h2>
-                <p>Free pickup—hassle-free!</p>
+                <h2>Take It Away</h2>
+                <p>We take the car and title—done deal.</p>
             </div>
         </div>
     </div>
@@ -366,31 +270,6 @@
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Cappello Motors LLC",
-            "description": "Largest car buyer in Metro Detroit offering instant payment and free pickup for fast car sales.",
-            "url": "https://cappellomotors.com",
-            "telephone": "586-453-5924",
-            "email": "cappellomotorsllc@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "49170 Van Dyke",
-                "addressLocality": "Shelby Township",
-                "addressRegion": "MI",
-                "postalCode": "48317",
-                "addressCountry": "US"
-            },
-            "openingHours": "Mo-Sa 09:00-18:00",
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "42.6572",
-                "longitude": "-83.0352"
-            }
-        }
-    </script>
     <script>
         function checkVin() {
             const carInput = document.getElementById('carInput').value;
@@ -402,44 +281,43 @@
                 document.getElementById('hiddenVin').value = carInput;
                 document.getElementById('carDetails').style.display = 'block';
                 document.querySelector('.input-container').style.display = 'none';
-                window.scrollTo({ top: document.getElementById('carDetails').offsetTop - 100, behavior: 'smooth' });
             }
         }
 
         document.getElementById('detailsForm').addEventListener('submit', function(event) {
             const mileage = document.getElementById('mileage').value;
             const condition = document.getElementById('condition').value;
-            const titleStatus = document.getElementById('titleStatus').value;
-            const year = document.getElementById('year').value;
-            const make = document.getElementById('make').value;
-            const model = document.getElementById('model').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
 
             const mileageError = document.getElementById('mileageError');
             const conditionError = document.getElementById('conditionError');
-            const titleError = document.getElementById('titleError');
-            const yearError = document.getElementById('yearError');
-            const makeError = document.getElementById('makeError');
-            const modelError = document.getElementById('modelError');
-            const phoneError = document.getElementById('phoneError');
-            const emailError = document.getElementById('emailError');
+            const contactError = document.getElementById('contactError');
 
             let hasError = false;
 
-            if (!mileage) { mileageError.style.display = 'block'; hasError = true; } else { mileageError.style.display = 'none'; }
-            if (!condition) { conditionError.style.display = 'block'; hasError = true; } else { conditionError.style.display = 'none'; }
-            if (!titleStatus) { titleError.style.display = 'block'; hasError = true; } else { titleError.style.display = 'none'; }
-            if (!year) { yearError.style.display = 'block'; hasError = true; } else { yearError.style.display = 'none'; }
-            if (!make) { makeError.style.display = 'block'; hasError = true; } else { makeError.style.display = 'none'; }
-            if (!model) { modelError.style.display = 'block'; hasError = true; } else { modelError.style.display = 'none'; }
-            if (!phone) { phoneError.style.display = 'block'; hasError = true; } else { phoneError.style.display = 'none'; }
-            if (!email) { emailError.style.display = 'block'; hasError = true; } else { emailError.style.display = 'none'; }
+            if (!mileage) {
+                mileageError.style.display = 'block';
+                hasError = true;
+            } else {
+                mileageError.style.display = 'none';
+            }
+            if (!condition) {
+                conditionError.style.display = 'block';
+                hasError = true;
+            } else {
+                conditionError.style.display = 'none';
+            }
+            if (!contact) {
+                contactError.style.display = 'block';
+                hasError = true;
+            } else {
+                contactError.style.display = 'none';
+            }
 
             if (hasError) {
                 event.preventDefault();
             } else {
-                alert('Thank you! We’re processing your details—expect an instant payment offer soon!');
+                alert('Thank you! We’ll respond faster than the big companies—expect a call or email soon!');
             }
         });
     </script>
