@@ -103,6 +103,14 @@
         button:hover {
             background-color: #b71c1c;
         }
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
         .error {
             color: #d32f2f;
             font-size: 14px;
@@ -174,7 +182,7 @@
             .step {
                 width: 45%;
             }
-            input[type="text"] {
+            input[type="text"], select, textarea, input[type="file"] {
                 width: 100%;
                 margin: 10px 0;
             }
@@ -217,7 +225,7 @@
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
-        <h2>Tell Us About Your Car</h2>
+        <h2>Car Details</h2>
         <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="hiddenVin">
             <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
@@ -230,12 +238,31 @@
                 <option value="poor">Poor</option>
             </select>
             <p class="error" id="conditionError">Please select a condition.</p>
+            <select id="titleStatus" name="TitleStatus" required>
+                <option value="">Title Status</option>
+                <option value="clean">Clean</option>
+                <option value="salvage">Salvage</option>
+                <option value="rebuilt">Rebuilt</option>
+            </select>
+            <p class="error" id="titleStatusError">Please select title status.</p>
+            <select id="lienStatus" name="LienStatus" required>
+                <option value="">Lien Status</option>
+                <option value="no_lien">No Lien</option>
+                <option value="has_lien">Has Lien</option>
+            </select>
+            <p class="error" id="lienStatusError">Please select lien status.</p>
+            <select id="smokerStatus" name="SmokerStatus" required>
+                <option value="">Smoker Status</option>
+                <option value="non_smoker">Non-Smoker</option>
+                <option value="smoker">Smoker</option>
+            </select>
+            <p class="error" id="smokerStatusError">Please select smoker status.</p>
             <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
             <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
             <p>Upload up to 5 photos of your car (optional)</p>
             <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
             <p class="error" id="contactError">Please provide contact info.</p>
-            <button type="submit">Send to Cappello Motors LLC</button>
+            <button type="submit" class="pulse">Send to Cappello Motors LLC</button>
         </form>
     </div>
     <div class="how-it-works">
@@ -289,10 +316,16 @@
         document.getElementById('detailsForm').addEventListener('submit', function(event) {
             const mileage = document.getElementById('mileage').value;
             const condition = document.getElementById('condition').value;
+            const titleStatus = document.getElementById('titleStatus').value;
+            const lienStatus = document.getElementById('lienStatus').value;
+            const smokerStatus = document.getElementById('smokerStatus').value;
             const contact = document.getElementById('contact').value;
 
             const mileageError = document.getElementById('mileageError');
             const conditionError = document.getElementById('conditionError');
+            const titleStatusError = document.getElementById('titleStatusError');
+            const lienStatusError = document.getElementById('lienStatusError');
+            const smokerStatusError = document.getElementById('smokerStatusError');
             const contactError = document.getElementById('contactError');
 
             let hasError = false;
@@ -308,6 +341,24 @@
                 hasError = true;
             } else {
                 conditionError.style.display = 'none';
+            }
+            if (!titleStatus) {
+                titleStatusError.style.display = 'block';
+                hasError = true;
+            } else {
+                titleStatusError.style.display = 'none';
+            }
+            if (!lienStatus) {
+                lienStatusError.style.display = 'block';
+                hasError = true;
+            } else {
+                lienStatusError.style.display = 'none';
+            }
+            if (!smokerStatus) {
+                smokerStatusError.style.display = 'block';
+                hasError = true;
+            } else {
+                smokerStatusError.style.display = 'none';
             }
             if (!contact) {
                 contactError.style.display = 'block';
