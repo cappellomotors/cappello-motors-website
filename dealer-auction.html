@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dealer Auction at Cappello Motors LLC—bid live on premium cars in Metro Detroit! Instant payment and free pickup.">
-    <meta name="keywords" content="dealer auction Metro Detroit, car bidding Shelby Township, Cappello Motors live auction">
+    <meta name="description" content="Dealer Auction at Cappello Motors LLC—exclusive live bidding for Metro Detroit dealers. Login required.">
+    <meta name="keywords" content="dealer auction Metro Detroit, car bidding Shelby Township, Cappello Motors dealer login">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
-    <title>Dealer Auction | Cappello Motors LLC</title>
+    <title>Dealer Auction Login | Cappello Motors LLC</title>
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -66,13 +66,72 @@
             color: #fff;
             text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
-        .auction-container {
+        .login-container, .auction-container {
             margin: 40px auto;
+            max-width: 750px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+        .auction-container {
             max-width: 1200px;
-            padding: 0 20px;
-            display: flex;
+            display: none;
             justify-content: space-around;
             flex-wrap: wrap;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .login-container:hover, .auction-container:hover {
+            transform: translateY(-5px);
+        }
+        .login-container h2, .auction-item h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 1.8em;
+            margin: 0 0 15px;
+            text-transform: uppercase;
+        }
+        .login-container p, .auction-item p {
+            color: #555;
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        input[type="password"] {
+            padding: 14px;
+            width: 200px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="password"]:focus {
+            border-color: #6b48ff;
+            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+            outline: none;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
         }
         .auction-item {
             width: 30%;
@@ -82,31 +141,10 @@
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
-        }
-        .auction-item:nth-child(1) { animation-delay: 0.1s; }
-        .auction-item:nth-child(2) { animation-delay: 0.2s; }
-        .auction-item:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .auction-item:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-        .auction-item h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #1a2a44;
-            font-size: 1.8em;
-            margin: 0 0 10px;
-            text-transform: uppercase;
-        }
-        .auction-item p {
-            color: #555;
-            font-size: 1.2em;
-            margin: 5px 0;
         }
         .timer {
             color: #6b48ff;
@@ -128,21 +166,6 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-sizing: border-box;
-        }
-        button {
-            padding: 12px 25px;
-            font-size: 16px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
-        }
-        button:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
         }
         footer {
             margin-top: auto;
@@ -197,9 +220,16 @@
     </nav>
     <header>
         <h1>Dealer Auction</h1>
-        <div class="highlight">Live Car Bidding—Join the Action!</div>
+        <div class="highlight">Exclusive Dealer Bidding</div>
     </header>
-    <div class="auction-container">
+    <div class="login-container" id="loginContainer">
+        <h2>Dealer Login</h2>
+        <p>Enter your dealer password to access the live auction.</p>
+        <input type="password" id="passwordInput" placeholder="Password">
+        <button onclick="checkPassword()">Login</button>
+        <p id="loginError" style="color: #d32f2f; display: none;">Incorrect password. Try again.</p>
+    </div>
+    <div class="auction-container" id="auctionContainer">
         <div class="auction-item" id="car1">
             <h2>2021 BMW M5</h2>
             <p>High-Performance Sedan</p>
@@ -236,11 +266,28 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
+        const dealerPassword = "dealer123"; // Demo password—replace with your own
         const cars = [
-            { id: 1, currentBid: 55000, timeLeft: 300 }, // 5 minutes in seconds
+            { id: 1, currentBid: 55000, timeLeft: 300 }, // 5 minutes
             { id: 2, currentBid: 65000, timeLeft: 240 }, // 4 minutes
             { id: 3, currentBid: 95000, timeLeft: 180 }  // 3 minutes
         ];
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === dealerPassword) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('auctionContainer').style.display = 'flex';
+                startAuction();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function startAuction() {
+            setInterval(updateTimers, 1000);
+            updateTimers();
+        }
 
         function updateTimers() {
             cars.forEach(car => {
@@ -271,9 +318,6 @@
                 alert('Please enter a valid bid higher than the current bid.');
             }
         }
-
-        setInterval(updateTimers, 1000);
-        updateTimers(); // Initial call to set timers
     </script>
 </body>
 </html>
