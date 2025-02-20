@@ -120,7 +120,7 @@
     <nav>
         <a href="https://cappellomotors.com">Sell Your Car</a>
         <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Fixed link -->
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
@@ -142,8 +142,6 @@
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-
-        // Car Setup
         const cars = [{ name: "Sports Car", speed: 6, handling: 5, color: '#d32f2f', width: 40, height: 60 }];
         let currentCar = cars[0];
         let carX = canvas.width / 2 - currentCar.width / 2;
@@ -153,21 +151,18 @@
         const acceleration = 0.2;
         const braking = 0.3;
         const friction = 0.1;
-
         let obstacles = [];
         let score = 0;
         let gameOver = false;
         let gameWon = false;
         const finishLineY = 50;
 
-        // Car Object (Enhanced Visuals)
         const car = {
             x: carX,
             y: carY,
             width: currentCar.width,
             height: currentCar.height,
             draw() {
-                // Car Body
                 ctx.fillStyle = currentCar.color;
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y + this.height);
@@ -175,41 +170,32 @@
                 ctx.lineTo(this.x + this.width, this.y + this.height);
                 ctx.closePath();
                 ctx.fill();
-                // Windows
                 ctx.fillStyle = '#000';
                 ctx.fillRect(this.x + this.width / 4, this.y + this.height / 4, this.width / 2, this.height / 4);
-                // Spoiler
                 ctx.fillRect(this.x + this.width / 4, this.y - 5, this.width / 2, 5);
-                // Wheels
                 ctx.fillStyle = '#333';
                 ctx.fillRect(this.x - 5, this.y + this.height / 4, 5, this.height / 2);
                 ctx.fillRect(this.x + this.width, this.y + this.height / 4, 5, this.height / 2);
             }
         };
 
-        // Obstacle Object (Traffic Cones)
         function createObstacle() {
             const x = Math.random() * (canvas.width - currentCar.width);
             obstacles.push({ x, y: -currentCar.height, width: 20, height: 40 });
         }
 
-        // Draw Road and Background
         function drawBackground() {
-            // Road
             ctx.fillStyle = '#555';
             ctx.fillRect(canvas.width / 4, 0, canvas.width / 2, canvas.height);
-            // Lane Lines
             ctx.fillStyle = '#fff';
             for (let y = 0; y < canvas.height; y += 40) {
                 ctx.fillRect(canvas.width / 2 - 5, y, 10, 20);
             }
-            // Trackside
             ctx.fillStyle = '#88cc88';
             ctx.fillRect(0, 0, canvas.width / 4, canvas.height);
             ctx.fillRect(canvas.width * 3 / 4, 0, canvas.width / 4, canvas.height);
         }
 
-        // Game Loop
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawBackground();
@@ -227,7 +213,6 @@
                 return;
             }
 
-            // Draw Finish Line
             ctx.fillStyle = '#fff';
             ctx.fillRect(0, finishLineY, canvas.width, 10);
             ctx.fillStyle = '#000';
@@ -235,16 +220,12 @@
                 ctx.fillRect(i, finishLineY, 10, 10);
             }
 
-            // Update Car Physics
             velocity = Math.min(velocity, maxSpeed);
             if (velocity > 0) velocity -= friction;
             if (velocity < 0) velocity = 0;
             car.y -= velocity;
-
-            // Draw Car
             car.draw();
 
-            // Move and Draw Obstacles (Cones)
             for (let i = obstacles.length - 1; i >= 0; i--) {
                 obstacles[i].y += 3;
                 ctx.fillStyle = '#ff6600';
@@ -257,7 +238,6 @@
                 ctx.fillStyle = '#fff';
                 ctx.fillRect(obstacles[i].x + 2, obstacles[i].y + 10, obstacles[i].width - 4, 10);
 
-                // Collision Detection
                 if (
                     car.x < obstacles[i].x + obstacles[i].width &&
                     car.x + car.width > obstacles[i].x &&
@@ -267,30 +247,25 @@
                     gameOver = true;
                 }
 
-                // Remove off-screen obstacles
                 if (obstacles[i].y > canvas.height) {
                     obstacles.splice(i, 1);
                     score += 10;
                 }
             }
 
-            // Check Finish Line
             if (car.y <= finishLineY + 10) {
                 gameWon = true;
             }
 
-            // Score Display
             ctx.fillStyle = '#1a2a44';
             ctx.font = '20px Roboto';
             ctx.fillText('Score: ' + score, 10, 30);
 
-            // Spawn Obstacles
             if (Math.random() < 0.02 && car.y > finishLineY + 50) createObstacle();
 
             requestAnimationFrame(gameLoop);
         }
 
-        // Controls
         let keys = {};
         document.addEventListener('keydown', (e) => {
             keys[e.key] = true;
@@ -309,7 +284,6 @@
             velocity += acceleration;
         });
 
-        // Restart Game
         function restartGame() {
             car.x = canvas.width / 2 - currentCar.width / 2;
             car.y = canvas.height - currentCar.height - 20;
@@ -321,7 +295,6 @@
             gameLoop();
         }
 
-        // Start Game
         gameLoop();
     </script>
 </body>
