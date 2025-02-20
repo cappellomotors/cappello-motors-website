@@ -82,4 +82,82 @@
             transition: transform 0.3s;
         }
         .why-box:hover {
-            transform: translateY(-5
+            transform: translateY(-5px);
+        }
+        .why-box h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 1.5em;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+        }
+        .why-box p {
+            color: #555;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 14px;
+        }
+        footer a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .why-box { width: 45%; }
+        }
+        @media (max-width: 480px) {
+            .why-box { width: 100%; }
+            h1 { font-size: 2em; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="https://cappellomotors.com">Sell Your Car</a>
+        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
+        <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
+        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
+    </nav>
+    <header>
+        <h1>Why Sell to Us</h1>
+    </header>
+    <div class="why-container">
+        <div class="why-box">
+            <h2>Fast Cash</h2>
+            <p>Get paid instantly—no waiting, no hassle. Cash in hand the same day!</p>
+        </div>
+        <div class="why-box">
+            <h2>Free Pickup</h2>
+            <p>We come to you anywhere in Metro Detroit—zero cost, zero stress.</p>
+        </div>
+        <div class="why-box">
+            <h2>Top Offers</h2>
+            <p>20+ years of expertise means you get a fair, competitive price every time.</p>
+        </div>
+        <div class="why-box">
+            <h2>No Fees</h2>
+            <p>What you see is what you get—no hidden charges or surprises.</p>
+        </div>
+        <div class="why-box">
+            <h2>Easy Process</h2>
+            <p>Simple steps, quick inspection, and we handle all the paperwork.</p>
+        </div>
+    </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+</body>
+</html>
