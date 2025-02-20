@@ -268,6 +268,46 @@
                 <option value="smoker">Smoker</option>
             </select>
             <p class="error" id="smokerStatusError">Please select smoker status.</p>
+            <div id="trimContainer"></div> <!-- Dynamic trim field -->
+            <p class="error" id="trimError">Please specify the trim.</p>
+            <select id="tireCondition" name="TireCondition" required>
+                <option value="">Tire Condition</option>
+                <option value="new">New</option>
+                <option value="good">Good</option>
+                <option value="worn">Worn</option>
+                <option value="flat">Flat/Bald</option>
+            </select>
+            <p class="error" id="tireConditionError">Please select tire condition.</p>
+            <select id="paintCondition" name="PaintCondition" required>
+                <option value="">Paint Chips/Scratches</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+            <p class="error" id="paintConditionError">Please select paint condition.</p>
+            <select id="dents" name="Dents" required>
+                <option value="">Dents</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+            <p class="error" id="dentsError">Please select dent condition.</p>
+            <select id="windshield" name="Windshield" required>
+                <option value="">Broken Windshield</option>
+                <option value="intact">Intact</option>
+                <option value="cracked">Cracked</option>
+                <option value="shattered">Shattered</option>
+            </select>
+            <p class="error" id="windshieldError">Please select windshield condition.</p>
+            <select id="oilLeaks" name="OilLeaks" required>
+                <option value="">Oil Leaks</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="major">Major</option>
+            </select>
+            <p class="error" id="oilLeaksError">Please select oil leak status.</p>
             <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
             <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
             <p>Upload up to 5 photos of your car (optional)</p>
@@ -315,6 +355,7 @@
             const carInput = document.getElementById('carInput').value;
             const vinError = document.getElementById('vinError');
             const vinInfo = document.getElementById('vinInfo');
+            const trimContainer = document.getElementById('trimContainer');
 
             if (carInput.trim() === '') {
                 vinError.style.display = 'block';
@@ -333,12 +374,64 @@
                 if (result && result.Make && result.Model && result.ModelYear) {
                     const trim = result.Trim ? result.Trim : 'Unknown Trim';
                     vinInfo.innerHTML = `<p>Your Car: ${result.ModelYear} ${result.Make} ${result.Model} (${trim})</p>`;
+                    if (trim === 'Unknown Trim') {
+                        trimContainer.innerHTML = `
+                            <select id="trim" name="Trim" required>
+                                <option value="">Select Trim</option>
+                                <option value="Base">Base</option>
+                                <option value="EX">EX</option>
+                                <option value="LX">LX</option>
+                                <option value="SX">SX</option>
+                                <option value="Other">Other (specify below)</option>
+                            </select>
+                            <input type="text" id="trimOther" name="TrimOther" placeholder="Specify Trim" style="display: none;">
+                        `;
+                        document.getElementById('trim').addEventListener('change', function() {
+                            const trimOther = document.getElementById('trimOther');
+                            trimOther.style.display = this.value === 'Other' ? 'inline-block' : 'none';
+                            trimOther.required = this.value === 'Other';
+                        });
+                    } else {
+                        trimContainer.innerHTML = `<input type="hidden" name="Trim" value="${trim}">`;
+                    }
                 } else {
                     vinInfo.innerHTML = '<p>Couldn’t decode VIN. Please check it and proceed.</p>';
+                    trimContainer.innerHTML = `
+                        <select id="trim" name="Trim" required>
+                            <option value="">Select Trim</option>
+                            <option value="Base">Base</option>
+                            <option value="EX">EX</option>
+                            <option value="LX">LX</option>
+                            <option value="SX">SX</option>
+                            <option value="Other">Other (specify below)</option>
+                        </select>
+                        <input type="text" id="trimOther" name="TrimOther" placeholder="Specify Trim" style="display: none;">
+                    `;
+                    document.getElementById('trim').addEventListener('change', function() {
+                        const trimOther = document.getElementById('trimOther');
+                        trimOther.style.display = this.value === 'Other' ? 'inline-block' : 'none';
+                        trimOther.required = this.value === 'Other';
+                    });
                 }
             } catch (error) {
                 console.error('VIN Decoder Error:', error);
                 vinInfo.innerHTML = '<p>Error fetching car info. Proceed manually.</p>';
+                trimContainer.innerHTML = `
+                    <select id="trim" name="Trim" required>
+                        <option value="">Select Trim</option>
+                        <option value="Base">Base</option>
+                        <option value="EX">EX</option>
+                        <option value="LX">LX</option>
+                        <option value="SX">SX</option>
+                        <option value="Other">Other (specify below)</option>
+                    </select>
+                    <input type="text" id="trimOther" name="TrimOther" placeholder="Specify Trim" style="display: none;">
+                `;
+                document.getElementById('trim').addEventListener('change', function() {
+                    const trimOther = document.getElementById('trimOther');
+                    trimOther.style.display = this.value === 'Other' ? 'inline-block' : 'none';
+                    trimOther.required = this.value === 'Other';
+                });
             }
         }
 
@@ -348,6 +441,13 @@
             const titleStatus = document.getElementById('titleStatus').value;
             const lienStatus = document.getElementById('lienStatus').value;
             const smokerStatus = document.getElementById('smokerStatus').value;
+            const trim = document.getElementById('trim') ? document.getElementById('trim').value : '';
+            const trimOther = document.getElementById('trimOther') ? document.getElementById('trimOther').value : '';
+            const tireCondition = document.getElementById('tireCondition').value;
+            const paintCondition = document.getElementById('paintCondition').value;
+            const dents = document.getElementById('dents').value;
+            const windshield = document.getElementById('windshield').value;
+            const oilLeaks = document.getElementById('oilLeaks').value;
             const contact = document.getElementById('contact').value;
 
             const mileageError = document.getElementById('mileageError');
@@ -355,15 +455,28 @@
             const titleStatusError = document.getElementById('titleStatusError');
             const lienStatusError = document.getElementById('lienStatusError');
             const smokerStatusError = document.getElementById('smokerStatusError');
+            const trimError = document.getElementById('trimError');
+            const tireConditionError = document.getElementById('tireConditionError');
+            const paintConditionError = document.getElementById('paintConditionError');
+            const dentsError = document.getElementById('dentsError');
+            const windshieldError = document.getElementById('windshieldError');
+            const oilLeaksError = document.getElementById('oilLeaksError');
             const contactError = document.getElementById('contactError');
 
             let hasError = false;
 
             if (!mileage) { mileageError.style.display = 'block'; hasError = true; } else { mileageError.style.display = 'none'; }
-            if (!condition) { conditionError.style.display = 'block'; hasError = true; } else { conditionError.style.display = 'none'; }
+            if (!condition) { conditionError.style.display = 'block'; hasError = 'true'; } else { conditionError.style.display = 'none'; }
             if (!titleStatus) { titleStatusError.style.display = 'block'; hasError = true; } else { titleStatusError.style.display = 'none'; }
             if (!lienStatus) { lienStatusError.style.display = 'block'; hasError = true; } else { lienStatusError.style.display = 'none'; }
             if (!smokerStatus) { smokerStatusError.style.display = 'block'; hasError = true; } else { smokerStatusError.style.display = 'none'; }
+            if (trim && !trim) { trimError.style.display = 'block'; hasError = true; } else { trimError.style.display = 'none'; }
+            if (trim === 'Other' && !trimOther) { trimError.style.display = 'block'; hasError = true; } else if (trim) { trimError.style.display = 'none'; }
+            if (!tireCondition) { tireConditionError.style.display = 'block'; hasError = true; } else { tireConditionError.style.display = 'none'; }
+            if (!paintCondition) { paintConditionError.style.display = 'block'; hasError = true; } else { paintConditionError.style.display = 'none'; }
+            if (!dents) { dentsError.style.display = 'block'; hasError = true; } else { dentsError.style.display = 'none'; }
+            if (!windshield) { windshieldError.style.display = 'block'; hasError = true; } else { windshieldError.style.display = 'none'; }
+            if (!oilLeaks) { oilLeaksError.style.display = 'block'; hasError = true; } else { oilLeaksError.style.display = 'none'; }
             if (!contact) { contactError.style.display = 'block'; hasError = true; } else { contactError.style.display = 'none'; }
 
             if (hasError) {
