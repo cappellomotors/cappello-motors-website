@@ -223,6 +223,7 @@
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a> <!-- Added back -->
     </nav>
     <header>
         <h1>Cappello Motors LLC</h1>
@@ -268,7 +269,7 @@
                 <option value="smoker">Smoker</option>
             </select>
             <p class="error" id="smokerStatusError">Please select smoker status.</p>
-            <div id="trimContainer"></div> <!-- Dynamic trim field -->
+            <div id="trimContainer"></div>
             <p class="error" id="trimError">Please specify the trim.</p>
             <select id="tireCondition" name="TireCondition" required>
                 <option value="">Tire Condition</option>
@@ -466,7 +467,7 @@
             let hasError = false;
 
             if (!mileage) { mileageError.style.display = 'block'; hasError = true; } else { mileageError.style.display = 'none'; }
-            if (!condition) { conditionError.style.display = 'block'; hasError = 'true'; } else { conditionError.style.display = 'none'; }
+            if (!condition) { conditionError.style.display = 'block'; hasError = true; } else { conditionError.style.display = 'none'; }
             if (!titleStatus) { titleStatusError.style.display = 'block'; hasError = true; } else { titleStatusError.style.display = 'none'; }
             if (!lienStatus) { lienStatusError.style.display = 'block'; hasError = true; } else { lienStatusError.style.display = 'none'; }
             if (!smokerStatus) { smokerStatusError.style.display = 'block'; hasError = true; } else { smokerStatusError.style.display = 'none'; }
