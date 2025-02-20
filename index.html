@@ -14,15 +14,17 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="2" fill="rgba(255, 255, 255, 0.1)"/></svg>') repeat, linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
         nav {
-            background-color: #1a2a44;
-            padding: 10px;
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            padding: 15px;
             position: fixed;
             top: 0;
             width: 100%;
@@ -37,85 +39,116 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
+            margin: 0 15px;
+            font-size: 18px;
             font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
+            transition: color 0.3s, transform 0.2s, text-shadow 0.3s;
         }
         nav a:hover {
-            color: #6b48ff;
+            color: #ffff00;
             transform: translateY(-2px);
+            text-shadow: 0 0 10px #ff0047;
         }
         header {
-            margin-top: 60px;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            margin-top: 80px;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1920x600?text=Sell+Your+Car+Now') no-repeat center;
+            background-size: cover;
             color: #fff;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 0 0 1000px rgba(26, 42, 68, 0.7);
+            animation: headerGlow 3s infinite;
+        }
+        @keyframes headerGlow {
+            0% { box-shadow: inset 0 0 0 1000px rgba(26, 42, 68, 0.7); }
+            50% { box-shadow: inset 0 0 0 1000px rgba(26, 42, 68, 0.9); }
+            100% { box-shadow: inset 0 0 0 1000px rgba(26, 42, 68, 0.7); }
         }
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 3em;
+            letter-spacing: 5px;
+            font-size: 4em;
             margin: 0;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 4px 15px rgba(255, 0, 71, 0.7), 0 0 20px #ffff00;
         }
         .highlight {
-            font-size: 1.8em;
-            font-weight: 500;
+            font-size: 2.2em;
+            font-weight: 700;
             margin: 20px 0;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: #ffff00;
+            text-shadow: 0 2px 10px rgba(255, 0, 71, 0.5);
         }
-        .input-container, .car-details {
-            margin: 30px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        .input-container {
+            margin: 40px auto;
+            max-width: 700px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(107, 72, 255, 0.5);
+            transition: transform 0.3s;
         }
-        .car-details {
-            display: none;
+        .input-container:hover {
+            transform: scale(1.05);
         }
-        input[type="text"], select, textarea, input[type="file"] {
-            padding: 12px;
-            width: 70%;
-            max-width: 300px;
-            font-size: 16px;
-            margin: 10px 10px 10px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+        .input-container p {
+            font-size: 1.5em;
+            color: #1a2a44;
+            margin: 0 0 20px;
+        }
+        input[type="text"] {
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 1.5em;
+            margin: 10px 0;
+            border: 3px solid #6b48ff;
+            border-radius: 10px;
             box-sizing: border-box;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(107, 72, 255, 0.5);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #ff0047;
+            box-shadow: 0 0 20px rgba(255, 0, 71, 0.7);
+            outline: none;
         }
         button {
-            padding: 12px 25px;
-            font-size: 16px;
-            background-color: #d32f2f;
-            color: white;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #ff0047 0%, #6b48ff 100%);
+            color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(255, 0, 71, 0.7);
+            animation: pulseButton 1.5s infinite;
         }
         button:hover {
-            background-color: #b71c1c;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 71, 0.9);
         }
-        .pulse {
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
+        @keyframes pulseButton {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         .error {
-            color: #d32f2f;
-            font-size: 14px;
+            color: #ff0047;
+            font-size: 1.2em;
             display: none;
             margin-top: 10px;
+            text-shadow: 0 0 5px rgba(255, 0, 71, 0.5);
+        }
+        .car-details {
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: none;
         }
         #vinInfo {
             font-size: 1.2em;
@@ -126,6 +159,17 @@
             border-radius: 8px;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select, textarea, input[type="file"] {
+            padding: 12px;
+            width: 70%;
+            max-width: 300px;
+            font-size: 16px;
+            margin: 10px 10px 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
         }
         .how-it-works {
             margin: 40px auto;
@@ -144,11 +188,15 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: flex-start;
+            transition: transform 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-5px);
         }
         .step-number {
             width: 40px;
             height: 40px;
-            background-color: #d32f2f;
+            background: linear-gradient(135deg, #ff0047 0%, #6b48ff 100%);
             color: #fff;
             font-size: 20px;
             font-weight: bold;
@@ -158,6 +206,7 @@
             justify-content: center;
             margin-right: 15px;
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(255, 0, 71, 0.5);
         }
         .step-text {
             flex: 1;
@@ -174,52 +223,60 @@
             font-size: 1em;
             margin: 10px 0 0;
         }
+        .car-model {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(0deg);
+            width: 300px;
+            height: 200px;
+            background: url('https://via.placeholder.com/300x200?text=Car+Model') no-repeat center;
+            opacity: 0.2;
+            z-index: 0;
+            animation: spinCar 20s infinite linear;
+        }
+        @keyframes spinCar {
+            0% { transform: translate(-50%, -50%) rotateY(0deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg); }
+        }
         footer {
             margin-top: auto;
             padding: 25px;
-            background-color: #1a2a44;
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
             color: #fff;
             font-size: 14px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
         }
         footer a {
-            color: #d32f2f;
+            color: #ff0047;
             text-decoration: none;
         }
         footer a:hover {
-            text-decoration: underline;
+            text-shadow: 0 0 5px #ffff00;
         }
         @media (max-width: 768px) {
-            .step {
-                width: 45%;
-            }
-            input[type="text"], select, textarea, input[type="file"] {
-                width: 100%;
-                margin: 10px 0;
-            }
-            button {
-                width: 100%;
-                margin: 0;
-            }
+            .step { width: 45%; }
+            input[type="text"], select, textarea, input[type="file"] { width: 100%; margin: 10px 0; }
+            button { width: 100%; margin: 0; }
+            h1 { font-size: 3em; }
+            .highlight { font-size: 1.8em; }
         }
         @media (max-width: 480px) {
-            .step {
-                width: 100%;
-            }
-            h1 {
-                font-size: 2.2em;
-            }
-            .highlight {
-                font-size: 1.4em;
-            }
+            .step { width: 100%; }
+            h1 { font-size: 2.2em; }
+            .highlight { font-size: 1.4em; }
+            nav a { margin: 10px 10px; font-size: 16px; }
+            input[type="text"] { font-size: 1.2em; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="car-model"></div>
     <nav>
         <a href="https://cappellomotors.com">Sell Your Car</a>
         <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Updated link -->
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
@@ -232,7 +289,7 @@
     <div class="input-container">
         <p>Start now—enter your VIN or license plate for a quick response!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <button class="pulse" onclick="checkVin()">Submit</button>
+        <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
     <div class="car-details" id="carDetails">
@@ -314,7 +371,7 @@
             <p>Upload up to 5 photos of your car (optional)</p>
             <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
             <p class="error" id="contactError">Please provide contact info.</p>
-            <button type="submit" class="pulse">Send to Cappello Motors LLC</button>
+            <button type="submit">Send to Cappello Motors LLC</button>
         </form>
     </div>
     <div class="how-it-works">
