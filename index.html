@@ -9,48 +9,189 @@
     <meta name="robots" content="index, follow">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
     <style>
-        /* Existing styles remain unchanged, adding stock ticker styles */
-        .stock-ticker {
-            background: #1a2a44;
-            padding: 10px 0;
-            overflow: hidden;
-            white-space: nowrap;
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #1a2a44;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 60px; /* Below fixed nav */
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
         }
-        .ticker-container {
-            display: inline-block;
-            animation: ticker 20s linear infinite;
-        }
-        .ticker-item {
-            display: inline-block;
-            margin: 0 20px;
+        nav a {
             color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
             font-size: 16px;
             font-weight: 500;
-            transition: transform 0.3s, color 0.3s;
+            transition: color 0.3s, transform 0.2s;
         }
-        .ticker-item:hover {
-            transform: scale(1.1);
+        nav a:hover {
             color: #6b48ff;
+            transform: translateY(-2px);
         }
-        .ticker-item span {
-            margin: 0 5px;
+        header {
+            margin-top: 60px;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-        .positive {
-            color: #00c853;
+        h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .negative {
+        .highlight {
+            font-size: 1.8em;
+            font-weight: 500;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .input-container, .car-details {
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .car-details {
+            display: none; /* Hidden until VIN entered */
+        }
+        input[type="text"], select, textarea, input[type="file"] {
+            padding: 12px;
+            width: 70%;
+            max-width: 300px;
+            font-size: 16px;
+            margin: 10px 10px 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .error {
             color: #d32f2f;
+            font-size: 14px;
+            display: none;
+            margin-top: 10px;
         }
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .how-it-works {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .step {
+            width: 22%;
+            margin: 20px 1%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #d32f2f;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            flex: 1;
+        }
+        .step h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 1.4em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .step p {
+            color: #555;
+            font-size: 1em;
+            margin: 10px 0 0;
+        }
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 14px;
+        }
+        footer a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
         @media (max-width: 768px) {
-            .ticker-item {
-                margin: 0 15px;
-                font-size: 14px;
+            .step {
+                width: 45%;
+            }
+            input[type="text"] {
+                width: 100%;
+                margin: 10px 0;
+            }
+            button {
+                width: 100%;
+                margin: 0;
+            }
+        }
+        @media (max-width: 480px) {
+            .step {
+                width: 100%;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            .highlight {
+                font-size: 1.4em;
             }
         }
     </style>
@@ -64,87 +205,123 @@
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
         <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
-        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
     </nav>
     <header>
         <h1>Cappello Motors LLC</h1>
         <div class="highlight">Sell Your Car Fast—Cash on the Spot, No Hassle!</div>
     </header>
-    <!-- Stock Ticker Section -->
-    <div class="stock-ticker">
-        <div class="ticker-container" id="tickerContainer">
-            <!-- Dynamically populated via JavaScript -->
-        </div>
-    </div>
     <div class="input-container">
         <p>Start now—enter your VIN or license plate for a quick response!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
-        <button class="pulse" onclick="checkVin()">Submit</button>
+        <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
     </div>
-    <!-- Rest of your existing HTML (car-details, how-it-works, footer) remains unchanged -->
     <div class="car-details" id="carDetails">
-        <!-- Existing car details form -->
+        <h2>Tell Us About Your Car</h2>
+        <form id="detailsForm" action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="VIN" id="hiddenVin">
+            <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
+            <p class="error" id="mileageError">Please enter the mileage.</p>
+            <select id="condition" name="Condition" required>
+                <option value="">Select Condition</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
+            </select>
+            <p class="error" id="conditionError">Please select a condition.</p>
+            <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" id="details" name="Details"></textarea>
+            <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
+            <p>Upload up to 5 photos of your car (optional)</p>
+            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
+            <p class="error" id="contactError">Please provide contact info.</p>
+            <button type="submit">Send to Cappello Motors LLC</button>
+        </form>
     </div>
     <div class="how-it-works">
-        <!-- Existing how-it-works steps -->
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+                <h2>We Show Up</h2>
+                <p>We come to your driveway—faster than the big guys.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+                <h2>Check It Out</h2>
+                <p>We inspect your car with a quick, fair review.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+                <h2>Pay Cash</h2>
+                <p>Get paid instantly—cash in hand, no delays.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-text">
+                <h2>Take It Away</h2>
+                <p>We take the car and title—done deal.</p>
+            </div>
+        </div>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
-
     <script>
-        // Existing checkVin and form submission scripts remain unchanged
-
-        // Stock Ticker Script
-        const tickers = [
-            { symbol: 'F', name: 'Ford' },
-            { symbol: 'GM', name: 'General Motors' },
-            { symbol: 'TM', name: 'Toyota' },
-            { symbol: 'TSLA', name: 'Tesla' },
-            { symbol: 'HMC', name: 'Honda' }
-        ];
-        const apiKey = 'YOUR_ALPHA_VANTAGE_API_KEY'; // Get free key from https://www.alphavantage.co/
-        const tickerContainer = document.getElementById('tickerContainer');
-
-        async function fetchStockData() {
-            tickerContainer.innerHTML = ''; // Clear previous data
-            for (const ticker of tickers) {
-                try {
-                    const response = await fetch(
-                        `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker.symbol}&apikey=${apiKey}`
-                    );
-                    const data = await response.json();
-                    const quote = data['Global Quote'];
-                    if (quote) {
-                        const price = parseFloat(quote['05. price']).toFixed(2);
-                        const change = parseFloat(quote['09. change']).toFixed(2);
-                        const changeClass = change >= 0 ? 'positive' : 'negative';
-                        const tickerItem = document.createElement('div');
-                        tickerItem.className = 'ticker-item';
-                        tickerItem.innerHTML = `
-                            ${ticker.name} (${ticker.symbol})
-                            <span>$${price}</span>
-                            <span class="${changeClass}">${change >= 0 ? '+' : ''}${change}</span>
-                        `;
-                        tickerContainer.appendChild(tickerItem);
-                    } else {
-                        throw new Error('No quote data');
-                    }
-                } catch (error) {
-                    console.error(`Error fetching ${ticker.symbol}:`, error);
-                    const tickerItem = document.createElement('div');
-                    tickerItem.className = 'ticker-item';
-                    tickerItem.innerHTML = `${ticker.name} (${ticker.symbol}) <span>N/A</span>`;
-                    tickerContainer.appendChild(tickerItem);
-                }
+        function checkVin() {
+            const carInput = document.getElementById('carInput').value;
+            const vinError = document.getElementById('vinError');
+            if (carInput.trim() === '') {
+                vinError.style.display = 'block';
+            } else {
+                vinError.style.display = 'none';
+                document.getElementById('hiddenVin').value = carInput;
+                document.getElementById('carDetails').style.display = 'block';
+                document.querySelector('.input-container').style.display = 'none';
             }
         }
 
-        // Fetch stock data on load and refresh every 5 minutes (300,000 ms)
-        fetchStockData();
-        setInterval(fetchStockData, 300000);
+        document.getElementById('detailsForm').addEventListener('submit', function(event) {
+            const mileage = document.getElementById('mileage').value;
+            const condition = document.getElementById('condition').value;
+            const contact = document.getElementById('contact').value;
+
+            const mileageError = document.getElementById('mileageError');
+            const conditionError = document.getElementById('conditionError');
+            const contactError = document.getElementById('contactError');
+
+            let hasError = false;
+
+            if (!mileage) {
+                mileageError.style.display = 'block';
+                hasError = true;
+            } else {
+                mileageError.style.display = 'none';
+            }
+            if (!condition) {
+                conditionError.style.display = 'block';
+                hasError = true;
+            } else {
+                conditionError.style.display = 'none';
+            }
+            if (!contact) {
+                contactError.style.display = 'block';
+                hasError = true;
+            } else {
+                contactError.style.display = 'none';
+            }
+
+            if (hasError) {
+                event.preventDefault();
+            } else {
+                alert('Thank you! We’ll respond faster than the big companies—expect a call or email soon!');
+            }
+        });
     </script>
 </body>
 </html>
