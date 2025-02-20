@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dealer Info at Cappello Motors LLC—stock tickers, news, and resources for Metro Detroit car dealers.">
+    <meta name="keywords" content="dealer info Metro Detroit, car stock tickers, Cappello Motors dealer resources">
+    <meta name="author" content="Cappello Motors LLC">
+    <meta name="robots" content="index, follow">
+    <title>Dealer Info | Cappello Motors LLC</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: #1a2a44;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.2s;
+        }
+        nav a:hover {
+            color: #6b48ff;
+            transform: translateY(-2px);
+        }
+        header {
+            margin-top: 80px;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        .highlight {
+            font-size: 2.2em;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: #fff;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        .info-container {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+            animation: slideIn 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .info-container:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 1.8em;
+            margin: 20px 0 15px;
+            text-transform: uppercase;
+        }
+        p { color: #555; font-size: 1.2em; margin: 5px 0; }
+        .ticker-item { display: inline-block; margin: 10px; font-weight: 500; }
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 16px;
+        }
+        footer a {
+            color: #6b48ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 3em; }
+            .highlight { font-size: 1.8em; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            .highlight { font-size: 1.4em; }
+            nav a { margin: 10px 15px; font-size: 16px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
+    </nav>
+    <header>
+        <h1>Dealer Info</h1>
+        <div class="highlight">Your Metro Detroit Dealer Hub</div>
+    </header>
+    <div class="info-container">
+        <h2>Stock Tickers</h2>
+        <div id="tickers">
+            <div class="ticker-item">Ford (F): <span id="ford">-</span></div>
+            <div class="ticker-item">GM (GM): <span id="gm">-</span></div>
+            <div class="ticker-item">Tesla (TSLA): <span id="tsla">-</span></div>
+            <div class="ticker-item">Toyota (TM): <span id="tm">-</span></div>
+            <div class="ticker-item">Stellantis (STLA): <span id="stla">-</span></div>
+        </div>
+        <h2>Latest Car News</h2>
+        <div id="newsFeed">
+            <p><strong>Feb 20, 2025:</strong> GM shifts focus to personal AVs.</p>
+            <p><strong>Feb 19, 2025:</strong> Tesla sales dip in China—BYD up.</p>
+            <p><strong>Feb 15, 2025:</strong> Toyota thrives amid EV shifts.</p>
+        </div>
+        <h2>Dealer Resources</h2>
+        <p><strong>MI Title Tip:</strong> Notarize titles to avoid delays.</p>
+        <p><strong>Winter Check:</strong> Inspect frames for salt damage.</p>
+        <p><a href="https://www.michigan.gov/sos" target="_blank">MI SOS Vehicle Services</a></p>
+        <p>Follow <a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for more tips!</p>
+    </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+    <script>
+        function updateTickers() {
+            document.getElementById('ford').textContent = '$' + (Math.random() * 20 + 10).toFixed(2);
+            document.getElementById('gm').textContent = '$' + (Math.random() * 50 + 30).toFixed(2);
+            document.getElementById('tsla').textContent = '$' + (Math.random() * 300 + 200).toFixed(2);
+            document.getElementById('tm').textContent = '$' + (Math.random() * 200 + 100).toFixed(2);
+            document.getElementById('stla').textContent = '$' + (Math.random() * 30 + 15).toFixed(2);
+        }
+        setInterval(updateTickers, 5000); // Update every 5s
+        updateTickers();
+    </script>
+</body>
+</html>
