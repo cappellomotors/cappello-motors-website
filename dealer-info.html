@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dealer Info at Cappello Motors LLC—stock tickers, news, and resources for Metro Detroit car dealers.">
-    <meta name="keywords" content="dealer info Metro Detroit, car stock tickers, Cappello Motors dealer resources">
+    <meta name="description" content="Cappello Motors LLC Dealer Info—Michigan state updates, compliance tips, and resources for Metro Detroit car dealers.">
+    <meta name="keywords" content="Michigan dealer updates, car dealer compliance, SOS dealer info, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Dealer Info | Cappello Motors LLC</title>
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            background: #0d1b2a;
+            color: #fff;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
         nav {
-            background-color: #1a2a44;
-            padding: 15px;
+            background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%);
+            padding: 20px;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -35,84 +33,135 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
+            margin: 0 30px;
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: transform 0.3s, text-shadow 0.3s;
         }
         nav a:hover {
-            color: #6b48ff;
-            transform: translateY(-2px);
+            transform: scale(1.15);
+            text-shadow: 0 0 15px #ffff00;
         }
         header {
-            margin-top: 80px;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
-            color: #fff;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            margin-top: 100px;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1920x400?text=Michigan+Dealer+Central') no-repeat center;
+            background-size: cover;
+            text-align: center;
+            box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7);
+            animation: flashGlow 2s infinite;
+        }
+        @keyframes flashGlow {
+            0% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7); }
+            50% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.9); }
+            100% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7); }
         }
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 4em;
+            letter-spacing: 6px;
+            font-size: 4.5em;
             margin: 0;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 0 20px #ff0047, 0 0 40px #ffff00;
         }
         .highlight {
-            font-size: 2.2em;
-            font-weight: 600;
-            margin: 25px 0 15px;
-            color: #fff;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            font-size: 2.5em;
+            font-weight: 800;
+            margin: 20px 0;
+            text-shadow: 0 0 15px #ffff00;
         }
         .info-container {
             margin: 40px auto;
-            max-width: 1200px;
+            max-width: 1400px;
+            padding: 40px;
+            background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(255, 0, 71, 0.7);
+        }
+        .section {
+            margin: 30px 0;
             padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s;
-            animation: slideIn 0.5s forwards;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .info-container:hover {
-            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ffff00;
         }
         h2 {
             font-family: 'Montserrat', Arial, sans-serif;
-            color: #1a2a44;
-            font-size: 1.8em;
-            margin: 20px 0 15px;
+            color: #ffff00;
+            font-size: 2.5em;
+            margin: 0 0 20px;
             text-transform: uppercase;
+            text-shadow: 0 0 10px #ff0047;
         }
-        p { color: #555; font-size: 1.2em; margin: 5px 0; }
-        .ticker-item { display: inline-block; margin: 10px; font-weight: 500; }
+        p, ul {
+            font-size: 1.4em;
+            margin: 10px 0;
+            color: #fff;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        ul li:before {
+            content: "⚡";
+            color: #ff0047;
+            position: absolute;
+            left: 0;
+        }
+        a {
+            color: #ffff00;
+            text-decoration: none;
+            transition: text-shadow 0.3s;
+        }
+        a:hover {
+            text-shadow: 0 0 10px #ff0047;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
+            color: #1a2a44;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
+            font-weight: 700;
+        }
+        button:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.9);
+        }
         footer {
-            margin-top: auto;
-            padding: 30px;
-            background-color: #1a2a44;
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%);
             color: #fff;
             font-size: 16px;
+            box-shadow: 0 -6px 20px rgba(255, 0, 71, 0.5);
         }
         footer a {
-            color: #6b48ff;
+            color: #ffff00;
             text-decoration: none;
         }
         footer a:hover {
-            text-decoration: underline;
+            text-shadow: 0 0 10px #ff0047;
         }
         @media (max-width: 768px) {
-            h1 { font-size: 3em; }
-            .highlight { font-size: 1.8em; }
+            h1 { font-size: 3.5em; }
+            .highlight { font-size: 2em; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 2.2em; }
-            .highlight { font-size: 1.4em; }
+            h1 { font-size: 2.5em; }
+            .highlight { font-size: 1.5em; }
             nav a { margin: 10px 15px; font-size: 16px; }
         }
     </style>
@@ -125,43 +174,48 @@
     </nav>
     <header>
         <h1>Dealer Info</h1>
-        <div class="highlight">Your Metro Detroit Dealer Hub</div>
+        <div class="highlight">Michigan Updates for Car Dealers</div>
     </header>
     <div class="info-container">
-        <h2>Stock Tickers</h2>
-        <div id="tickers">
-            <div class="ticker-item">Ford (F): <span id="ford">-</span></div>
-            <div class="ticker-item">GM (GM): <span id="gm">-</span></div>
-            <div class="ticker-item">Tesla (TSLA): <span id="tsla">-</span></div>
-            <div class="ticker-item">Toyota (TM): <span id="tm">-</span></div>
-            <div class="ticker-item">Stellantis (STLA): <span id="stla">-</span></div>
+        <div class="section">
+            <h2>State of Michigan Updates</h2>
+            <ul>
+                <li><strong>Feb 20, 2025:</strong> SOS reminds dealers—titles must be filed within 15 days of sale (<a href="https://www.michigan.gov/sos/vehicle/buy-sell" target="_blank">MCL 257.217</a>).</li>
+                <li><strong>Jan 1, 2025:</strong> New electronic title rules—dealers must use e-Services for lien releases.</li>
+                <li><strong>Dec 31, 2023:</strong> Surety bond increased to $25,000 for all active licenses—check yours!</li>
+            </ul>
         </div>
-        <h2>Latest Car News</h2>
-        <div id="newsFeed">
-            <p><strong>Feb 20, 2025:</strong> GM shifts focus to personal AVs.</p>
-            <p><strong>Feb 19, 2025:</strong> Tesla sales dip in China—BYD up.</p>
-            <p><strong>Feb 15, 2025:</strong> Toyota thrives amid EV shifts.</p>
+        <div class="section">
+            <h2>Compliance Alerts</h2>
+            <p>Stay sharp—here’s what Michigan expects:</p>
+            <ul>
+                <li>Keep a Police Book—record all sales per MCL 257.251.</li>
+                <li>Class B dealers: Complete training every renewal (<a href="https://www.michigan.gov/sos/vehicle/dealers" target="_blank">SOS Dealer Manual</a>).</li>
+                <li>No Sunday sales in counties over 130,000—know your spot!</li>
+            </ul>
         </div>
-        <h2>Dealer Resources</h2>
-        <p><strong>MI Title Tip:</strong> Notarize titles to avoid delays.</p>
-        <p><strong>Winter Check:</strong> Inspect frames for salt damage.</p>
-        <p><a href="https://www.michigan.gov/sos" target="_blank">MI SOS Vehicle Services</a></p>
-        <p>Follow <a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for more tips!</p>
+        <div class="section">
+            <h2>SOS Resources</h2>
+            <ul>
+                <li><a href="https://www.michigan.gov/sos/vehicle/dealers" target="_blank">Dealer Services Homepage</a>—forms, manuals, and more.</li>
+                <li><a href="https://www.michigan.gov/sos/-/media/Project/Websites/sos/Dealer-Manual/Dealer_Manual_Complete.pdf" target="_blank">Dealer Manual</a>—your compliance bible.</li>
+                <li><a href="https://cvs.sos.state.mi.us/" target="_blank">e-Services Login</a>—check bulletins daily.</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Quick Tips</h2>
+            <p>From your pals at Cappello Motors:</p>
+            <ul>
+                <li>Notarize titles—skip delays at SOS.</li>
+                <li>Winter check: Salt eats frames—inspect early.</li>
+                <li>Follow <a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for insider hacks!</li>
+            </ul>
+            <button onclick="window.location.href='https://www.michigan.gov/sos/vehicle/dealers'">SOS Dealer Portal</button>
+        </div>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
-    <script>
-        function updateTickers() {
-            document.getElementById('ford').textContent = '$' + (Math.random() * 20 + 10).toFixed(2);
-            document.getElementById('gm').textContent = '$' + (Math.random() * 50 + 30).toFixed(2);
-            document.getElementById('tsla').textContent = '$' + (Math.random() * 300 + 200).toFixed(2);
-            document.getElementById('tm').textContent = '$' + (Math.random() * 200 + 100).toFixed(2);
-            document.getElementById('stla').textContent = '$' + (Math.random() * 30 + 15).toFixed(2);
-        }
-        setInterval(updateTickers, 5000);
-        updateTickers();
-    </script>
 </body>
 </html>
