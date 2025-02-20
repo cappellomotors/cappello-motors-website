@@ -130,7 +130,7 @@
     <nav>
         <a href="https://cappellomotors.com">Sell Your Car</a>
         <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
     </nav>
     <div class="login-container">
@@ -139,7 +139,6 @@
         <input type="password" id="passwordInput" placeholder="Password">
         <button onclick="checkPassword()">Login</button>
         <p class="error" id="loginError">Incorrect password. Try again.</p>
-        <p>Logged in? Go to: <a href="https://cappellomotors.com/dealer-auction.html">Auction</a> | <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a></p>
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
@@ -151,7 +150,7 @@
             const input = document.getElementById('passwordInput').value;
             if (input === dealerPassword) {
                 document.getElementById('loginError').style.display = 'none';
-                alert('Login successful! Navigate to Auction or Dealer Info.');
+                window.location.href = 'https://cappellomotors.com/dealer-main.html';
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }

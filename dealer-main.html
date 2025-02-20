@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cappello Motors LLC Dealer Hub—auctions, info, and resources for Metro Detroit dealers.">
+    <meta name="keywords" content="dealer hub Metro Detroit, car auctions, dealer resources, Cappello Motors">
+    <meta name="author" content="Cappello Motors LLC">
+    <meta name="robots" content="index, follow">
+    <title>Dealer Hub | Cappello Motors LLC</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+        nav {
+            background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%);
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            color: #6b48ff;
+            transform: scale(1.1);
+        }
+        header {
+            margin-top: 100px;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1920x600?text=Detroit+Car+Scene') no-repeat center;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            box-shadow: inset 0 0 0 1000px rgba(26, 42, 68, 0.7);
+        }
+        h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-size: 4.5em;
+            margin: 0;
+            text-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .highlight {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        .main-container {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            animation: slideIn 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            width: 45%;
+            margin: 20px 2%;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .section:hover {
+            transform: translateY(-10px);
+        }
+        h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #1a2a44;
+            font-size: 2em;
+            margin: 0 0 15px;
+            text-transform: uppercase;
+        }
+        p {
+            color: #555;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: #6b48ff;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+        }
+        .stat-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(107, 72, 255, 0.6);
+        }
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            background-color: #1a2a44;
+            color: #fff;
+            font-size: 16px;
+        }
+        footer a {
+            color: #6b48ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .section { width: 100%; }
+            h1 { font-size: 3.5em; }
+            .highlight { font-size: 2em; }
+            .stat-item { width: 45%; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5em; }
+            .highlight { font-size: 1.5em; }
+            nav a { margin: 10px 15px; font-size: 16px; }
+            .stat-item { width: 100%; margin: 10px 0; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
+        <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
+    </nav>
+    <header>
+        <h1>Dealer Hub</h1>
+        <div class="highlight">Your Metro Detroit Dealer Command Center</div>
+    </header>
+    <div class="main-container">
+        <div class="section">
+            <h2>Auction Access</h2>
+            <p>Bid on exclusive Metro Detroit inventory—live auctions daily!</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>15</h3>
+                    <p>Cars Today</p>
+                </div>
+                <div class="stat-item">
+                    <h3>$500K</h3>
+                    <p>Total Bids</p>
+                </div>
+            </div>
+            <button onclick="window.location.href='https://cappellomotors.com/dealer-auction.html'">Start Bidding</button>
+        </div>
+        <div class="section">
+            <h2>Dealer Intel</h2>
+            <p>Real-time stock tickers, news, and MI-specific resources.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>5</h3>
+                    <p>Top Stocks</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>News Updates</p>
+                </div>
+            </div>
+            <button onclick="window.location.href='https://cappellomotors.com/dealer-info.html'">Get Intel</button>
+        </div>
+    </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+</body>
+</html>
