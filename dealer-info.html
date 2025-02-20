@@ -43,8 +43,19 @@
             transform: scale(1.15);
             text-shadow: 0 0 15px #ffff00;
         }
+        .news-ticker {
+            background: #ff0047;
+            padding: 10px;
+            font-size: 1.5em;
+            color: #ffff00;
+            text-shadow: 0 0 10px #1e90ff;
+            position: fixed;
+            top: 80px;
+            width: 100%;
+            z-index: 1000;
+        }
         header {
-            margin-top: 100px;
+            margin-top: 140px;
             padding: 80px 20px;
             background: url('https://via.placeholder.com/1920x400?text=Michigan+Dealer+Central') no-repeat center;
             background-size: cover;
@@ -172,6 +183,9 @@
         <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
         <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
     </nav>
+    <marquee class="news-ticker" behavior="scroll" direction="left">
+        SOS Update: New e-Services rules effective Jan 1, 2025 | MCL 257.217: File titles within 15 days | Surety bond now $25,000—check yours!
+    </marquee>
     <header>
         <h1>Dealer Info</h1>
         <div class="highlight">Michigan Updates for Car Dealers</div>
