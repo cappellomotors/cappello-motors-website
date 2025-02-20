@@ -61,56 +61,25 @@
             margin: 0;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .content {
+        .why-container {
             margin: 40px auto;
-            max-width: 800px;
+            max-width: 1200px;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
         }
-        p {
-            color: #555;
-            font-size: 1.2em;
-            margin: 10px 0;
+        .why-box {
+            width: 30%;
+            margin: 15px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
         }
-        footer {
-            margin-top: auto;
-            padding: 25px;
-            background-color: #1a2a44;
-            color: #fff;
-            font-size: 14px;
-        }
-        footer a {
-            color: #d32f2f;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <nav>
-        <a href="https://cappellomotors.com">Sell Your Car</a>
-        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Fixed link -->
-        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
-        <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
-        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
-        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
-    </nav>
-    <header>
-        <h1>Why Sell to Us</h1>
-    </header>
-    <div class="content">
-        <p>Get fast cash and free pickup with Cappello Motors LLC—Metro Detroit’s trusted car buyer!</p>
-        <!-- Add your why sell content here -->
-    </div>
-    <footer>
-        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
-        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
-    </footer>
-</body>
-</html>
+        .why-box:hover {
+            transform: translateY(-5
