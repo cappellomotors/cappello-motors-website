@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors LLC Dealer Auction—exclusive live bidding for Metro Detroit dealers. Bigger, bolder, better!">
+    <meta name="description" content="Cappello Motors LLC Dealer Auction—exclusive live bidding coming soon for Metro Detroit dealers. Get ready!">
     <meta name="keywords" content="dealer auction Metro Detroit, car bidding Shelby Township, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
@@ -17,6 +17,23 @@
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="2" fill="rgba(255, 255, 0, 0.3)"/></svg>') repeat;
+            animation: particleFlow 20s infinite linear;
+        }
+        @keyframes particleFlow {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
         }
         nav {
             background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%);
@@ -24,8 +41,8 @@
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
+            z-index: 1001;
+            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.7);
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -40,142 +57,168 @@
             transition: transform 0.3s, text-shadow 0.3s;
         }
         nav a:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 15px #ffff00;
+            transform: scale(1.2);
+            text-shadow: 0 0 20px #ffff00;
         }
         header {
             margin-top: 100px;
-            padding: 80px 20px;
-            background: url('https://via.placeholder.com/1920x400?text=Live+Auction+Zone') no-repeat center;
+            padding: 100px 20px;
+            background: url('https://via.placeholder.com/1920x400?text=Auction+Launch+Zone') no-repeat center;
             background-size: cover;
             text-align: center;
-            box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7);
-            animation: flashGlow 2s infinite;
+            box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8);
+            animation: neonFlash 2s infinite;
+            position: relative;
+            z-index: 1;
         }
-        @keyframes flashGlow {
-            0% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7); }
+        @keyframes neonFlash {
+            0% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8); }
             50% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.9); }
-            100% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.7); }
+            100% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8); }
         }
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 6px;
-            font-size: 4.5em;
+            letter-spacing: 8px;
+            font-size: 5.5em;
             margin: 0;
-            text-shadow: 0 0 20px #ff0047, 0 0 40px #ffff00;
+            text-shadow: 0 0 25px #ffff00, 0 0 50px #1e90ff;
         }
         .highlight {
-            font-size: 2.5em;
-            font-weight: 800;
+            font-size: 3em;
+            font-weight: 900;
             margin: 20px 0;
-            text-shadow: 0 0 15px #ffff00;
+            text-shadow: 0 0 20px #ff0047;
+        }
+        .countdown-banner {
+            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
+            padding: 20px;
+            font-size: 2em;
+            font-weight: 700;
+            color: #1a2a44;
+            text-shadow: 0 0 10px #1e90ff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.8);
+            margin: 20px auto;
+            max-width: 600px;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         .auction-container {
             margin: 40px auto;
-            max-width: 1400px;
+            max-width: 1600px;
             padding: 40px;
             background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(255, 0, 71, 0.7);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 0, 71, 0.9);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            position: relative;
+            z-index: 1;
         }
         .auction-item {
-            width: 30%;
+            width: 22%;
             margin: 20px 1%;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border: 3px solid #ffff00;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 4px solid #ffff00;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
         }
         .auction-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 0, 71, 0.8);
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(255, 0, 71, 1);
+        }
+        .auction-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('https://via.placeholder.com/100x100?text=Car+Silhouette') no-repeat center;
+            opacity: 0.1;
+            transform: rotate(45deg);
         }
         .auction-item h2 {
             font-family: 'Montserrat', Arial, sans-serif;
             color: #ffff00;
-            font-size: 2em;
+            font-size: 2.2em;
             margin: 0 0 15px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px #ff0047;
+            text-shadow: 0 0 15px #ff0047;
         }
         .auction-item p {
-            font-size: 1.3em;
+            font-size: 1.5em;
             margin: 10px 0;
             color: #fff;
         }
-        .timer {
+        .coming-soon {
             font-size: 2em;
             font-weight: 800;
-            color: #ff0047;
-            text-shadow: 0 0 10px #ffff00;
-            animation: pulseTimer 1s infinite;
+            color: #1e90ff;
+            text-shadow: 0 0 15px #ffff00;
+            animation: flashText 1s infinite;
         }
-        @keyframes pulseTimer {
+        @keyframes flashText {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .bid-info span {
+            font-size: 2em;
+            color: #ffff00;
+            font-weight: 700;
+            text-shadow: 0 0 15px #1e90ff;
+        }
+        .launch-button {
+            padding: 25px 50px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
+            color: #1a2a44;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 40px rgba(255, 255, 0, 0.9);
+            font-weight: 800;
+            margin: 40px auto;
+            display: block;
+            animation: pulseButton 1.5s infinite;
+        }
+        @keyframes pulseButton {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-        .bid-info {
-            margin: 15px 0;
+        .launch-button:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 15px 60px rgba(255, 255, 0, 1);
         }
-        .bid-info span {
-            font-size: 1.8em;
-            color: #ffff00;
-            font-weight: 700;
-            text-shadow: 0 0 10px #1e90ff;
-        }
-        input[type="number"] {
-            padding: 12px;
-            width: 120px;
-            font-size: 16px;
-            margin: 10px 0;
-            border: 2px solid #ffff00;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
-            color: #1a2a44;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
-            font-weight: 700;
-        }
-        button:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.9);
-        }
-        .coming-soon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #1e90ff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 1em;
-            font-weight: 700;
-            text-shadow: 0 0 5px #ffff00;
+        .video-teaser {
+            margin: 40px auto;
+            max-width: 800px;
+            height: 200px;
+            background: url('https://via.placeholder.com/800x200?text=Auction+Teaser+Video') no-repeat center;
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 0, 71, 0.7);
         }
         footer {
-            margin-top: 40px;
             padding: 40px;
             background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%);
             color: #fff;
             font-size: 16px;
             box-shadow: 0 -6px 20px rgba(255, 0, 71, 0.5);
+            position: relative;
+            z-index: 1;
         }
         footer a {
             color: #ffff00;
@@ -199,116 +242,80 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="particles"></div>
     <nav>
         <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
         <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
     </nav>
     <header>
         <h1>Dealer Auction</h1>
-        <div class="highlight">Bid Big, Win Bigger!</div>
+        <div class="highlight">Get Ready to Rule the Roads!</div>
     </header>
+    <div class="countdown-banner" id="countdown">Auction Launch: Coming Soon!</div>
     <div class="auction-container">
-        <div class="auction-item" id="car1">
+        <div class="auction-item">
             <h2>2021 BMW M5</h2>
             <p>High-Performance Sedan</p>
-            <p class="timer" id="timer1">00:00</p>
+            <p class="coming-soon">Coming Soon</p>
             <div class="bid-info">
-                <p>Current Bid: <span id="bid1">$55,000</span></p>
-                <input type="number" id="bidInput1" placeholder="Your Bid" min="55000" step="100">
-                <button onclick="placeBid(1)">Place Bid</button>
+                <p>Starting Bid: <span>$55,000</span></p>
             </div>
         </div>
-        <div class="auction-item" id="car2">
+        <div class="auction-item">
             <h2>2020 Mercedes-Benz S-Class</h2>
             <p>Luxury Sedan</p>
-            <p class="timer" id="timer2">00:00</p>
+            <p class="coming-soon">Coming Soon</p>
             <div class="bid-info">
-                <p>Current Bid: <span id="bid2">$65,000</span></p>
-                <input type="number" id="bidInput2" placeholder="Your Bid" min="65000" step="100">
-                <button onclick="placeBid(2)">Place Bid</button>
+                <p>Starting Bid: <span>$65,000</span></p>
             </div>
         </div>
-        <div class="auction-item" id="car3">
+        <div class="auction-item">
             <h2>2019 Porsche 911 Turbo</h2>
             <p>Sports Coupe</p>
-            <p class="timer" id="timer3">00:00</p>
+            <p class="coming-soon">Coming Soon</p>
             <div class="bid-info">
-                <p>Current Bid: <span id="bid3">$95,000</span></p>
-                <input type="number" id="bidInput3" placeholder="Your Bid" min="95000" step="100">
-                <button onclick="placeBid(3)">Place Bid</button>
+                <p>Starting Bid: <span>$95,000</span></p>
             </div>
         </div>
-        <div class="auction-item" id="car4">
+        <div class="auction-item">
             <h2>2022 Ford Mustang GT</h2>
             <p>Muscle Car</p>
-            <p class="timer" id="timer4">Coming Soon</p>
+            <p class="coming-soon">Coming Soon</p>
             <div class="bid-info">
                 <p>Starting Bid: <span>$40,000</span></p>
-                <p class="coming-soon">Coming Soon</p>
             </div>
         </div>
-        <div class="auction-item" id="car5">
+        <div class="auction-item">
             <h2>2023 Tesla Model X</h2>
             <p>Electric SUV</p>
-            <p class="timer" id="timer5">Coming Soon</p>
+            <p class="coming-soon">Coming Soon</p>
             <div class="bid-info">
                 <p>Starting Bid: <span>$85,000</span></p>
-                <p class="coming-soon">Coming Soon</p>
             </div>
         </div>
     </div>
+    <button class="launch-button" onclick="alert('Auctions launching soon—stay tuned!')">Auction Launch</button>
+    <div class="video-teaser"></div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        const cars = [
-            { id: 1, currentBid: 55000, timeLeft: 300 },
-            { id: 2, currentBid: 65000, timeLeft: 240 },
-            { id: 3, currentBid: 95000, timeLeft: 180 },
-            { id: 4, currentBid: 40000, timeLeft: -1 }, // Coming Soon
-            { id: 5, currentBid: 85000, timeLeft: -1 }  // Coming Soon
-        ];
-
-        document.getElementById('auctionContainer').style.display = 'flex';
-        startAuction();
-
-        function startAuction() {
-            setInterval(updateTimers, 1000);
-            updateTimers();
-        }
-
-        function updateTimers() {
-            cars.forEach(car => {
-                const timerEl = document.getElementById(`timer${car.id}`);
-                if (car.timeLeft > 0) {
-                    car.timeLeft--;
-                    const minutes = Math.floor(car.timeLeft / 60);
-                    const seconds = car.timeLeft % 60;
-                    timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                } else if (car.timeLeft === 0) {
-                    timerEl.textContent = "Auction Ended";
-                    document.getElementById(`bidInput${car.id}`).disabled = true;
-                    document.querySelector(`#car${car.id} button`).disabled = true;
-                } else {
-                    timerEl.textContent = "Coming Soon";
-                }
-            });
-        }
-
-        function placeBid(carId) {
-            const car = cars.find(c => c.id === carId);
-            const bidInput = document.getElementById(`bidInput${carId}`);
-            const newBid = parseInt(bidInput.value);
-            if (newBid && newBid > car.currentBid && car.timeLeft > 0) {
-                car.currentBid = newBid;
-                document.getElementById(`bid${carId}`).textContent = `$${newBid.toLocaleString()}`;
-                bidInput.value = '';
-                alert(`Bid of $${newBid.toLocaleString()} placed on Car ${carId}!`);
+        // Simple countdown teaser (mock—can replace with real logic later)
+        const countdownEl = document.getElementById('countdown');
+        let timeLeft = 300; // Mock 5-minute countdown
+        function updateCountdown() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownEl.textContent = `Auction Launch: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             } else {
-                alert('Please enter a valid bid higher than the current bid.');
+                countdownEl.textContent = 'Auction Launch: Get Ready!';
             }
         }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
