@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors LLC Dealer Hub—live auctions, stock tickers, news, and resources for Metro Detroit dealers.">
-    <meta name="keywords" content="dealer hub Metro Detroit, car auctions, stock tickers, dealer news, Cappello Motors">
+    <meta name="description" content="Cappello Motors LLC Dealer Hub—auctions, stock tickers, news, and resources for Metro Detroit dealers.">
+    <meta name="keywords" content="dealer hub Metro Detroit, car auctions, dealer news, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Dealer Hub | Cappello Motors LLC</title>
@@ -101,13 +101,13 @@
             margin: 10px 0;
             color: #fff;
         }
-        .tickers, .stats, .auctions {
+        .tickers, .auctions, .deals {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 20px 0;
         }
-        .ticker-item, .stat-item, .auction-preview {
+        .ticker-item, .auction-preview, .deal-item {
             background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
             color: #fff;
             padding: 20px;
@@ -120,13 +120,35 @@
             text-align: center;
             transition: transform 0.3s;
         }
-        .ticker-item:hover, .stat-item:hover, .auction-preview:hover {
+        .ticker-item:hover, .auction-preview:hover, .deal-item:hover {
             transform: scale(1.1);
         }
         .ticker-item span { font-size: 2em; display: block; }
-        .auction-preview p { font-size: 1.2em; }
-        .news-feed { max-height: 200px; overflow-y: auto; }
+        .auction-preview p, .deal-item p { font-size: 1.2em; }
+        .news-feed { max-height: 250px; overflow-y: auto; }
         .news-feed p { font-size: 1.3em; margin: 5px 0; }
+        .tips-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .tip-item {
+            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
+            color: #1a2a44;
+            padding: 20px;
+            border-radius: 15px;
+            width: 33%;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
+        }
+        .market-pulse {
+            height: 200px;
+            background: url('https://via.placeholder.com/1200x200?text=Market+Pulse+Graph') no-repeat center;
+            background-size: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
+        }
         button {
             padding: 20px 40px;
             font-size: 20px;
@@ -159,12 +181,14 @@
             text-shadow: 0 0 10px #ff0047;
         }
         @media (max-width: 768px) {
-            .ticker-item, .stat-item, .auction-preview { width: 45%; }
+            .ticker-item, .auction-preview, .deal-item { width: 45%; }
+            .tip-item { width: 70%; }
             h1 { font-size: 3.5em; }
             .highlight { font-size: 2em; }
         }
         @media (max-width: 480px) {
-            .ticker-item, .stat-item, .auction-preview { width: 100%; }
+            .ticker-item, .auction-preview, .deal-item { width: 100%; }
+            .tip-item { width: 100%; }
             h1 { font-size: 2.5em; }
             .highlight { font-size: 1.5em; }
             nav a { margin: 10px 15px; font-size: 16px; }
@@ -184,8 +208,8 @@
     <div class="main-container">
         <div class="section">
             <h2>Welcome, Dealer!</h2>
-            <p>Your gateway to Metro Detroit’s hottest car deals and insider intel.</p>
-            <p>20+ years of expertise at your fingertips—let’s dominate the market!</p>
+            <p>Your one-stop hub for dominating Metro Detroit’s car market.</p>
+            <p>20+ years of expertise—unleash the power of Cappello Motors!</p>
         </div>
         <div class="section">
             <h2>Live Auctions</h2>
@@ -209,13 +233,13 @@
             <button onclick="window.location.href='https://cappellomotors.com/dealer-auction.html'">Bid Now</button>
         </div>
         <div class="section">
-            <h2>Stock Tickers</h2>
-            <div class="tickers" id="tickers">
-                <div class="ticker-item">F: <span id="ford">-</span></div>
-                <div class="ticker-item">GM: <span id="gm">-</span></div>
-                <div class="ticker-item">TSLA: <span id="tsla">-</span></div>
-                <div class="ticker-item">TM: <span id="tm">-</span></div>
-                <div class="ticker-item">STLA: <span id="stla">-</span></div>
+            <h2>Stock Tickers (Daily)</h2>
+            <div class="tickers">
+                <div class="ticker-item">F: <span>$13.45</span></div>
+                <div class="ticker-item">GM: <span>$45.67</span></div>
+                <div class="ticker-item">TSLA: <span>$245.89</span></div>
+                <div class="ticker-item">TM: <span>$182.34</span></div>
+                <div class="ticker-item">STLA: <span>$21.78</span></div>
             </div>
         </div>
         <div class="section">
@@ -223,23 +247,46 @@
             <div class="news-feed" id="newsFeed"><p>Loading news...</p></div>
         </div>
         <div class="section">
-            <h2>Dealer Stats</h2>
-            <div class="stats">
-                <div class="stat-item"><h3>15</h3><p>Cars Today</p></div>
-                <div class="stat-item"><h3>$500K</h3><p>Bids Today</p></div>
-                <div class="stat-item"><h3>50+</h3><p>Active Dealers</p></div>
+            <h2>Hot Deals</h2>
+            <div class="deals">
+                <div class="deal-item">
+                    <p>2022 Ford F-150</p>
+                    <p>$35,000</p>
+                </div>
+                <div class="deal-item">
+                    <p>2021 Chevy Tahoe</p>
+                    <p>$48,000</p>
+                </div>
+                <div class="deal-item">
+                    <p>2020 Dodge Charger</p>
+                    <p>$29,900</p>
+                </div>
             </div>
         </div>
         <div class="section">
-            <h2>Market Trends</h2>
-            <p>Used car prices up 5% in MI this month—focus on SUVs!</p>
-            <p>Top sellers: Ford F-150, Chevy Silverado.</p>
+            <h2>Quick Tips</h2>
+            <div class="tips-carousel">
+                <div class="tip-item">
+                    <p>Check wheel wells for rust—MI winters hit hard!</p>
+                </div>
+                <div class="tip-item">
+                    <p>VIN last 6 digits = rare trims—spot goldmines!</p>
+                </div>
+                <div class="tip-item">
+                    <p>Notarize MI titles—skip the delays!</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Market Pulse</h2>
+            <div class="market-pulse"></div>
+            <p>Used SUV prices spiking—Detroit’s hot trend!</p>
         </div>
         <div class="section">
             <h2>Resources</h2>
-            <p><strong>MI Title Tip:</strong> Notarize titles fast.</p>
-            <p><strong>Winter Prep:</strong> Salt damage check—frames first.</p>
-            <p><a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for insider tips!</p>
+            <p><strong>MI Title Hack:</strong> Notarize fast.</p>
+            <p><strong>Winter Win:</strong> Salt damage—frames first.</p>
+            <p><a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for more!</p>
             <button onclick="window.location.href='https://cappellomotors.com/dealer-info.html'">More Intel</button>
         </div>
     </div>
@@ -248,26 +295,6 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        // Alpha Vantage API for live stock tickers (get key at alphavantage.co)
-        const apiKey = 'YOUR_ALPHA_VANTAGE_API_KEY'; // Replace with your key
-        const stocks = ['F', 'GM', 'TSLA', 'TM', 'STLA'];
-        function fetchStockData() {
-            stocks.forEach(stock => {
-                fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=${apiKey}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const price = data['Global Quote'] && data['Global Quote']['05. price'] ? data['Global Quote']['05. price'] : '-';
-                        document.getElementById(stock.toLowerCase()).textContent = `$${parseFloat(price).toFixed(2)}`;
-                    })
-                    .catch(error => {
-                        console.error('Stock Error:', error);
-                        document.getElementById(stock.toLowerCase()).textContent = 'N/A';
-                    });
-            });
-        }
-        fetchStockData();
-        setInterval(fetchStockData, 60000); // Update every minute
-
         // NewsAPI for daily car news (get key at newsapi.org)
         const newsApiKey = 'YOUR_NEWSAPI_KEY'; // Replace with your key
         fetch(`https://newsapi.org/v2/top-headlines?q=automotive&category=business&apiKey=${newsApiKey}`)
