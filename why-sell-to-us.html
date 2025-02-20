@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Why sell your car to Cappello Motors LLC? Instant payment, free pickup, and Metro Detroit’s largest car buyer—better than the rest!">
-    <meta name="keywords" content="why sell car Metro Detroit, instant payment car buyer, free pickup Shelby Township, Cappello Motors advantages">
+    <meta name="description" content="Why sell your car to Cappello Motors LLC? Fast cash and free pickup in Metro Detroit. Learn more!">
+    <meta name="keywords" content="why sell to Cappello Motors, car buyer Metro Detroit, Shelby Township car sales">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Why Sell to Us | Cappello Motors LLC</title>
@@ -22,7 +22,7 @@
         }
         nav {
             background-color: #1a2a44;
-            padding: 15px;
+            padding: 10px;
             position: fixed;
             top: 0;
             width: 100%;
@@ -30,13 +30,15 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
         }
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
+            margin: 0 10px;
+            font-size: 16px;
             font-weight: 500;
             transition: color 0.3s, transform 0.2s;
         }
@@ -45,8 +47,8 @@
             transform: translateY(-2px);
         }
         header {
-            margin-top: 80px;
-            padding: 60px 20px;
+            margin-top: 60px;
+            padding: 40px 20px;
             background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
             color: #fff;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -54,100 +56,37 @@
         h1 {
             font-family: 'Montserrat', Arial, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 4em;
+            letter-spacing: 3px;
+            font-size: 2.5em;
             margin: 0;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .highlight {
-            font-size: 2.2em;
-            font-weight: 600;
-            margin: 25px 0 15px;
-            color: #fff;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-        }
-        .reasons {
+        .content {
             margin: 40px auto;
-            max-width: 1200px;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-        .reason {
-            width: 30%;
-            margin: 20px 1%;
+            max-width: 800px;
+            padding: 20px;
             background: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        .reason:nth-child(1) { animation-delay: 0.1s; }
-        .reason:nth-child(2) { animation-delay: 0.2s; }
-        .reason:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reason:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-        .reason h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #1a2a44;
-            font-size: 1.8em;
-            margin: 0 0 15px;
-            text-transform: uppercase;
-        }
-        .reason p {
+        p {
             color: #555;
             font-size: 1.2em;
-            margin: 0;
+            margin: 10px 0;
         }
         footer {
             margin-top: auto;
-            padding: 30px;
+            padding: 25px;
             background-color: #1a2a44;
             color: #fff;
-            font-size: 16px;
+            font-size: 14px;
         }
         footer a {
-            color: #6b48ff;
+            color: #d32f2f;
             text-decoration: none;
         }
         footer a:hover {
             text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            .reason {
-                width: 47%;
-                margin: 15px 1%;
-            }
-            h1 {
-                font-size: 3em;
-            }
-            .highlight {
-                font-size: 1.8em;
-            }
-        }
-        @media (max-width: 480px) {
-            .reason {
-                width: 100%;
-            }
-            h1 {
-                font-size: 2.2em;
-            }
-            .highlight {
-                font-size: 1.4em;
-            }
-            nav a {
-                margin: 10px 15px;
-                font-size: 16px;
-            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -156,27 +95,18 @@
     <nav>
         <a href="https://cappellomotors.com">Sell Your Car</a>
         <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Fixed link -->
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
         <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
+        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
+        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
     </nav>
     <header>
-        <h1>Why Sell to Us?</h1>
-        <div class="highlight">Your Best Choice for Fast Car Sales</div>
+        <h1>Why Sell to Us</h1>
     </header>
-    <div class="reasons">
-        <div class="reason">
-            <h2>Instant Payment</h2>
-            <p>Get paid on the spot—no waiting, no hassle. We offer immediate funds when you sell to Cappello Motors LLC.</p>
-        </div>
-        <div class="reason">
-            <h2>Free Pickup</h2>
-            <p>We come to you anywhere in Metro Detroit with free pickup—save time and let us handle the logistics.</p>
-        </div>
-        <div class="reason">
-            <h2>Trusted Local Buyer</h2>
-            <p>As the largest car buyer in Metro Detroit, we’ve earned trust with personalized service and fair offers.</p>
-        </div>
+    <div class="content">
+        <p>Get fast cash and free pickup with Cappello Motors LLC—Metro Detroit’s trusted car buyer!</p>
+        <!-- Add your why sell content here -->
     </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
