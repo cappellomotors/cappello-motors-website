@@ -331,7 +331,8 @@
                 const data = await response.json();
                 const result = data.Results[0];
                 if (result && result.Make && result.Model && result.ModelYear) {
-                    vinInfo.innerHTML = `<p>Your Car: ${result.ModelYear} ${result.Make} ${result.Model}</p>`;
+                    const trim = result.Trim ? result.Trim : 'Unknown Trim';
+                    vinInfo.innerHTML = `<p>Your Car: ${result.ModelYear} ${result.Make} ${result.Model} (${trim})</p>`;
                 } else {
                     vinInfo.innerHTML = '<p>Couldn’t decode VIN. Please check it and proceed.</p>';
                 }
