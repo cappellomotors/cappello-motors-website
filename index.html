@@ -8,6 +8,14 @@
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Sell Your Car Fast | Cappello Motors LLC</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16886493440"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-16886493440');
+    </script>
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -540,7 +548,12 @@
             if (hasError) {
                 event.preventDefault();
             } else {
-                alert('Thank you! We’ll respond faster than the big companies—expect a call or email soon!');
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-16886493440/REPLACE_WITH_CONVERSION_ID',
+                    'event_callback': function() {
+                        alert('Thank you! We’ll respond faster than the big companies—expect a call or email soon!');
+                    }
+                });
             }
         });
     </script>
