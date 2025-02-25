@@ -9,209 +9,35 @@
     <meta name="robots" content="index, follow">
     <title>Dealer Auction | Cappello Motors LLC</title>
     <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #0d1b2a;
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="2" fill="rgba(255, 255, 0, 0.3)"/></svg>') repeat;
-            animation: particleFlow 20s infinite linear;
-        }
-        @keyframes particleFlow {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100px); }
-        }
-        nav {
-            background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%);
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1001;
-            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.7);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 30px;
-            font-size: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: transform 0.3s, text-shadow 0.3s;
-        }
-        nav a:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 20px #ffff00;
-        }
-        header {
-            margin-top: 100px;
-            padding: 100px 20px;
-            background: url('https://via.placeholder.com/1920x400?text=Auction+Zone') no-repeat center;
-            background-size: cover;
-            text-align: center;
-            box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8);
-            animation: neonFlash 2s infinite;
-            position: relative;
-            z-index: 1;
-        }
-        @keyframes neonFlash {
-            0% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8); }
-            50% { box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.9); }
-            100% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8); }
-        }
-        h1 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            font-size: 5.5em;
-            margin: 0;
-            text-shadow: 0 0 25px #ffff00, 0 0 50px #1e90ff;
-        }
-        .highlight {
-            font-size: 3em;
-            font-weight: 900;
-            margin: 20px 0;
-            text-shadow: 0 0 20px #ff0047;
-        }
-        .auction-container {
-            margin: 40px auto;
-            max-width: 1600px;
-            padding: 40px;
-            background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 0, 71, 0.9);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            position: relative;
-            z-index: 1;
-        }
-        .auction-item {
-            width: 22%;
-            margin: 20px 1%;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border: 4px solid #ffff00;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .auction-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 20px 50px rgba(255, 0, 71, 1);
-        }
-        .auction-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('https://via.placeholder.com/100x100?text=Car+Silhouette') no-repeat center;
-            opacity: 0.1;
-            transform: rotate(45deg);
-        }
-        .auction-item h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #ffff00;
-            font-size: 2.2em;
-            margin: 0 0 15px;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #ff0047;
-        }
-        .auction-item p {
-            font-size: 1.5em;
-            margin: 10px 0;
-            color: #fff;
-        }
-        .timer {
-            font-size: 2em;
-            font-weight: 800;
-            color: #1e90ff;
-            text-shadow: 0 0 15px #ffff00;
-        }
-        .bid-info span {
-            font-size: 2em;
-            color: #ffff00;
-            font-weight: 700;
-            text-shadow: 0 0 15px #1e90ff;
-        }
-        input[type="number"] {
-            padding: 12px;
-            width: 120px;
-            font-size: 16px;
-            margin: 10px 0;
-            border: 2px solid #ffff00;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
-            color: #1a2a44;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
-            font-weight: 700;
-        }
-        button:disabled {
-            background: #555;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        button:hover:not(:disabled) {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.9);
-        }
-        footer {
-            padding: 40px;
-            background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%);
-            color: #fff;
-            font-size: 16px;
-            box-shadow: 0 -6px 20px rgba(255, 0, 71, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-        footer a {
-            color: #ffff00;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-shadow: 0 0 10px #ff0047;
-        }
-        @media (max-width: 768px) {
-            .auction-item { width: 45%; }
-            h1 { font-size: 3.5em; }
-            .highlight { font-size: 2em; }
-        }
-        @media (max-width: 480px) {
-            .auction-item { width: 100%; }
-            h1 { font-size: 2.5em; }
-            .highlight { font-size: 1.5em; }
-            nav a { margin: 10px 15px; font-size: 16px; }
-        }
+        body { font-family: 'Roboto', Arial, sans-serif; margin: 0; padding: 0; background: #0d1b2a; color: #fff; min-height: 100vh; overflow-x: hidden; position: relative; }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,0,0.3)"/></svg>') repeat; animation: particleFlow 20s infinite linear; }
+        @keyframes particleFlow { 0% { transform: translateY(0); } 100% { transform: translateY(-100px); } }
+        nav { background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%); padding: 20px; position: fixed; top: 0; width: 100%; z-index: 1001; box-shadow: 0 8px 25px rgba(255,0,71,0.7); display: flex; justify-content: center; flex-wrap: wrap; }
+        nav a { color: #fff; text-decoration: none; margin: 0 30px; font-size: 22px; font-weight: 700; text-transform: uppercase; transition: transform 0.3s, text-shadow 0.3s; }
+        nav a:hover { transform: scale(1.2); text-shadow: 0 0 20px #ffff00; }
+        header { margin-top: 100px; padding: 100px 20px; background: url('https://via.placeholder.com/1920x400?text=Auction+Zone') no-repeat center; background-size: cover; text-align: center; box-shadow: inset 0 0 0 1000px rgba(255,0,71,0.8); animation: neonFlash 2s infinite; position: relative; z-index: 1; }
+        @keyframes neonFlash { 0% { box-shadow: inset 0 0 0 1000px rgba(255,0,71,0.8); } 50% { box-shadow: inset 0 0 0 1000px rgba(30,144,255,0.9); } 100% { box-shadow: inset 0 0 0 1000px rgba(255,0,71,0.8); } }
+        h1 { font-family: 'Montserrat', Arial, sans-serif; text-transform: uppercase; letter-spacing: 8px; font-size: 5.5em; margin: 0; text-shadow: 0 0 25px #ffff00, 0 0 50px #1e90ff; }
+        .highlight { font-size: 3em; font-weight: 900; margin: 20px 0; text-shadow: 0 0 20px #ff0047; }
+        #signin { text-align: center; margin: 20px; }
+        #signin input { padding: 12px; width: 200px; font-size: 16px; margin: 10px; border: 2px solid #ffff00; border-radius: 8px; background: rgba(255,255,255,0.2); color: #fff; }
+        .auction-container { margin: 40px auto; max-width: 1600px; padding: 40px; background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%); border-radius: 30px; box-shadow: 0 20px 60px rgba(255,0,71,0.9); display: none; flex-wrap: wrap; justify-content: space-around; position: relative; z-index: 1; }
+        .auction-item { width: 22%; margin: 20px 1%; padding: 40px; background: rgba(255,255,255,0.2); border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); border: 4px solid #ffff00; transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+        .auction-item:hover { transform: scale(1.1); box-shadow: 0 20px 50px rgba(255,0,71,1); }
+        .auction-item::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: url('https://via.placeholder.com/100x100?text=Car+Silhouette') no-repeat center; opacity: 0.1; transform: rotate(45deg); }
+        .auction-item h2 { font-family: 'Montserrat', Arial, sans-serif; color: #ffff00; font-size: 2.2em; margin: 0 0 15px; text-transform: uppercase; text-shadow: 0 0 15px #ff0047; }
+        .auction-item p { font-size: 1.5em; margin: 10px 0; color: #fff; }
+        .timer { font-size: 2em; font-weight: 800; color: #1e90ff; text-shadow: 0 0 15px #ffff00; }
+        .bid-info span { font-size: 2em; color: #ffff00; font-weight: 700; text-shadow: 0 0 15px #1e90ff; }
+        input[type="number"] { padding: 12px; width: 120px; font-size: 16px; margin: 10px 0; border: 2px solid #ffff00; border-radius: 8px; background: rgba(255,255,255,0.2); color: #fff; }
+        button { padding: 15px 30px; font-size: 18px; background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%); color: #1a2a44; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 6px 20px rgba(255,255,0,0.7); font-weight: 700; }
+        button:disabled { background: #555; cursor: not-allowed; box-shadow: none; }
+        button:hover:not(:disabled) { transform: scale(1.1) translateY(-3px); box-shadow: 0 10px 30px rgba(255,255,0,0.9); }
+        footer { padding: 40px; background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%); color: #fff; font-size: 16px; box-shadow: 0 -6px 20px rgba(255,0,71,0.5); position: relative; z-index: 1; }
+        footer a { color: #ffff00; text-decoration: none; }
+        footer a:hover { text-shadow: 0 0 10px #ff0047; }
+        @media (max-width: 768px) { .auction-item { width: 45%; } h1 { font-size: 3.5em; } .highlight { font-size: 2em; } }
+        @media (max-width: 480px) { .auction-item { width: 100%; } h1 { font-size: 2.5em; } .highlight { font-size: 1.5em; } nav a { margin: 10px 15px; font-size: 16px; } }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -225,6 +51,11 @@
         <h1>Dealer Auction</h1>
         <div class="highlight">Bid Now, Win Big!</div>
     </header>
+    <div id="signin">
+        <input type="email" id="email" placeholder="Dealer Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Sign In</button>
+    </div>
     <div class="auction-container" id="auctionContainer">
         <div class="auction-item" id="car1">
             <h2>2021 BMW M5</h2>
@@ -282,34 +113,59 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        const cars = [
-            { id: 1, currentBid: 55000, endTime: new Date().getTime() + 3 * 24 * 60 * 60 * 1000 }, // 3 days
-            { id: 2, currentBid: 65000, endTime: new Date().getTime() + 4 * 24 * 60 * 60 * 1000 }, // 4 days
-            { id: 3, currentBid: 95000, endTime: new Date().getTime() + 5 * 24 * 60 * 60 * 1000 }, // 5 days
-            { id: 4, currentBid: 40000, endTime: new Date().getTime() + 3.5 * 24 * 60 * 60 * 1000 }, // 3.5 days
-            { id: 5, currentBid: 85000, endTime: new Date().getTime() + 4.5 * 24 * 60 * 60 * 1000 }  // 4.5 days
-        ];
+        let cars = [];
 
-        // Load saved bids and end times from localStorage if available
-        const savedCars = JSON.parse(localStorage.getItem('auctionCars')) || cars;
-        cars.forEach((car, index) => {
-            car.currentBid = savedCars[index].currentBid;
-            car.endTime = savedCars[index].endTime;
-        });
-
-        document.getElementById('auctionContainer').style.display = 'flex';
-        startAuction();
-
-        function startAuction() {
-            setInterval(updateTimers, 1000);
-            updateTimers();
+        async function signIn() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById('signin').style.display = 'none';
+                    document.getElementById('auctionContainer').style.display = 'flex';
+                    connectWebSocket();
+                } else {
+                    alert('Sign-in failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Sign-in error:', error);
+                alert('Sign-in error: ' + error.message);
+            }
         }
 
-        function updateTimers() {
-            const now = new Date().getTime();
+        function connectWebSocket() {
+            const socket = new WebSocket('ws://localhost:3000');
+            socket.onopen = () => console.log('WebSocket connected');
+            socket.onmessage = (event) => {
+                console.log('WebSocket message:', event.data);
+                const data = JSON.parse(event.data);
+                if (data.type === 'init' || data.type === 'update') {
+                    cars = data.auctions;
+                    updateUI();
+                } else if (data.type === 'bid') {
+                    const car = cars.find(c => c.id === data.carId);
+                    if (car) {
+                        car.currentBid = data.bid;
+                        document.getElementById(`bid${data.carId}`).textContent = `$${data.bid.toLocaleString()}`;
+                    }
+                }
+            };
+            socket.onerror = (error) => console.error('WebSocket error:', error);
+            socket.onclose = () => console.log('WebSocket closed');
+        }
+
+        function updateUI() {
+            const now = Date.now();
             cars.forEach(car => {
                 const timerEl = document.getElementById(`timer${car.id}`);
+                const bidEl = document.getElementById(`bid${car.id}`);
                 const timeLeft = car.endTime - now;
+                bidEl.textContent = `$${car.currentBid.toLocaleString()}`;
                 if (timeLeft > 0) {
                     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -322,26 +178,35 @@
                     document.querySelector(`#car${car.id} button`).disabled = true;
                 }
             });
-            // Save current state to localStorage
-            localStorage.setItem('auctionCars', JSON.stringify(cars));
+            setTimeout(updateUI, 1000);
         }
 
-        function placeBid(carId) {
-            const car = cars.find(c => c.id === carId);
+        async function placeBid(carId) {
+            console.log('Place Bid clicked for car:', carId);
             const bidInput = document.getElementById(`bidInput${carId}`);
             const newBid = parseInt(bidInput.value);
-            const now = new Date().getTime();
-
-            if (newBid && newBid > car.currentBid && car.endTime > now) {
-                car.currentBid = newBid;
-                document.getElementById(`bid${carId}`).textContent = `$${newBid.toLocaleString()}`;
-                bidInput.value = '';
-                alert(`Bid of $${newBid.toLocaleString()} placed on Car ${carId}!`);
-                localStorage.setItem('auctionCars', JSON.stringify(cars));
-            } else if (car.endTime <= now) {
-                alert('This auction has ended!');
-            } else {
-                alert('Please enter a bid higher than the current bid.');
+            if (isNaN(newBid) || newBid <= 0) {
+                alert('Please enter a valid bid amount.');
+                return;
+            }
+            try {
+                console.log('Sending bid:', { carId, newBid });
+                const response = await fetch('http://localhost:3000/place-bid', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ carId, bid: newBid })
+                });
+                const result = await response.json();
+                console.log('Server response:', result);
+                if (result.success) {
+                    bidInput.value = '';
+                    alert(`Success! Your bid of $${result.newBid.toLocaleString()} is now the highest for ${cars.find(c => c.id === carId).name}.`);
+                } else {
+                    alert('Bid failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Bid error:', error);
+                alert('Error placing bid: ' + error.message);
             }
         }
     </script>
