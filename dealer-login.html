@@ -10,117 +10,165 @@
     <title>Dealer Login | Cappello Motors LLC</title>
     <style>
         body {
-            font-family: 'Futura', 'Roboto', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f1c2e, #2a3e64);
-            color: #fff;
+            background: linear-gradient(135deg, #f7f9fc, #e0e7f0);
+            color: #34495e;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             position: relative;
+            line-height: 1.6;
         }
-        .login-background {
+        .background-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://via.placeholder.com/1920x1080?text=Digital+Matrix') no-repeat center/cover;
-            opacity: 0.3;
+            background: url('https://via.placeholder.com/1920x1080?text=Subtle+Marble') no-repeat center/cover;
+            opacity: 0.1;
             z-index: -1;
-            animation: bgShift 10s infinite linear;
         }
-        @keyframes bgShift {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-10%); }
+        nav {
+            background: #2c3e50;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+        }
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 25px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #e74c3c;
         }
         .login-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: #ffffff;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 500px;
-            backdrop-filter: blur(10px);
-            border: 2px solid #00bfff;
-            animation: glowPulse 3s infinite alternate;
+            max-width: 450px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease;
         }
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 20px #00bfff; }
-            100% { box-shadow: 0 0 40px #00ffcc; }
+        .login-container:hover {
+            transform: translateY(-5px);
         }
         h1 {
-            font-family: 'Futura', 'Helvetica', sans-serif;
-            font-size: 3.5em;
-            color: #00ffcc;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px #00bfff;
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin: 0 0 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        input {
+        .tagline {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        input[type="email"],
+        input[type="password"] {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             margin: 10px 0;
-            border: 2px solid #00bfff;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #f9fbfd;
+            color: #34495e;
             font-size: 16px;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        input:focus {
-            border-color: #00ffcc;
-            box-shadow: 0 0 10px #00ffcc;
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #2c3e50;
+            box-shadow: 0 0 8px rgba(44, 62, 80, 0.2);
             outline: none;
         }
         button {
-            padding: 15px 40px;
-            font-size: 18px;
-            background: linear-gradient(135deg, #00bfff 0%, #00ffcc 100%);
-            color: #0f1c2e;
+            padding: 12px 30px;
+            font-size: 16px;
+            background: #2c3e50;
+            color: #fff;
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-weight: 700;
-            text-transform: uppercase;
+            transition: background 0.3s, transform 0.2s;
             margin-top: 20px;
+            font-weight: 600;
         }
         button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.8);
-        }
-        button:active {
-            transform: translateY(0);
+            background: #e74c3c;
+            transform: translateY(-2px);
         }
         .error {
-            color: #ff4d4d;
+            color: #e74c3c;
             margin-top: 10px;
             display: none;
+            font-size: 14px;
+        }
+        footer {
+            padding: 20px 0;
+            background: #2c3e50;
+            color: #ecf0f1;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
         }
         @media (max-width: 600px) {
-            .login-container { padding: 20px; }
-            h1 { font-size: 2.5em; }
-            input { font-size: 14px; }
-            button { font-size: 16px; padding: 12px 30px; }
+            .login-container { padding: 25px; }
+            h1 { font-size: 2em; }
+            .tagline { font-size: 1em; }
+            input[type="email"],
+            input[type="password"] { font-size: 14px; }
+            button { font-size: 14px; padding: 10px 20px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="login-background"></div>
+    <div class="background-overlay"></div>
+    <nav>
+        <a href="https://cappellomotors.com">Home</a>
+        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
+    </nav>
     <div class="login-container">
         <h1>Dealer Login</h1>
+        <div class="tagline">Access your exclusive dealer tools</div>
         <input type="email" id="email" placeholder="Dealer Email">
         <input type="password" id="password" placeholder="Password">
         <button onclick="signIn()">Sign In</button>
         <div id="error" class="error"></div>
     </div>
+    <footer>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
     <script>
         async function signIn() {
             const email = document.getElementById('email').value;
@@ -140,11 +188,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                if (!response.ok) throw new Error('Network error: ' + response.statusText);
                 const result = await response.json();
                 console.log('Sign-in response:', result);
                 if (result.success) {
-                    window.location.href = result.redirect || 'http://localhost:3000/dealer-auction.html';
+                    window.location.href = 'http://localhost:3000/dealer-auction.html';
                 } else {
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
                     errorDiv.style.display = 'block';
