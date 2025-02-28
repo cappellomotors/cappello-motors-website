@@ -5,44 +5,48 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Initial server check
 console.log('Starting server with Node.js:', process.version);
-console.log('Dependencies:', { express: require('express'), ws: require('ws'), bcrypt: require('bcrypt') });
+console.log('Checking dependencies:');
+console.log('express:', require('express').version || 'loaded');
+console.log('ws:', require('ws').version || 'loaded');
+console.log('bcrypt:', require('bcrypt').version || 'loaded');
 
 // Middleware
 app.use(express.json());
 app.use((req, res, next) => {
-    console.log('Middleware hit:', req.method, req.url);
+    console.log('Incoming request:', req.method, req.url, 'Origin:', req.headers.origin);
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Explicit local origin
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials if needed
+    res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
 
 app.use(express.static(path.join(__dirname, '../')));
 
 app.get('/', (req, res) => {
-    console.log('Serving default page: dealer-login.html');
+    console.log('Attempting to serve dealer-login.html from:', path.join(__dirname, '../dealer-login.html'));
     res.sendFile(path.join(__dirname, '../dealer-login.html'), (err) => {
         if (err) {
-            console.error('Error serving dealer-login.html:', err);
-            res.status(500).send('Server error: Unable to load login page');
+            console.error('Failed to serve dealer-login.html:', err.message, err.stack);
+            res.status(500).send('Server error: Unable to load login page. Check terminal logs.');
         }
     });
 });
 
 app.get('/dealer-auction.html', (req, res) => {
-    console.log('Serving dealer-auction.html');
+    console.log('Attempting to serve dealer-auction.html from:', path.join(__dirname, '../dealer-auction.html'));
     res.sendFile(path.join(__dirname, '../dealer-auction.html'), (err) => {
         if (err) {
-            console.error('Error serving dealer-auction.html:', err);
-            res.status(500).send('Server error: Unable to load auction page');
+            console.error('Failed to serve dealer-auction.html:', err.message, err.stack);
+            res.status(500).send('Server error: Unable to load auction page. Check terminal logs.');
         }
     });
 });
 
 app.options('/signin', (req, res) => {
-    console.log('Handling OPTIONS for /signin');
+    console.log('Handling OPTIONS preflight for /signin');
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Methods', 'POST');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -50,7 +54,7 @@ app.options('/signin', (req, res) => {
 });
 
 app.options('/place-bid', (req, res) => {
-    console.log('Handling OPTIONS for /place-bid');
+    console.log('Handling OPTIONS preflight for /place-bid');
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Methods', 'POST');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -70,20 +74,20 @@ let auctions = [
 ];
 
 app.post('/signin', async (req, res) => {
-    console.log('Sign-in attempt received with body:', req.body);
+    console.log('Sign-in POST received, body:', JSON.stringify(req.body));
     const { email, password } = req.body || {};
     if (!email || !password) {
         console.log('Sign-in failed: Missing credentials');
         return res.status(400).json({ success: false, message: 'Missing email or password' });
     }
     try {
-        console.log('Checking credentials for:', email);
+        console.log('Validating credentials for:', email);
         const dealer = dealers.find(d => d.email === email);
         if (dealer) {
             const match = await bcrypt.compare(password, dealer.password);
-            console.log('Password match:', match);
+            console.log('Password comparison result:', match);
             if (match) {
-                console.log('Sign-in successful:', email);
+                console.log('Sign-in successful for:', email);
                 res.json({ success: true, redirect: '/dealer-auction.html' });
             } else {
                 console.log('Sign-in failed: Password mismatch for', email);
@@ -94,13 +98,13 @@ app.post('/signin', async (req, res) => {
             res.status(401).json({ success: false, message: 'Invalid email or password' });
         }
     } catch (error) {
-        console.error('Sign-in error:', error);
-        res.status(500).json({ success: false, message: 'Server error during sign-in: ' + error.message });
+        console.error('Sign-in error:', error.message, error.stack);
+        res.status(500).json({ success: false, message: 'Server error: ' + error.message });
     }
 });
 
 app.post('/place-bid', (req, res) => {
-    console.log('Bid received with body:', req.body);
+    console.log('Bid POST received, body:', JSON.stringify(req.body));
     const { carId, bid } = req.body || {};
     if (!carId || !bid) {
         console.log('Bid failed: Missing data');
@@ -123,8 +127,8 @@ app.post('/place-bid', (req, res) => {
             res.status(400).json({ success: false, message: 'Bid too low or auction ended' });
         }
     } catch (error) {
-        console.error('Bid error:', error);
-        res.status(500).json({ success: false, message: 'Server error during bid: ' + error.message });
+        console.error('Bid error:', error.message, error.stack);
+        res.status(500).json({ success: false, message: 'Server error: ' + error.message });
     }
 });
 
@@ -132,16 +136,17 @@ const server = app.listen(port, () => console.log(`Server running on http://loca
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
-    console.log('WebSocket client connected');
+    console.log('WebSocket client connected from:', ws._socket.remoteAddress);
     ws.send(JSON.stringify({ type: 'init', auctions }));
-    ws.on('message', (message) => console.log('WebSocket message:', message));
+    ws.on('message', (message) => console.log('WebSocket message received:', message.toString()));
 });
 
 function broadcast(data) {
-    console.log('Broadcasting:', data);
+    console.log('Broadcasting data:', data);
     wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(data));
+            console.log('Sent to client:', client._socket.remoteAddress);
         }
     });
 }
