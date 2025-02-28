@@ -13,9 +13,10 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f5f7fa;
-            color: #2c3e50;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
             min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
             line-height: 1.6;
         }
@@ -197,13 +198,7 @@
         <h1>Dealer Auction</h1>
         <div class="highlight">Secure Your Next Deal</div>
     </header>
-    <div id="signin">
-        <input type="email" id="email" placeholder="Dealer Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="signIn()">Sign In</button>
-        <div id="error" class="error"></div>
-    </div>
-    <div class="auction-container" id="auctionContainer" style="display: none;">
+    <div class="auction-container" id="auctionContainer">
         <div class="auction-item" id="car1">
             <h2>2021 BMW M5</h2>
             <p>High-Performance Sedan</p>
@@ -262,41 +257,9 @@
     <script>
         let cars = [];
 
-        async function signIn() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('error');
-            errorDiv.style.display = 'none';
-
-            if (!email || !password) {
-                errorDiv.textContent = 'Please fill in all fields.';
-                errorDiv.style.display = 'block';
-                return;
-            }
-
-            try {
-                const response = await fetch('http://localhost:3000/signin', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-                if (!response.ok) throw new Error('Network error: ' + response.statusText);
-                const result = await response.json();
-                console.log('Sign-in response:', result);
-                if (result.success) {
-                    document.getElementById('signin').style.display = 'none';
-                    document.getElementById('auctionContainer').style.display = 'block';
-                    connectWebSocket();
-                } else {
-                    errorDiv.textContent = result.message || 'Invalid login attempt.';
-                    errorDiv.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Sign-in error:', error);
-                errorDiv.textContent = 'Error: ' + (error.message || 'Load failed');
-                errorDiv.style.display = 'block';
-            }
-        }
+        window.addEventListener('load', () => {
+            connectWebSocket();
+        });
 
         function connectWebSocket() {
             const socket = new WebSocket('ws://localhost:3000');
@@ -350,13 +313,16 @@
                 return;
             }
             try {
-                console.log('Sending bid:', { carId, newBid });
+                console.log('Sending bid request to:', 'http://localhost:3000/place-bid');
                 const response = await fetch('http://localhost:3000/place-bid', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ carId, bid: newBid })
                 });
-                if (!response.ok) throw new Error('Network error: ' + response.statusText);
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Network error: ${response.status} - ${response.statusText} - ${text}`);
+                }
                 const result = await response.json();
                 console.log('Server response:', result);
                 if (result.success) {
@@ -366,17 +332,10 @@
                     alert('Bid failed: ' + result.message);
                 }
             } catch (error) {
-                console.error('Bid error:', error);
+                console.error('Bid error details:', error);
                 alert('Error placing bid: ' + error.message);
             }
         }
-
-        // Handle Enter key
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && document.getElementById('signin').style.display !== 'none') {
-                signIn();
-            }
-        });
     </script>
 </body>
 </html>
