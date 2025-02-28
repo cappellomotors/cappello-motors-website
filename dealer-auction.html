@@ -10,331 +10,187 @@
     <title>Dealer Auction | Cappello Motors LLC</title>
     <style>
         body {
-            font-family: 'Futura', 'Poppins', Arial, sans-serif;
+            font-family: 'Arial', 'Helvetica', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f1c2e, #2a3e64);
-            color: #fff;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            line-height: 1.6;
         }
-        .holo-particles {
+        .header-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
-            animation: holoPulse 8s infinite ease-in-out;
-        }
-        @keyframes holoPulse {
-            0% { opacity: 0.2; }
-            50% { opacity: 0.5; }
-            100% { opacity: 0.2; }
+            background: url('https://via.placeholder.com/1920x1080?text=Professional+Backdrop') no-repeat center/cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         nav {
-            background: linear-gradient(135deg, #ff1493, #00b7eb);
-            padding: 25px;
+            background: #1a3c6e;
+            padding: 15px 0;
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1002;
-            box-shadow: 0 10px 40px rgba(255, 20, 147, 0.8);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
         }
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 40px;
-            font-size: 26px;
-            font-weight: 700;
-            text-transform: uppercase;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        nav a::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #ffd700;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease-out;
-        }
-        nav a:hover::before {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+            margin: 0 25px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
         nav a:hover {
-            transform: scale(1.2);
-            color: #ffd700;
-            text-shadow: 0 0 25px #00b7eb;
+            color: #ff6f61;
         }
         header {
-            margin-top: 130px;
-            padding: 150px 60px;
-            background: url('https://via.placeholder.com/1920x600?text=Quantum+Auction+Zone') no-repeat center/cover;
-            position: relative;
+            margin-top: 80px;
+            padding: 80px 20px;
             text-align: center;
-            z-index: 1;
-            overflow: hidden;
-        }
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 20, 147, 0.6), rgba(0, 183, 235, 0.6));
-            z-index: -1;
-            animation: waveEffect 5s infinite ease-in-out;
-        }
-        @keyframes waveEffect {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
         }
         h1 {
-            font-family: 'Orbitron', 'Futura', sans-serif;
-            font-size: 7em;
-            text-transform: uppercase;
-            letter-spacing: 12px;
+            font-size: 3.5em;
+            color: #1a3c6e;
             margin: 0;
-            color: #ffd700;
-            text-shadow: 0 0 40px #ff1493, 0 0 60px #00b7eb;
-            animation: neonPulse 2s infinite alternate;
-        }
-        @keyframes neonPulse {
-            0% { text-shadow: 0 0 20px #ff1493, 0 0 30px #00b7eb; }
-            100% { text-shadow: 0 0 40px #ff1493, 0 0 60px #00b7eb; }
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .highlight {
-            font-size: 4em;
-            font-weight: 900;
-            margin: 25px 0;
-            color: #00ffcc;
-            text-shadow: 0 0 30px #00ffcc, 0 0 20px #00b7eb;
+            font-size: 1.8em;
+            color: #ff6f61;
+            margin: 10px 0;
+            font-weight: 600;
         }
         .auction-container {
-            margin: 70px auto;
-            max-width: 2000px;
-            padding: 70px;
-            background: linear-gradient(135deg, #1e90ff, #ff1493);
-            border-radius: 50px;
-            box-shadow: 0 30px 100px rgba(255, 20, 147, 0.9);
+            margin: 100px auto;
+            max-width: 1200px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .auction-container::before {
-            content: '';
-            position: absolute;
-            top: -60%;
-            left: -60%;
-            width: 220%;
-            height: 220%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            animation: radialPulse 15s infinite ease-in-out;
-        }
-        @keyframes radialPulse {
-            0% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.2); opacity: 0.05; }
-            100% { transform: scale(1); opacity: 0.1; }
         }
         .auction-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-            border: 5px solid #ffd700;
-            transition: all 0.6s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         .auction-item:hover {
-            transform: rotate(3deg) scale(1.2);
-            box-shadow: 0 40px 100px rgba(255, 20, 147, 1);
-            background: rgba(255, 215, 0, 0.3);
-        }
-        .auction-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('https://via.placeholder.com/200x200?text=Car+Icon') no-repeat center;
-            opacity: 0.15;
-            animation: spinFade 8s infinite linear;
-        }
-        @keyframes spinFade {
-            0% { transform: rotate(0deg) scale(1); opacity: 0.15; }
-            50% { transform: rotate(180deg) scale(1.1); opacity: 0.2; }
-            100% { transform: rotate(360deg) scale(1); opacity: 0.15; }
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background: #fff;
         }
         .auction-item h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8em;
-            color: #ffd700;
-            margin: 0 0 20px;
-            text-transform: uppercase;
-            text-shadow: 0 0 25px #ff1493;
-            animation: textGlow 1.5s infinite alternate;
-        }
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 15px #ff1493; }
-            100% { text-shadow: 0 0 35px #ff1493; }
+            font-size: 1.5em;
+            color: #1a3c6e;
+            margin: 0 0 10px;
+            font-weight: 600;
         }
         .auction-item p {
-            font-size: 1.8em;
-            color: #e0e0e0;
-            text-align: center;
-            margin: 15px 0;
+            font-size: 1.1em;
+            color: #666;
+            margin: 5px 0;
         }
         .timer {
-            font-size: 2.5em;
-            font-weight: 900;
-            color: #00ffcc;
-            text-shadow: 0 0 25px #00ffcc;
-            margin: 20px 0;
-            animation: timerBeat 2s infinite;
-        }
-        @keyframes timerBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+            font-size: 1.3em;
+            color: #1a3c6e;
+            font-weight: 600;
+            margin: 10px 0;
         }
         .bid-info {
-            text-align: center;
             margin-top: auto;
         }
         .bid-info span {
-            font-size: 2.5em;
-            color: #ffd700;
-            font-weight: 900;
-            text-shadow: 0 0 25px #ff1493;
+            font-size: 1.4em;
+            color: #ff6f61;
+            font-weight: 600;
         }
         input[type="number"] {
-            padding: 18px;
-            width: 180px;
-            font-size: 20px;
-            margin: 20px 0;
-            border: 4px solid #ffd700;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            transition: all 0.3s ease;
+            padding: 10px;
+            width: 120px;
+            font-size: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s;
         }
         input[type="number"]:focus {
-            border-color: #00ffcc;
-            box-shadow: 0 0 15px #00ffcc;
+            border-color: #1a3c6e;
             outline: none;
         }
         button {
-            padding: 20px 50px;
-            font-size: 24px;
-            background: linear-gradient(135deg, #ffd700 0%, #ff1493 100%);
-            color: #0f1c2e;
+            padding: 10px 20px;
+            font-size: 14px;
+            background: #1a3c6e;
+            color: #fff;
             border: none;
-            border-radius: 15px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.5s ease;
-            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.9);
-            font-weight: 900;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.7s ease;
-            z-index: 0;
-        }
-        button:hover::before {
-            width: 400px;
-            height: 400px;
+            transition: background 0.3s, transform 0.2s;
         }
         button:hover {
-            transform: translateY(-8px) scale(1.2);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 1);
-            color: #fff;
+            background: #ff6f61;
+            transform: translateY(-2px);
         }
         button:disabled {
-            background: #444;
+            background: #ccc;
             cursor: not-allowed;
-            box-shadow: none;
         }
         footer {
-            padding: 60px;
-            background: linear-gradient(135deg, #2a3e64, #0f1c2e);
+            padding: 20px 0;
+            background: #1a3c6e;
             color: #fff;
-            font-size: 20px;
-            box-shadow: 0 -15px 40px rgba(255, 20, 147, 0.6);
+            font-size: 14px;
             text-align: center;
-            position: relative;
-            z-index: 1;
+            margin-top: 40px;
         }
         footer a {
-            color: #00ffcc;
+            color: #ff6f61;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.3s;
         }
         footer a:hover {
-            color: #ffd700;
-            text-shadow: 0 0 20px #00b7eb;
-        }
-        @media (max-width: 1024px) {
-            .auction-item { width: 45%; }
-            h1 { font-size: 5.5em; }
-            .highlight { font-size: 3.5em; }
-            nav a { margin: 20px; font-size: 22px; }
+            color: #fff;
         }
         @media (max-width: 768px) {
             .auction-item { width: 100%; }
-            h1 { font-size: 4em; }
-            .highlight { font-size: 2.5em; }
-            nav a { margin: 15px; font-size: 18px; }
-            input[type="number"] { width: 140px; }
-            button { padding: 15px 40px; font-size: 20px; }
+            h1 { font-size: 2.5em; }
+            .highlight { font-size: 1.5em; }
+            nav a { margin: 15px; font-size: 16px; }
+            .auction-container { padding: 20px; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 2.8em; }
-            .highlight { font-size: 1.8em; }
-            nav a { margin: 10px; font-size: 16px; }
-            .auction-item { padding: 30px; }
-            input[type="number"] { width: 120px; font-size: 16px; }
-            button { padding: 12px 30px; font-size: 18px; }
+            h1 { font-size: 2em; }
+            .highlight { font-size: 1.2em; }
+            nav a { margin: 10px; font-size: 14px; }
+            .auction-item { padding: 15px; }
+            input[type="number"] { width: 100px; }
+            button { padding: 8px 15px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="holo-particles"></div>
+    <div class="header-image"></div>
     <nav>
         <a href="https://cappellomotors.com/dealer-main.html">Home</a>
         <a href="https://cappellomotors.com/dealer-auction.html">Auction</a>
@@ -342,7 +198,7 @@
     </nav>
     <header>
         <h1>Dealer Auction</h1>
-        <div class="highlight">Bid in a New Dimension</div>
+        <div class="highlight">Secure Your Next Deal</div>
     </header>
     <div class="auction-container" id="auctionContainer">
         <div class="auction-item" id="car1">
@@ -403,7 +259,6 @@
     <script>
         let cars = [];
 
-        // Auto-connect WebSocket on page load
         window.addEventListener('load', () => {
             connectWebSocket();
         });

@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Allow local origin
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
@@ -16,10 +16,20 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '../')));
 
 app.get('/', (req, res) => {
-    console.log('Attempting to serve dealer-auction.html');
+    console.log('Serving default page: dealer-login.html');
+    res.sendFile(path.join(__dirname, '../dealer-login.html'), (err) => {
+        if (err) {
+            console.error('Error serving dealer-login.html:', err);
+            res.status(500).send('Server error: Unable to load login page');
+        }
+    });
+});
+
+app.get('/dealer-auction.html', (req, res) => {
+    console.log('Serving dealer-auction.html');
     res.sendFile(path.join(__dirname, '../dealer-auction.html'), (err) => {
         if (err) {
-            console.error('Failed to serve file:', err);
+            console.error('Error serving dealer-auction.html:', err);
             res.status(500).send('Server error: Unable to load auction page');
         }
     });
@@ -52,19 +62,24 @@ let auctions = [
 ];
 
 app.post('/signin', async (req, res) => {
-    console.log('Sign-in attempt:', req.body);
+    console.log('Sign-in attempt received:', req.body);
     const { email, password } = req.body || {};
     if (!email || !password) {
-        console.log('Missing credentials');
+        console.log('Sign-in failed: Missing credentials');
         return res.status(400).json({ success: false, message: 'Missing email or password' });
     }
-    const dealer = dealers.find(d => d.email === email);
-    if (dealer && await bcrypt.compare(password, dealer.password)) {
-        console.log('Sign-in successful:', email);
-        res.json({ success: true });
-    } else {
-        console.log('Sign-in failed:', email);
-        res.status(401).json({ success: false, message: 'Invalid credentials' });
+    try {
+        const dealer = dealers.find(d => d.email === email);
+        if (dealer && await bcrypt.compare(password, dealer.password)) {
+            console.log('Sign-in successful:', email);
+            res.json({ success: true, redirect: '/dealer-auction.html' });
+        } else {
+            console.log('Sign-in failed: Invalid credentials for', email);
+            res.status(401).json({ success: false, message: 'Invalid email or password' });
+        }
+    } catch (error) {
+        console.error('Sign-in error:', error);
+        res.status(500).json({ success: false, message: 'Server error during sign-in' });
     }
 });
 
@@ -72,22 +87,27 @@ app.post('/place-bid', (req, res) => {
     console.log('Bid received:', req.body);
     const { carId, bid } = req.body || {};
     if (!carId || !bid) {
-        console.log('Missing bid data');
+        console.log('Bid failed: Missing data');
         return res.status(400).json({ success: false, message: 'Missing carId or bid' });
     }
-    const auction = auctions.find(a => a.id === carId);
-    if (!auction) {
-        console.log('Bid failed: Car not found', carId);
-        return res.status(404).json({ success: false, message: 'Car not found' });
-    }
-    if (bid > auction.currentBid && auction.endTime > Date.now()) {
-        auction.currentBid = bid;
-        console.log('Bid successful:', { carId, bid });
-        broadcast({ type: 'bid', carId, bid });
-        res.json({ success: true, newBid: bid });
-    } else {
-        console.log('Bid failed:', { carId, bid });
-        res.status(400).json({ success: false, message: 'Bid too low or auction ended' });
+    try {
+        const auction = auctions.find(a => a.id === carId);
+        if (!auction) {
+            console.log('Bid failed: Car not found', carId);
+            return res.status(404).json({ success: false, message: 'Car not found' });
+        }
+        if (bid > auction.currentBid && auction.endTime > Date.now()) {
+            auction.currentBid = bid;
+            console.log('Bid successful:', { carId, bid });
+            broadcast({ type: 'bid', carId, bid });
+            res.json({ success: true, newBid: bid });
+        } else {
+            console.log('Bid failed:', { carId, bid });
+            res.status(400).json({ success: false, message: 'Bid too low or auction ended' });
+        }
+    } catch (error) {
+        console.error('Bid error:', error);
+        res.status(500).json({ success: false, message: 'Server error during bid' });
     }
 });
 
