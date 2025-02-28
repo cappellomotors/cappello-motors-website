@@ -10,151 +10,158 @@
     <title>Dealer Login | Cappello Motors LLC</title>
     <style>
         body {
-            font-family: 'Roboto', Arial, sans-serif;
-            text-align: center;
+            font-family: 'Futura', 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
+            background: linear-gradient(135deg, #0f1c2e, #2a3e64);
+            color: #fff;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            line-height: 1.6;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
         }
-        nav {
-            background-color: #1a2a44;
-            padding: 15px;
+        .login-background {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080?text=Digital+Matrix') no-repeat center/cover;
+            opacity: 0.3;
+            z-index: -1;
+            animation: bgShift 10s infinite linear;
         }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
-        }
-        nav a:hover {
-            color: #6b48ff;
-            transform: translateY(-2px);
+        @keyframes bgShift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-10%); }
         }
         .login-container {
-            margin: 150px auto;
-            max-width: 750px;
-            padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s;
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.7);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #00bfff;
+            animation: glowPulse 3s infinite alternate;
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 20px #00bfff; }
+            100% { box-shadow: 0 0 40px #00ffcc; }
         }
-        .login-container:hover {
-            transform: translateY(-5px);
-        }
-        h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #1a2a44;
-            font-size: 1.8em;
-            margin: 0 0 15px;
+        h1 {
+            font-family: 'Futura', 'Helvetica', sans-serif;
+            font-size: 3.5em;
+            color: #00ffcc;
             text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #00bfff;
         }
-        p {
-            color: #555;
-            font-size: 1.2em;
-            margin: 5px 0;
-        }
-        input[type="password"] {
-            padding: 14px;
-            width: 200px;
-            font-size: 16px;
+        input {
+            width: 100%;
+            padding: 15px;
             margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            border: 2px solid #00bfff;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        input[type="password"]:focus {
-            border-color: #6b48ff;
-            box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+        input:focus {
+            border-color: #00ffcc;
+            box-shadow: 0 0 10px #00ffcc;
             outline: none;
         }
         button {
-            padding: 12px 25px;
-            font-size: 16px;
-            background: linear-gradient(135deg, #6b48ff 0%, #4a32cc 100%);
-            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #00bfff 0%, #00ffcc 100%);
+            color: #0f1c2e;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(107, 72, 255, 0.4);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 20px;
         }
         button:hover {
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(107, 72, 255, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.8);
+        }
+        button:active {
+            transform: translateY(0);
         }
         .error {
-            color: #d32f2f;
-            display: none;
+            color: #ff4d4d;
             margin-top: 10px;
+            display: none;
         }
-        footer {
-            margin-top: auto;
-            padding: 30px;
-            background-color: #1a2a44;
-            color: #fff;
-            font-size: 16px;
-        }
-        footer a {
-            color: #6b48ff;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
+        @media (max-width: 600px) {
+            .login-container { padding: 20px; }
+            h1 { font-size: 2.5em; }
+            input { font-size: 14px; }
+            button { font-size: 16px; padding: 12px 30px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="https://cappellomotors.com">Sell Your Car</a>
-        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
-        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
-    </nav>
+    <div class="login-background"></div>
     <div class="login-container">
-        <h2>Dealer Login</h2>
-        <p>Enter your password to access dealer tools.</p>
-        <input type="password" id="passwordInput" placeholder="Password">
-        <button onclick="checkPassword()">Login</button>
-        <p class="error" id="loginError">Incorrect password. Try again.</p>
+        <h1>Dealer Login</h1>
+        <input type="email" id="email" placeholder="Dealer Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Sign In</button>
+        <div id="error" class="error"></div>
     </div>
-    <footer>
-        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
-        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
-    </footer>
     <script>
-        const dealerPassword = "dealer123"; // Demo—replace with secure auth
-        function checkPassword() {
-            const input = document.getElementById('passwordInput').value;
-            if (input === dealerPassword) {
-                document.getElementById('loginError').style.display = 'none';
-                window.location.href = 'https://cappellomotors.com/dealer-main.html';
-            } else {
-                document.getElementById('loginError').style.display = 'block';
+        async function signIn() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error');
+            errorDiv.style.display = 'none';
+
+            if (!email || !password) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const result = await response.json();
+                console.log('Sign-in response:', result);
+                if (result.success) {
+                    window.location.href = result.redirect || 'http://localhost:3000/dealer-auction.html';
+                } else {
+                    errorDiv.textContent = result.message || 'Invalid login attempt.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Sign-in error:', error);
+                errorDiv.textContent = 'Error: ' + (error.message || 'Connection failed');
+                errorDiv.style.display = 'block';
             }
         }
+
+        // Handle Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                signIn();
+            }
+        });
     </script>
 </body>
 </html>
