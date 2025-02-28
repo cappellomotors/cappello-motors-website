@@ -10,28 +10,27 @@
     <title>Dealer Auction | Cappello Motors LLC</title>
     <style>
         body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-            color: #333;
+            background: #f5f7fa;
+            color: #2c3e50;
             min-height: 100vh;
-            overflow-x: hidden;
             position: relative;
             line-height: 1.6;
         }
-        .header-image {
+        .header-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://via.placeholder.com/1920x1080?text=Professional+Backdrop') no-repeat center/cover;
-            opacity: 0.1;
+            background: url('https://via.placeholder.com/1920x1080?text=Subtle+Pattern') no-repeat center/cover;
+            opacity: 0.05;
             z-index: -1;
         }
         nav {
-            background: #1a3c6e;
+            background: #2c3e50;
             padding: 15px 0;
             position: fixed;
             top: 0;
@@ -42,7 +41,7 @@
             justify-content: center;
         }
         nav a {
-            color: #fff;
+            color: #ecf0f1;
             text-decoration: none;
             margin: 0 25px;
             font-size: 18px;
@@ -50,45 +49,44 @@
             transition: color 0.3s ease;
         }
         nav a:hover {
-            color: #ff6f61;
+            color: #e74c3c;
         }
         header {
-            margin-top: 80px;
-            padding: 80px 20px;
+            margin-top: 70px;
+            padding: 60px 20px;
             text-align: center;
             background: #ffffff;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
         }
         h1 {
-            font-size: 3.5em;
-            color: #1a3c6e;
+            font-size: 3em;
+            color: #2c3e50;
             margin: 0;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .highlight {
-            font-size: 1.8em;
-            color: #ff6f61;
+            font-size: 1.5em;
+            color: #e74c3c;
             margin: 10px 0;
             font-weight: 600;
         }
         .auction-container {
-            margin: 100px auto;
-            max-width: 1200px;
-            padding: 40px;
+            margin: 90px auto 40px;
+            max-width: 1300px;
+            padding: 30px;
             background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            position: relative;
         }
         .auction-item {
-            background: #f9f9f9;
+            background: #fafafa;
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 20px;
             text-align: center;
             transition: all 0.3s ease;
@@ -99,19 +97,19 @@
             background: #fff;
         }
         .auction-item h2 {
-            font-size: 1.5em;
-            color: #1a3c6e;
+            font-size: 1.6em;
+            color: #2c3e50;
             margin: 0 0 10px;
             font-weight: 600;
         }
         .auction-item p {
             font-size: 1.1em;
-            color: #666;
+            color: #7f8c8d;
             margin: 5px 0;
         }
         .timer {
             font-size: 1.3em;
-            color: #1a3c6e;
+            color: #2c3e50;
             font-weight: 600;
             margin: 10px 0;
         }
@@ -119,8 +117,8 @@
             margin-top: auto;
         }
         .bid-info span {
-            font-size: 1.4em;
-            color: #ff6f61;
+            font-size: 1.5em;
+            color: #e74c3c;
             font-weight: 600;
         }
         input[type="number"] {
@@ -135,13 +133,13 @@
             transition: border-color 0.3s;
         }
         input[type="number"]:focus {
-            border-color: #1a3c6e;
+            border-color: #2c3e50;
             outline: none;
         }
         button {
             padding: 10px 20px;
             font-size: 14px;
-            background: #1a3c6e;
+            background: #2c3e50;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -149,7 +147,7 @@
             transition: background 0.3s, transform 0.2s;
         }
         button:hover {
-            background: #ff6f61;
+            background: #e74c3c;
             transform: translateY(-2px);
         }
         button:disabled {
@@ -158,14 +156,14 @@
         }
         footer {
             padding: 20px 0;
-            background: #1a3c6e;
-            color: #fff;
+            background: #2c3e50;
+            color: #ecf0f1;
             font-size: 14px;
             text-align: center;
             margin-top: 40px;
         }
         footer a {
-            color: #ff6f61;
+            color: #e74c3c;
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -175,13 +173,12 @@
         @media (max-width: 768px) {
             .auction-item { width: 100%; }
             h1 { font-size: 2.5em; }
-            .highlight { font-size: 1.5em; }
+            .highlight { font-size: 1.3em; }
             nav a { margin: 15px; font-size: 16px; }
-            .auction-container { padding: 20px; }
         }
         @media (max-width: 480px) {
             h1 { font-size: 2em; }
-            .highlight { font-size: 1.2em; }
+            .highlight { font-size: 1.1em; }
             nav a { margin: 10px; font-size: 14px; }
             .auction-item { padding: 15px; }
             input[type="number"] { width: 100px; }
@@ -190,7 +187,7 @@
     </style>
 </head>
 <body>
-    <div class="header-image"></div>
+    <div class="header-overlay"></div>
     <nav>
         <a href="https://cappellomotors.com/dealer-main.html">Home</a>
         <a href="https://cappellomotors.com/dealer-auction.html">Auction</a>
@@ -200,7 +197,13 @@
         <h1>Dealer Auction</h1>
         <div class="highlight">Secure Your Next Deal</div>
     </header>
-    <div class="auction-container" id="auctionContainer">
+    <div id="signin">
+        <input type="email" id="email" placeholder="Dealer Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()">Sign In</button>
+        <div id="error" class="error"></div>
+    </div>
+    <div class="auction-container" id="auctionContainer" style="display: none;">
         <div class="auction-item" id="car1">
             <h2>2021 BMW M5</h2>
             <p>High-Performance Sedan</p>
@@ -259,9 +262,41 @@
     <script>
         let cars = [];
 
-        window.addEventListener('load', () => {
-            connectWebSocket();
-        });
+        async function signIn() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error');
+            errorDiv.style.display = 'none';
+
+            if (!email || !password) {
+                errorDiv.textContent = 'Please fill in all fields.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                if (!response.ok) throw new Error('Network error: ' + response.statusText);
+                const result = await response.json();
+                console.log('Sign-in response:', result);
+                if (result.success) {
+                    document.getElementById('signin').style.display = 'none';
+                    document.getElementById('auctionContainer').style.display = 'block';
+                    connectWebSocket();
+                } else {
+                    errorDiv.textContent = result.message || 'Invalid login attempt.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Sign-in error:', error);
+                errorDiv.textContent = 'Error: ' + (error.message || 'Load failed');
+                errorDiv.style.display = 'block';
+            }
+        }
 
         function connectWebSocket() {
             const socket = new WebSocket('ws://localhost:3000');
@@ -321,7 +356,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ carId, bid: newBid })
                 });
-                if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
+                if (!response.ok) throw new Error('Network error: ' + response.statusText);
                 const result = await response.json();
                 console.log('Server response:', result);
                 if (result.success) {
@@ -335,6 +370,13 @@
                 alert('Error placing bid: ' + error.message);
             }
         }
+
+        // Handle Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('signin').style.display !== 'none') {
+                signIn();
+            }
+        });
     </script>
 </body>
 </html>
