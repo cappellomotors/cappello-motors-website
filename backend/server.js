@@ -8,10 +8,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use((req, res, next) => {
     console.log('Request:', req.method, req.url, 'Origin:', req.headers.origin, 'Body:', req.body);
-    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins for testing
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') return res.sendStatus(200); // Handle preflight
+    if (req.method === 'OPTIONS') return res.sendStatus(200);
     next();
 });
 
@@ -37,41 +37,33 @@ let auctions = [
 ];
 
 app.post('/signin', async (req, res) => {
-    console.log('Sign-in attempt received, Body:', req.body);
+    console.log('Sign-in attempt:', req.body);
     const { email, password } = req.body || {};
     if (!email || !password) {
-        console.log('Sign-in failed: Missing credentials');
+        console.log('Missing credentials');
         return res.status(400).json({ success: false, message: 'Missing email or password' });
     }
     try {
-        console.log('Validating credentials for:', email);
         const dealer = dealers.find(d => d.email === email);
-        if (dealer) {
-            const match = await bcrypt.compare(password, dealer.password);
-            console.log('Password match:', match);
-            if (match) {
-                console.log('Sign-in successful for:', email);
-                res.json({ success: true, redirect: '/dealer-auction.html' });
-            } else {
-                console.log('Sign-in failed: Password mismatch');
-                res.status(401).json({ success: false, message: 'Invalid email or password' });
-            }
+        if (dealer && await bcrypt.compare(password, dealer.password)) {
+            console.log('Sign-in successful:', email);
+            res.json({ success: true, redirect: '/dealer-auction.html' });
         } else {
-            console.log('Sign-in failed: Dealer not found');
+            console.log('Sign-in failed:', email);
             res.status(401).json({ success: false, message: 'Invalid email or password' });
         }
     } catch (error) {
         console.error('Sign-in error:', error);
-        res.status(500).json({ success: false, message: 'Server error: ' + error.message });
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
 app.post('/place-bid', (req, res) => {
-    console.log('Bid attempt received, Body:', req.body);
+    console.log('Bid attempt:', req.body);
     const { carId, bid } = req.body || {};
-    if (!carId || !bid) {
-        console.log('Bid failed: Missing data');
-        return res.status(400).json({ success: false, message: 'Missing carId or bid' });
+    if (!carId || !bid || isNaN(bid)) {
+        console.log('Bid failed: Invalid data', { carId, bid });
+        return res.status(400).json({ success: false, message: 'Invalid carId or bid' });
     }
     try {
         console.log('Processing bid for carId:', carId);
@@ -86,7 +78,7 @@ app.post('/place-bid', (req, res) => {
             broadcast({ type: 'bid', carId, bid });
             res.json({ success: true, newBid: bid });
         } else {
-            console.log('Bid failed: Invalid bid');
+            console.log('Bid failed: Invalid bid amount or time');
             res.status(400).json({ success: false, message: 'Bid too low or auction ended' });
         }
     } catch (error) {
