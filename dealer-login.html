@@ -154,7 +154,7 @@
     <nav>
         <a href="https://cappellomotors.com">Home</a>
         <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappello-motors-website.onrender.com/dealer-login.html">Dealer Login</a>
+        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a>
         <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
     </nav>
     <div class="login-container">
@@ -177,7 +177,7 @@
             errorDiv.style.display = 'none';
 
             if (!email || !password) {
-                errorDiv.textResponse = 'Please fill in all fields.';
+                errorDiv.textContent = 'Please fill in all fields.';
                 errorDiv.style.display = 'block';
                 return;
             }
@@ -199,7 +199,7 @@
                 const result = await response.json();
                 console.log('Sign-in response:', result);
                 if (result.success) {
-                    window.location.href = result.redirect || 'https://cappello-motors-website.onrender.com/dealer-auction.html';
+                    window.location.href = result.redirect || 'https://cappello-motors-website.onrender.com/dealer-main.html';
                 } else {
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
                     errorDiv.style.display = 'block';
@@ -211,7 +211,6 @@
             }
         }
 
-        // Handle Enter key
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 signIn();
