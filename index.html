@@ -219,7 +219,7 @@
         <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
         <div id="vinInfo"></div>
-        <button id="continueButton" style="display: none;" onclick="window.location.href='/sell-your-car.html'">Continue to Sell</button>
+        <button id="continueButton" style="display: none;" onclick="continueToSell()">Continue to Sell</button>
     </div>
     <main>
         <section class="daily-post">
@@ -238,6 +238,7 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
+        let lastVin = '';
         async function checkVin() {
             const carInput = document.getElementById('carInput').value;
             const vinError = document.getElementById('vinError');
@@ -259,16 +260,23 @@
                 const result = data.Results[0];
                 if (result && result.Make && result.Model && result.ModelYear) {
                     vinInfo.textContent = `Your Car: ${result.ModelYear} ${result.Make} ${result.Model}${result.Trim ? ' (' + result.Trim + ')' : ''}`;
+                    lastVin = carInput;
                     continueButton.style.display = 'block';
                 } else {
                     vinInfo.textContent = 'Couldn’t decode VIN. Proceed manually below.';
+                    lastVin = carInput;
                     continueButton.style.display = 'block';
                 }
             } catch (error) {
                 console.error('VIN Decoder Error:', error);
                 vinInfo.textContent = 'Error fetching car info. Try again or proceed manually.';
+                lastVin = carInput;
                 continueButton.style.display = 'block';
             }
+        }
+
+        function continueToSell() {
+            window.location.href = `/sell-your-car.html?vin=${encodeURIComponent(lastVin)}`;
         }
     </script>
 </body>
