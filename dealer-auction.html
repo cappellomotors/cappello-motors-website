@@ -190,20 +190,14 @@
 <body>
     <div class="header-overlay"></div>
     <nav>
-        <a href="https://cappellomotors.com/dealer-main.html">Home</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Auction</a>
-        <a href="https://cappellomotors.com/dealer-info.html">Info</a>
+        <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
+        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
+        <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
     </nav>
     <header>
         <h1>Dealer Auction</h1>
         <div class="highlight">Secure Your Next Deal</div>
     </header>
-    <div id="signin" style="display: none;">
-        <input type="email" id="email" placeholder="Dealer Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="signIn()">Sign In</button>
-        <div id="error" class="error"></div>
-    </div>
     <div class="auction-container" id="auctionContainer">
         <div class="auction-item" id="car1">
             <h2>2021 BMW M5</h2>
@@ -265,11 +259,9 @@
 
         window.addEventListener('load', () => {
             connectWebSocket();
-            // Show auction only after WebSocket connects
             setTimeout(() => {
                 document.getElementById('auctionContainer').style.display = 'grid';
-                document.getElementById('signin').style.display = 'none';
-            }, 5000); // Delay to ensure WebSocket initializes
+            }, 5000);
         });
 
         function connectWebSocket() {
@@ -277,7 +269,7 @@
             const socket = new WebSocket(wsUrl);
             socket.onopen = () => {
                 console.log('WebSocket connected to:', wsUrl);
-                socket.send(JSON.stringify({ type: 'init' })); // Request initial data
+                socket.send(JSON.stringify({ type: 'init' }));
             };
             socket.onmessage = (event) => {
                 console.log('WebSocket message:', event.data);
@@ -294,8 +286,7 @@
                 }
             };
             socket.onerror = (error) => console.error('WebSocket error:', error);
-            socket.onclose = () => console.log('WebSocket closed, retrying in 5s...', new Date());
-            socket.onclose = () => setTimeout(connectWebSocket, 5000); // Retry on close
+            socket.onclose = () => setTimeout(connectWebSocket, 5000);
         }
 
         function updateUI() {
