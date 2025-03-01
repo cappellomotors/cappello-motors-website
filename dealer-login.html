@@ -191,21 +191,23 @@
                     body: JSON.stringify({ email, password })
                 });
                 console.log('Response status:', response.status);
-                if (!response.ok) {
-                    const text = await response.text();
-                    console.log('Response text:', text);
-                    throw new Error(`Network error: ${response.status} - ${response.statusText} - ${text}`);
-                }
                 const result = await response.json();
-                console.log('Sign-in response:', result);
-                if (result.success) {
-                    window.location.href = result.redirect; // Use backend redirect only
+                console.log('Backend response:', result);
+
+                if (!response.ok) {
+                    throw new Error(`Network error: ${response.status} - ${result.message || 'Unknown error'}`);
+                }
+
+                if (result.success && result.redirect) {
+                    console.log('Redirecting to:', result.redirect);
+                    window.location.href = result.redirect;
                 } else {
+                    console.log('Login failed with message:', result.message);
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
                     errorDiv.style.display = 'block';
                 }
             } catch (error) {
-                console.error('Sign-in error details:', error);
+                console.error('Sign-in error:', error);
                 errorDiv.textContent = 'Error: ' + (error.message || 'Connection failed');
                 errorDiv.style.display = 'block';
             }
