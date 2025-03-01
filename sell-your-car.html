@@ -78,6 +78,19 @@
             box-sizing: border-box;
             font-size: 1em;
         }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        input[type="file"] {
+            padding: 5px;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 0.9em;
+            display: none;
+            margin-top: 5px;
+        }
         button {
             padding: 12px 30px;
             font-size: 1.2em;
@@ -127,21 +140,78 @@
         <div id="vinInfo"></div>
         <form action="https://formspree.io/f/xyzklgvk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="VIN" id="vinField">
-            <input type="text" placeholder="Mileage (e.g., 50,000)" name="Mileage" required>
-            <select name="Condition" required>
+            <input type="text" placeholder="Mileage (e.g., 50,000)" id="mileage" name="Mileage" required>
+            <p class="error" id="mileageError">Please enter the mileage.</p>
+            <select id="condition" name="Condition" required>
                 <option value="">Select Condition</option>
                 <option value="excellent">Excellent</option>
                 <option value="good">Good</option>
                 <option value="fair">Fair</option>
                 <option value="poor">Poor</option>
             </select>
-            <select name="TitleStatus" required>
+            <p class="error" id="conditionError">Please select a condition.</p>
+            <select id="titleStatus" name="TitleStatus" required>
                 <option value="">Title Status</option>
                 <option value="clean">Clean</option>
                 <option value="salvage">Salvage</option>
                 <option value="rebuilt">Rebuilt</option>
             </select>
-            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" name="ContactInfo" required>
+            <p class="error" id="titleStatusError">Please select title status.</p>
+            <select id="lienStatus" name="LienStatus" required>
+                <option value="">Lien Status</option>
+                <option value="no_lien">No Lien</option>
+                <option value="has_lien">Has Lien</option>
+            </select>
+            <p class="error" id="lienStatusError">Please select lien status.</p>
+            <select id="smokerStatus" name="SmokerStatus" required>
+                <option value="">Smoker Status</option>
+                <option value="non_smoker">Non-Smoker</option>
+                <option value="smoker">Smoker</option>
+            </select>
+            <p class="error" id="smokerStatusError">Please select smoker status.</p>
+            <select id="tireCondition" name="TireCondition" required>
+                <option value="">Tire Condition</option>
+                <option value="new">New</option>
+                <option value="good">Good</option>
+                <option value="worn">Worn</option>
+                <option value="flat">Flat/Bald</option>
+            </select>
+            <p class="error" id="tireConditionError">Please select tire condition.</p>
+            <select id="paintCondition" name="PaintCondition" required>
+                <option value="">Paint Chips/Scratches</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+            <p class="error" id="paintConditionError">Please select paint condition.</p>
+            <select id="dents" name="Dents" required>
+                <option value="">Dents</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+            <p class="error" id="dentsError">Please select dent condition.</p>
+            <select id="windshield" name="Windshield" required>
+                <option value="">Broken Windshield</option>
+                <option value="intact">Intact</option>
+                <option value="cracked">Cracked</option>
+                <option value="shattered">Shattered</option>
+            </select>
+            <p class="error" id="windshieldError">Please select windshield condition.</p>
+            <select id="oilLeaks" name="OilLeaks" required>
+                <option value="">Oil Leaks</option>
+                <option value="none">None</option>
+                <option value="minor">Minor</option>
+                <option value="major">Major</option>
+            </select>
+            <p class="error" id="oilLeaksError">Please select oil leak status.</p>
+            <textarea placeholder="Additional Details (e.g., accidents, modifications)" rows="4" name="Details"></textarea>
+            <input type="file" id="carPhotos" name="Photos[]" accept="image/*" multiple>
+            <p>Upload up to 5 photos of your car (optional)</p>
+            <input type="text" placeholder="Your Contact Info (e.g., phone or email)" id="contact" name="ContactInfo" required>
+            <p class="error" id="contactError">Please provide contact info.</p>
             <button type="submit">Send to Cappello Motors</button>
         </form>
     </div>
@@ -164,6 +234,22 @@
                 })
                 .catch(error => console.error('VIN Fetch Error:', error));
         }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            let hasError = false;
+            ['mileage', 'condition', 'titleStatus', 'lienStatus', 'smokerStatus', 'tireCondition', 'paintCondition', 'dents', 'windshield', 'oilLeaks', 'contact'].forEach(field => {
+                const value = document.getElementById(field).value;
+                const error = document.getElementById(field + 'Error');
+                if (!value) {
+                    error.style.display = 'block';
+                    hasError = true;
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+            if (hasError) e.preventDefault();
+            else alert('Thank you! We’ll get back to you soon with an offer.');
+        });
     </script>
 </body>
 </html>
