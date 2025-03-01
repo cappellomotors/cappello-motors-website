@@ -6,221 +6,189 @@
     <meta name="description" content="Cappello Motors LLC Dealer Hub—auctions, stock tickers, news, and resources for Metro Detroit dealers.">
     <meta name="keywords" content="dealer hub Metro Detroit, car auctions, dealer news, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
-    <meta name="robots" content="index, follow">
-    <title>Dealer Hub | Cappello Motors LLC</title>
+    <meta name="robots" content="noindex, follow">
+    <title>Dealer Main | Cappello Motors LLC</title>
     <style>
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #0d1b2a;
-            color: #fff;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080?text=Subtle+Pattern') no-repeat center/cover;
+            opacity: 0.05;
+            z-index: -1;
         }
         nav {
-            background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%);
-            padding: 20px;
+            background: #2c3e50;
+            padding: 15px 0;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
         }
         nav a {
-            color: #fff;
+            color: #ecf0f1;
             text-decoration: none;
-            margin: 0 30px;
-            font-size: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: transform 0.3s, text-shadow 0.3s;
+            margin: 0 25px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
         nav a:hover {
-            transform: scale(1.15);
-            text-shadow: 0 0 15px #ffff00;
+            color: #e74c3c;
         }
         header {
-            margin-top: 100px;
-            padding: 100px 20px;
-            background: url('https://via.placeholder.com/1920x600?text=Detroit+Motor+City') no-repeat center;
-            background-size: cover;
+            margin-top: 70px;
+            padding: 60px 20px;
             text-align: center;
-            box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.6);
-            animation: pulseGlow 3s infinite;
-        }
-        @keyframes pulseGlow {
-            0% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.6); }
-            50% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.8); }
-            100% { box-shadow: inset 0 0 0 1000px rgba(255, 0, 71, 0.6); }
+            background: #ffffff;
+            border-bottom: 2px solid #ddd;
         }
         h1 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            font-size: 5em;
+            font-size: 3em;
+            color: #2c3e50;
             margin: 0;
-            text-shadow: 0 0 20px #ffff00, 0 0 40px #1e90ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         .highlight {
-            font-size: 3em;
-            font-weight: 800;
-            margin: 20px 0;
-            text-shadow: 0 0 15px #ffff00;
+            font-size: 1.5em;
+            color: #e74c3c;
+            margin: 10px 0;
+            font-weight: 600;
         }
         .main-container {
             margin: 40px auto;
-            max-width: 1400px;
-            padding: 40px;
-            background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(255, 0, 71, 0.7);
+            max-width: 1300px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         .section {
-            margin: 30px 0;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border: 2px solid #ffff00;
+            margin: 20px 0;
+            padding: 20px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
-        .dashboard {
-            background: linear-gradient(135deg, #ff0047 0%, #1e90ff 100%);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 0, 71, 0.7);
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #ffff00;
-            font-size: 2.5em;
-            margin: 0 0 20px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px #ff0047;
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin: 0 0 15px;
+            font-weight: 600;
         }
         p {
-            font-size: 1.4em;
-            margin: 10px 0;
-            color: #fff;
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin: 5px 0;
         }
-        .tickers, .auctions, .deals {
+        .dashboard, .tickers, .auctions {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 20px 0;
         }
-        .ticker-item, .auction-preview, .deal-item {
-            background: linear-gradient(135deg, #1e90ff 0%, #ff0047 100%);
-            color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            width: 18%;
-            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
+        .dashboard-item, .ticker-item, .auction-preview {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            width: 30%;
             margin: 10px;
-            font-size: 1.5em;
-            font-weight: 700;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
         }
-        .ticker-item:hover, .auction-preview:hover, .deal-item:hover {
-            transform: scale(1.1);
+        .dashboard-item:hover, .ticker-item:hover, .auction-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
-        .ticker-item span { font-size: 2em; display: block; }
-        .dashboard span {
+        .dashboard-item span {
             font-size: 2em;
-            color: #ffff00;
-            text-shadow: 0 0 10px #ff0047;
-            animation: pulseNumber 2s infinite;
+            color: #e74c3c;
+            display: block;
+            font-weight: 700;
         }
-        @keyframes pulseNumber {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .auction-preview p, .deal-item p { font-size: 1.2em; }
-        .news-feed { max-height: 250px; overflow-y: auto; }
-        .news-feed p { font-size: 1.3em; margin: 5px 0; }
-        .tips-carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0;
-        }
-        .tip-item {
-            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
-            color: #1a2a44;
-            padding: 20px;
-            border-radius: 15px;
-            width: 33%;
-            flex-shrink: 0;
-            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
-        }
-        .market-pulse {
-            height: 200px;
-            background: url('https://via.placeholder.com/1200x200?text=Market+Pulse+Graph') no-repeat center;
-            background-size: cover;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(255, 0, 71, 0.5);
+        .ticker-item span {
+            font-size: 1.5em;
+            color: #2c3e50;
+            display: block;
+            font-weight: 600;
         }
         button {
-            padding: 20px 40px;
-            font-size: 20px;
-            background: linear-gradient(135deg, #ffff00 0%, #ff0047 100%);
-            color: #1a2a44;
+            padding: 10px 20px;
+            font-size: 14px;
+            background: #2c3e50;
+            color: #fff;
             border: none;
-            border-radius: 15px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 20px rgba(255, 255, 0, 0.7);
-            font-weight: 700;
+            transition: background 0.3s, transform 0.2s;
         }
         button:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 10px 40px rgba(255, 255, 0, 0.9);
+            background: #e74c3c;
+            transform: translateY(-2px);
         }
         footer {
+            padding: 20px 0;
+            background: #2c3e50;
+            color: #ecf0f1;
+            font-size: 14px;
+            text-align: center;
             margin-top: 40px;
-            padding: 40px;
-            background: linear-gradient(135deg, #1a2a44 0%, #2a3a64 100%);
-            color: #fff;
-            font-size: 16px;
-            box-shadow: 0 -6px 20px rgba(255, 0, 71, 0.5);
         }
         footer a {
-            color: #ffff00;
+            color: #e74c3c;
             text-decoration: none;
+            transition: color 0.3s;
         }
         footer a:hover {
-            text-shadow: 0 0 10px #ff0047;
+            color: #fff;
         }
         @media (max-width: 768px) {
-            .ticker-item, .auction-preview, .deal-item { width: 45%; }
-            .tip-item { width: 70%; }
-            h1 { font-size: 3.5em; }
-            .highlight { font-size: 2em; }
+            .dashboard-item, .ticker-item, .auction-preview { width: 45%; }
+            h1 { font-size: 2.5em; }
+            .highlight { font-size: 1.3em; }
         }
         @media (max-width: 480px) {
-            .ticker-item, .auction-preview, .deal-item { width: 100%; }
-            .tip-item { width: 100%; }
-            h1 { font-size: 2.5em; }
-            .highlight { font-size: 1.5em; }
-            nav a { margin: 10px 15px; font-size: 16px; }
+            .dashboard-item, .ticker-item, .auction-preview { width: 100%; }
+            h1 { font-size: 2em; }
+            .highlight { font-size: 1.1em; }
+            nav a { margin: 10px; font-size: 14px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-overlay"></div>
     <nav>
+        <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
         <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
         <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
     </nav>
     <header>
-        <h1>Dealer Hub</h1>
-        <div class="highlight">Metro Detroit’s Ultimate Dealer Command</div>
+        <h1>Dealer Main</h1>
+        <div class="highlight">Your Metro Detroit Dealer Hub</div>
     </header>
     <div class="main-container">
         <div class="section">
@@ -228,11 +196,22 @@
             <p>Your one-stop hub for dominating Metro Detroit’s car market.</p>
             <p>20+ years of expertise—unleash the power of Cappello Motors!</p>
         </div>
-        <div class="section dashboard">
+        <div class="section">
             <h2>Your Dashboard</h2>
-            <p>Bids Placed: <span id="bids">0</span></p>
-            <p>Auctions Won: <span id="wins">0</span></p>
-            <p>Hot Leads: <span id="leads">2</span></p>
+            <div class="dashboard">
+                <div class="dashboard-item">
+                    <p>Bids Placed</p>
+                    <span id="bids">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <p>Auctions Won</p>
+                    <span id="wins">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <p>Hot Leads</p>
+                    <span id="leads">2</span>
+                </div>
+            </div>
         </div>
         <div class="section">
             <h2>Live Auctions</h2>
@@ -253,7 +232,7 @@
                     <p>Time: 2:45</p>
                 </div>
             </div>
-            <button onclick="window.location.href='https://cappellomotors.com/dealer-auction.html'">Bid Now</button>
+            <button onclick="window.location.href='https://cappellomotors.com/dealer-auction.html'">Go to Auctions</button>
         </div>
         <div class="section">
             <h2>Stock Tickers (Daily)</h2>
@@ -261,56 +240,7 @@
                 <div class="ticker-item">F: <span>$13.45</span></div>
                 <div class="ticker-item">GM: <span>$45.67</span></div>
                 <div class="ticker-item">TSLA: <span>$245.89</span></div>
-                <div class="ticker-item">TM: <span>$182.34</span></div>
-                <div class="ticker-item">STLA: <span>$21.78</span></div>
             </div>
-        </div>
-        <div class="section">
-            <h2>Daily News</h2>
-            <div class="news-feed" id="newsFeed"><p>Loading news...</p></div>
-        </div>
-        <div class="section">
-            <h2>Hot Deals</h2>
-            <div class="deals">
-                <div class="deal-item">
-                    <p>2022 Ford F-150</p>
-                    <p>$35,000</p>
-                </div>
-                <div class="deal-item">
-                    <p>2021 Chevy Tahoe</p>
-                    <p>$48,000</p>
-                </div>
-                <div class="deal-item">
-                    <p>2020 Dodge Charger</p>
-                    <p>$29,900</p>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <h2>Quick Tips</h2>
-            <div class="tips-carousel">
-                <div class="tip-item">
-                    <p>Check wheel wells for rust—MI winters hit hard!</p>
-                </div>
-                <div class="tip-item">
-                    <p>VIN last 6 digits = rare trims—spot goldmines!</p>
-                </div>
-                <div class="tip-item">
-                    <p>File titles via e-Services—skip the delays!</p>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <h2>Market Pulse</h2>
-            <div class="market-pulse"></div>
-            <p>Used SUV prices spiking—Detroit’s hot trend!</p>
-        </div>
-        <div class="section">
-            <h2>Resources</h2>
-            <p><strong>e-Services:</strong> Use ELT for lien releases—go paperless!</p>
-            <p><strong>Winter Win:</strong> Salt damage—frames first.</p>
-            <p><a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for more!</p>
-            <button onclick="window.location.href='https://cappellomotors.com/dealer-info.html'">More Intel</button>
         </div>
     </div>
     <footer>
@@ -318,28 +248,22 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        // NewsAPI for daily car news (get key at newsapi.org)
-        const newsApiKey = 'YOUR_NEWSAPI_KEY'; // Replace with your key
-        fetch(`https://newsapi.org/v2/top-headlines?q=automotive&category=business&apiKey=${newsApiKey}`)
-            .then(response => response.json())
-            .then(data => {
-                const newsFeed = document.getElementById('newsFeed');
-                newsFeed.innerHTML = '';
-                data.articles.slice(0, 5).forEach(article => {
-                    newsFeed.innerHTML += `<p><strong>${new Date(article.publishedAt).toLocaleDateString()}:</strong> ${article.title}</p>`;
-                });
-            })
-            .catch(error => {
-                console.error('News Error:', error);
-                document.getElementById('newsFeed').innerHTML = '<p>News unavailable.</p>';
-            });
-
-        // Dashboard initialization
-        localStorage.setItem('bids', localStorage.getItem('bids') || 0);
-        localStorage.setItem('wins', localStorage.getItem('wins') || 0);
-        document.getElementById('bids').textContent = localStorage.getItem('bids');
-        document.getElementById('wins').textContent = localStorage.getItem('wins');
-        document.getElementById('leads').textContent = 2; // Mock static leads
+        fetch('https://cappello-motors-website.onrender.com/api/dashboard', {
+            method: 'GET',
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bids').textContent = data.bids || 0;
+            document.getElementById('wins').textContent = data.wins || 0;
+            document.getElementById('leads').textContent = data.leads || 2;
+        })
+        .catch(error => {
+            console.error('Dashboard Error:', error);
+            document.getElementById('bids').textContent = localStorage.getItem('bids') || 0;
+            document.getElementById('wins').textContent = localStorage.getItem('wins') || 0;
+            document.getElementById('leads').textContent = 2;
+        });
     </script>
 </body>
 </html>
