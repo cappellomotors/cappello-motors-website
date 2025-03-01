@@ -170,8 +170,6 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        console.log('dealer-login.html loaded at:', new Date().toISOString());
-
         async function signIn() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -186,29 +184,18 @@
             }
 
             try {
-                const signInUrl = 'https://cappello-motors-website.onrender.com/signin';
-                console.log('Sending sign-in request to:', signInUrl);
-                console.log('Request body:', JSON.stringify({ email, password }));
-                const response = await fetch(signInUrl, {
+                const response = await fetch('/signin', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-                console.log('Response status:', response.status);
                 const result = await response.json();
                 console.log('Backend response:', result);
 
-                if (!response.ok) {
-                    throw new Error(`Network error: ${response.status} - ${result.message || 'Unknown error'}`);
-                }
-
                 if (result.success && result.redirect) {
-                    console.log('Redirect received from backend:', result.redirect);
-                    console.log('Current URL before redirect:', window.location.href);
+                    console.log('Redirecting to:', result.redirect);
                     window.location.href = result.redirect;
-                    console.log('Redirect initiated to:', result.redirect);
                 } else {
-                    console.log('Login failed with message:', result.message);
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
                     errorDiv.style.display = 'block';
                 }
