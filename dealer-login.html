@@ -199,7 +199,7 @@
                 const result = await response.json();
                 console.log('Sign-in response:', result);
                 if (result.success) {
-                    window.location.href = result.redirect || 'https://cappello-motors-website.onrender.com/dealer-main.html';
+                    window.location.href = result.redirect; // Use backend redirect only
                 } else {
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
                     errorDiv.style.display = 'block';
