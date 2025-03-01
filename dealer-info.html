@@ -52,8 +52,18 @@
         nav a:hover {
             color: #e74c3c;
         }
+        .news-ticker {
+            background: #e74c3c;
+            padding: 10px;
+            font-size: 1.2em;
+            color: #fff;
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            z-index: 1000;
+        }
         header {
-            margin-top: 70px;
+            margin-top: 110px;
             padding: 60px 20px;
             text-align: center;
             background: #ffffff;
@@ -177,6 +187,9 @@
         <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
         <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
     </nav>
+    <marquee class="news-ticker" behavior="scroll" direction="left">
+        SOS ALERT: ELT mandatory for lienholders as of Oct 1, 2023 | File titles within 15 days (MCL 257.217) | Check e-Services for updates!
+    </marquee>
     <header>
         <h1>Dealer Info</h1>
         <div class="highlight">Michigan Dealer Central</div>
@@ -214,7 +227,6 @@
             <ul>
                 <li>File titles fast—15 days max, no exceptions.</li>
                 <li>Winter check: Salt eats frames—inspect early.</li>
-                <li>Follow <a href="https://x.com/carguruguy" target="_blank">@carguruguy</a> for pro moves!</li>
             </ul>
             <button onclick="window.location.href='https://www.michigan.gov/sos/vehicle/dealers'">SOS Dealer Portal</button>
         </div>
