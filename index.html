@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup. Explore daily car insights and join our community!">
+    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup. Get daily car insights!">
     <meta name="keywords" content="sell car fast Metro Detroit, instant payment Shelby Township, car buyer Detroit, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Cappello Motors LLC - Sell Fast, Buy Smart</title>
-    <!-- Google Analytics (unchanged from your original) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16886493440"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -80,16 +80,61 @@
         }
         header p {
             font-size: 1.8em;
-            margin: 10px 0 20px;
+            margin: 10px 0;
         }
-        header input {
-            padding: 12px;
-            width: 60%;
-            max-width: 500px;
-            font-size: 16px;
+        .input-container {
+            margin: 40px auto;
+            max-width: 700px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(52, 73, 94, 0.5);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .input-container:hover {
+            transform: scale(1.05);
+        }
+        .input-container p {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin: 0 0 20px;
+        }
+        .input-container input {
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 1.2em;
+            border: 3px solid #2c3e50;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(52, 73, 94, 0.3);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .input-container input:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+            outline: none;
+        }
+        .input-container button {
+            padding: 12px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #fff;
             border: none;
-            border-radius: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 15px;
+        }
+        .input-container button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(52, 73, 94, 0.6);
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 1.1em;
+            display: none;
+            margin-top: 10px;
         }
         main {
             max-width: 1200px;
@@ -111,7 +156,7 @@
             font-size: 1.8em;
             margin: 0 0 15px;
         }
-        .daily-post p {
+        .daily-post p, .tweets p {
             color: #7f8c8d;
             font-size: 1.2em;
         }
@@ -123,7 +168,11 @@
         .daily-post a:hover {
             text-decoration: underline;
         }
-        .x-feed { min-height: 400px; }
+        .tweets p {
+            margin: 10px 0;
+            border-left: 3px solid #e74c3c;
+            padding-left: 15px;
+        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
@@ -142,7 +191,7 @@
             main { grid-template-columns: 1fr; }
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
-            header input { width: 80%; }
+            .input-container { margin: 20px auto; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -158,23 +207,58 @@
         </nav>
         <h1>Cappello Motors</h1>
         <p>Sell Fast, Buy Smart in Metro Detroit</p>
-        <input type="text" placeholder="Search Cars or Enter VIN">
     </header>
+    <div class="input-container">
+        <p>Start now—enter your VIN or license plate!</p>
+        <input type="text" placeholder="VIN or License Plate" id="carInput">
+        <button onclick="checkVin()">Submit</button>
+        <p class="error" id="vinError">Please enter a VIN or license plate.</p>
+    </div>
     <main>
         <section class="daily-post">
             <h2>Daily Insight - March 1, 2025</h2>
             <p>Why Metro Detroit Sellers Get More with Us: Instant cash and free pickup beat the big guys—skip the hassle!</p>
             <a href="/helpful-info.html">Explore Past Tips</a>
         </section>
-        <aside class="x-feed">
-            <h2>Follow @CappelloMotorsMI</h2>
-            <a class="twitter-timeline" href="https://twitter.com/CappelloMotorsMI?ref_src=twsrc%5Etfw" data-height="400">Tweets by CappelloMotorsMI</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <aside class="tweets">
+            <h2>Latest Updates</h2>
+            <p><strong>@CappelloMotorsMI:</strong> Sellers—clean your car before listing for top offers!</p>
+            <p><strong>@CappelloMotorsMI:</strong> Dealers—use e-Services to file titles in 15 days or less!</p>
         </aside>
     </main>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
+    <script>
+        async function checkVin() {
+            const carInput = document.getElementById('carInput').value;
+            const vinError = document.getElementById('vinError');
+
+            if (carInput.trim() === '') {
+                vinError.style.display = 'block';
+                return;
+            }
+            vinError.style.display = 'none';
+
+            try {
+                const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/${carInput}?format=json`);
+                if (!response.ok) throw new Error('API request failed');
+                const data = await response.json();
+                const result = data.Results[0];
+                if (result && result.Make && result.Model && result.ModelYear) {
+                    alert(`Your Car: ${result.ModelYear} ${result.Make} ${result.Model}`);
+                    window.location.href = '/sell-your-car.html'; // Redirect to full form
+                } else {
+                    alert('Couldn’t decode VIN. Please check it or proceed manually.');
+                    window.location.href = '/sell-your-car.html';
+                }
+            } catch (error) {
+                console.error('VIN Decoder Error:', error);
+                alert('Error fetching car info. Proceed manually.');
+                window.location.href = '/sell-your-car.html';
+            }
+        }
+    </script>
 </body>
 </html>
