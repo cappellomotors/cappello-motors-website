@@ -3,296 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play a fun racing game at Cappello Motors LLC! Race a sleek sports car to the finish line.">
-    <meta name="keywords" content="car racing game, realistic sports cars, Cappello Motors">
+    <meta name="description" content="Race a realistic Mustang GT with @cappellomotors - Metro Detroit car fun at its finest!">
+    <meta name="keywords" content="racing game Metro Detroit, realistic car game Shelby Township, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
-    <title>Racing Game | Cappello Motors LLC</title>
+    <title>Racing Game | @cappellomotors</title>
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: #f5f7fa;
+            color: #34495e;
             line-height: 1.6;
+            min-height: 100vh;
+            overflow: hidden;
         }
         nav {
-            background-color: #1a2a44;
-            padding: 10px;
-            position: fixed;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 15px;
+            position: sticky;
             top: 0;
-            width: 100%;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            white-space: nowrap;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        nav .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #ecf0f1;
+            margin-right: 30px;
+        }
+        nav .logo span {
+            color: #e74c3c;
         }
         nav a {
-            color: #fff;
+            color: #ecf0f1;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
+            margin: 0 15px;
+            font-size: 18px;
             font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
+            transition: color 0.3s;
         }
         nav a:hover {
-            color: #6b48ff;
-            transform: translateY(-2px);
+            color: #e74c3c;
         }
         header {
-            margin-top: 60px;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
             color: #fff;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
         }
         h1 {
-            font-family: 'Montserrat', Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            margin: 0;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 2.5em;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .game-section {
-            margin: 40px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background-attachment: fixed;
         }
         canvas {
-            border: 2px solid #1a2a44;
-            border-radius: 8px;
-            background: #e6e9ff;
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #2c3e50;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #d32f2f;
-            color: white;
+            background: linear-gradient(135deg, #e74c3c 0%, #d32f2f 100%);
+            color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         button:hover {
-            background-color: #b71c1c;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.6);
         }
         footer {
-            margin-top: auto;
-            padding: 25px;
-            background-color: #1a2a44;
-            color: #fff;
-            font-size: 14px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
         }
         footer a {
-            color: #d32f2f;
+            color: #e74c3c;
             text-decoration: none;
         }
         footer a:hover {
-            text-decoration: underline;
+            color: #fff;
         }
         @media (max-width: 768px) {
-            canvas {
-                width: 100%;
-                height: auto;
-            }
-        }
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-            }
+            h1 { font-size: 1.5em; }
+            nav a { margin: 5px 10px; font-size: 16px; }
+            canvas { width: 100%; height: auto; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="https://cappellomotors.com">Sell Your Car</a>
-        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Fixed link -->
-        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
-        <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
-        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
-        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
-    </nav>
     <header>
+        <nav>
+            <span class="logo">C<span>M</span></span>
+            <a href="/sell-your-car.html">Sell Your Car</a>
+            <a href="/cars-for-sale.html">Cars for Sale</a>
+            <a href="/dealer-login.html">Dealer Login</a>
+            <a href="/dealer-registration.html">Dealer Registration</a>
+            <a href="/why-sell-to-us.html">Why Sell to Us</a>
+            <a href="/contact-us.html">Contact Us</a>
+            <a href="/racing-game.html">Racing Game</a>
+        </nav>
         <h1>Racing Game</h1>
-        <p>Race a sleek sports car to the finish line—avoid obstacles and feel the speed!</p>
+        <p>Race a Mustang GT through Metro Detroit—feel the power!</p>
     </header>
     <section class="game-section">
-        <p>Use arrow keys (or tap left/right on mobile) to steer. Reach the finish line!</p>
-        <canvas id="gameCanvas" width="400" height="600"></canvas>
-        <button onclick="restartGame()">Restart Race</button>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div class="controls">
+            <button onclick="restartGame()">Restart</button>
+            <button onclick="togglePause()">Pause/Resume</button>
+        </div>
     </section>
     <footer>
-        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <p>@cappellomotors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const cars = [{ name: "Sports Car", speed: 6, handling: 5, color: '#d32f2f', width: 40, height: 60 }];
-        let currentCar = cars[0];
-        let carX = canvas.width / 2 - currentCar.width / 2;
-        let carY = canvas.height - currentCar.height - 20;
-        let velocity = 0;
-        const maxSpeed = currentCar.speed;
-        const acceleration = 0.2;
-        const braking = 0.3;
-        const friction = 0.1;
+        
+        // Game State
+        let car = {
+            x: canvas.width / 2 - 40,
+            y: canvas.height - 120,
+            width: 80,
+            height: 120,
+            speed: 0,
+            maxSpeed: 10,
+            acceleration: 0.15,
+            braking: 0.3,
+            friction: 0.05,
+            steer: 0,
+            maxSteer: 5,
+            rotation: 0,
+            color: '#e74c3c' // Mustang GT red
+        };
         let obstacles = [];
+        let roadOffset = 0;
         let score = 0;
         let gameOver = false;
         let gameWon = false;
-        const finishLineY = 50;
+        let paused = false;
+        const finishLineY = -canvas.height;
 
-        const car = {
-            x: carX,
-            y: carY,
-            width: currentCar.width,
-            height: currentCar.height,
-            draw() {
-                ctx.fillStyle = currentCar.color;
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y + this.height);
-                ctx.lineTo(this.x + this.width / 2, this.y);
-                ctx.lineTo(this.x + this.width, this.y + this.height);
-                ctx.closePath();
-                ctx.fill();
-                ctx.fillStyle = '#000';
-                ctx.fillRect(this.x + this.width / 4, this.y + this.height / 4, this.width / 2, this.height / 4);
-                ctx.fillRect(this.x + this.width / 4, this.y - 5, this.width / 2, 5);
-                ctx.fillStyle = '#333';
-                ctx.fillRect(this.x - 5, this.y + this.height / 4, 5, this.height / 2);
-                ctx.fillRect(this.x + this.width, this.y + this.height / 4, 5, this.height / 2);
+        // Realistic Car Physics
+        function updateCarPhysics() {
+            if (!paused && !gameOver && !gameWon) {
+                car.speed = Math.max(0, Math.min(car.maxSpeed, car.speed));
+                car.speed -= car.friction;
+                car.x += car.steer * car.speed * 0.1;
+                car.rotation = car.steer * car.speed * 0.02;
+                car.y -= car.speed;
+
+                if (car.x < 100) car.x = 100;
+                if (car.x > canvas.width - 100 - car.width) car.x = canvas.width - 100 - car.width;
+                if (car.y < finishLineY + canvas.height) gameWon = true;
             }
-        };
-
-        function createObstacle() {
-            const x = Math.random() * (canvas.width - currentCar.width);
-            obstacles.push({ x, y: -currentCar.height, width: 20, height: 40 });
         }
 
-        function drawBackground() {
-            ctx.fillStyle = '#555';
-            ctx.fillRect(canvas.width / 4, 0, canvas.width / 2, canvas.height);
+        // Draw Detailed Car
+        function drawCar() {
+            ctx.save();
+            ctx.translate(car.x + car.width / 2, car.y + car.height / 2);
+            ctx.rotate(car.rotation * Math.PI / 180);
+            ctx.fillStyle = car.color;
+            ctx.fillRect(-car.width / 2, -car.height / 2, car.width, car.height); // Body
+            ctx.fillStyle = '#333';
+            ctx.fillRect(-car.width / 2 + 10, -car.height / 2 + 10, car.width - 20, 20); // Hood
+            ctx.fillStyle = '#000';
+            ctx.fillRect(-car.width / 2 + 10, car.height / 2 - 30, car.width - 20, 20); // Windows
+            ctx.fillStyle = '#666';
+            ctx.fillRect(-car.width / 2 - 5, -car.height / 2 + 40, 10, 40); // Left Wheel
+            ctx.fillRect(car.width / 2 - 5, -car.height / 2 + 40, 10, 40); // Right Wheel
             ctx.fillStyle = '#fff';
-            for (let y = 0; y < canvas.height; y += 40) {
+            ctx.fillRect(-car.width / 2 + 10, -car.height / 2 + 10, car.width - 20, 5); // Hood Stripe
+            ctx.restore();
+        }
+
+        // Road and Environment
+        function drawRoad() {
+            roadOffset = (roadOffset + car.speed) % 40;
+            ctx.fillStyle = '#555';
+            ctx.fillRect(100, 0, canvas.width - 200, canvas.height);
+            ctx.fillStyle = '#fff';
+            for (let y = -roadOffset; y < canvas.height; y += 40) {
                 ctx.fillRect(canvas.width / 2 - 5, y, 10, 20);
             }
             ctx.fillStyle = '#88cc88';
-            ctx.fillRect(0, 0, canvas.width / 4, canvas.height);
-            ctx.fillRect(canvas.width * 3 / 4, 0, canvas.width / 4, canvas.height);
+            ctx.fillRect(0, 0, 100, canvas.height);
+            ctx.fillRect(canvas.width - 100, 0, 100, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, finishLineY + roadOffset, canvas.width, 10);
+            ctx.fillStyle = '#000';
+            for (let x = 0; x < canvas.width; x += 20) {
+                ctx.fillRect(x, finishLineY + roadOffset, 10, 10);
+            }
         }
 
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBackground();
+        // Obstacles (Other Cars)
+        function createObstacle() {
+            const x = 100 + Math.random() * (canvas.width - 200 - 60);
+            obstacles.push({
+                x,
+                y: -120,
+                width: 60,
+                height: 120,
+                color: ['#3498db', '#2ecc71', '#f1c40f'][Math.floor(Math.random() * 3)]
+            });
+        }
 
-            if (gameOver) {
-                ctx.fillStyle = '#1a2a44';
-                ctx.font = '30px Montserrat';
-                ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
-                return;
-            }
-            if (gameWon) {
-                ctx.fillStyle = '#1a2a44';
-                ctx.font = '30px Montserrat';
-                ctx.fillText('You Win! Score: ' + score, canvas.width / 2 - 100, canvas.height / 2);
-                return;
-            }
-
-            ctx.fillStyle = '#fff';
-            ctx.fillRect(0, finishLineY, canvas.width, 10);
-            ctx.fillStyle = '#000';
-            for (let i = 0; i < canvas.width; i += 20) {
-                ctx.fillRect(i, finishLineY, 10, 10);
-            }
-
-            velocity = Math.min(velocity, maxSpeed);
-            if (velocity > 0) velocity -= friction;
-            if (velocity < 0) velocity = 0;
-            car.y -= velocity;
-            car.draw();
-
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                obstacles[i].y += 3;
-                ctx.fillStyle = '#ff6600';
-                ctx.beginPath();
-                ctx.moveTo(obstacles[i].x + obstacles[i].width / 2, obstacles[i].y);
-                ctx.lineTo(obstacles[i].x, obstacles[i].y + obstacles[i].height);
-                ctx.lineTo(obstacles[i].x + obstacles[i].width, obstacles[i].y + obstacles[i].height);
-                ctx.closePath();
-                ctx.fill();
-                ctx.fillStyle = '#fff';
-                ctx.fillRect(obstacles[i].x + 2, obstacles[i].y + 10, obstacles[i].width - 4, 10);
-
+        function drawObstacles() {
+            obstacles.forEach((obs, i) => {
+                obs.y += 3;
+                ctx.fillStyle = obs.color;
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                ctx.fillStyle = '#000';
+                ctx.fillRect(obs.x + 10, obs.y + 20, obs.width - 20, 20);
                 if (
-                    car.x < obstacles[i].x + obstacles[i].width &&
-                    car.x + car.width > obstacles[i].x &&
-                    car.y < obstacles[i].y + obstacles[i].height &&
-                    car.y + car.height > obstacles[i].y
+                    car.x < obs.x + obs.width &&
+                    car.x + car.width > obs.x &&
+                    car.y < obs.y + obs.height &&
+                    car.y + car.height > obs.y
                 ) {
                     gameOver = true;
                 }
+                if (obs.y > canvas.height) obstacles.splice(i, 1);
+            });
+        }
 
-                if (obstacles[i].y > canvas.height) {
-                    obstacles.splice(i, 1);
-                    score += 10;
-                }
+        // Game Loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawRoad();
+            updateCarPhysics();
+            drawCar();
+            drawObstacles();
+
+            if (!paused && !gameOver && !gameWon && Math.random() < 0.02) createObstacle();
+
+            ctx.fillStyle = '#fff';
+            ctx.font = '20px Montserrat';
+            ctx.fillText('Score: ' + score, 20, 40);
+            score += Math.floor(car.speed / 2);
+
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#e74c3c';
+                ctx.font = '40px Montserrat';
+                ctx.fillText('Crash! Score: ' + score, canvas.width / 2 - 150, canvas.height / 2);
+            } else if (gameWon) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#2ecc71';
+                ctx.font = '40px Montserrat';
+                ctx.fillText('You Win! Score: ' + score, canvas.width / 2 - 150, canvas.height / 2);
             }
-
-            if (car.y <= finishLineY + 10) {
-                gameWon = true;
-            }
-
-            ctx.fillStyle = '#1a2a44';
-            ctx.font = '20px Roboto';
-            ctx.fillText('Score: ' + score, 10, 30);
-
-            if (Math.random() < 0.02 && car.y > finishLineY + 50) createObstacle();
 
             requestAnimationFrame(gameLoop);
         }
 
+        // Controls
         let keys = {};
         document.addEventListener('keydown', (e) => {
             keys[e.key] = true;
-            if (e.key === 'ArrowLeft' && car.x > 0) car.x -= currentCar.handling;
-            if (e.key === 'ArrowRight' && car.x < canvas.width - car.width) car.x += currentCar.handling;
-            if (e.key === 'ArrowUp') velocity += acceleration;
-            if (e.key === 'ArrowDown') velocity -= braking;
+            if (e.key === 'ArrowLeft') car.steer = -car.maxSteer;
+            if (e.key === 'ArrowRight') car.steer = car.maxSteer;
+            if (e.key === 'ArrowUp') car.speed += car.acceleration;
+            if (e.key === 'ArrowDown') car.speed -= car.braking;
         });
         document.addEventListener('keyup', (e) => {
             keys[e.key] = false;
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') car.steer = 0;
         });
-        canvas.addEventListener('touchstart', (e) => {
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
             const touchX = e.touches[0].clientX - canvas.offsetLeft;
-            if (touchX < canvas.width / 2 && car.x > 0) car.x -= currentCar.handling * 2;
-            if (touchX > canvas.width / 2 && car.x < canvas.width - car.width) car.x += currentCar.handling * 2;
-            velocity += acceleration;
+            car.steer = (touchX - car.x - car.width / 2) / 10;
+            car.speed += car.acceleration * 0.5;
         });
 
         function restartGame() {
-            car.x = canvas.width / 2 - currentCar.width / 2;
-            car.y = canvas.height - currentCar.height - 20;
-            velocity = 0;
+            car.x = canvas.width / 2 - 40;
+            car.y = canvas.height - 120;
+            car.speed = 0;
+            car.steer = 0;
+            car.rotation = 0;
             obstacles = [];
             score = 0;
             gameOver = false;
             gameWon = false;
+            paused = false;
             gameLoop();
+        }
+
+        function togglePause() {
+            paused = !paused;
         }
 
         gameLoop();

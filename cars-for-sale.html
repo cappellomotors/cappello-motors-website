@@ -3,43 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse cars for sale at Cappello Motors LLC in Shelby Township, MI. Quality used vehicles for Metro Detroit.">
+    <meta name="description" content="Browse cars for sale at @cappellomotors in Shelby Township, MI. Quality used vehicles for Metro Detroit.">
     <meta name="keywords" content="cars for sale Metro Detroit, used cars Shelby Township, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
-    <title>Cars for Sale | Cappello Motors LLC</title>
+    <title>Cars for Sale | @cappellomotors</title>
     <style>
-        body { font-family: 'Roboto', Arial, sans-serif; text-align: center; margin: 0; padding: 0; background: linear-gradient(135deg, #f5f7fa 0%, #e6e9ff 100%); min-height: 100vh; display: flex; flex-direction: column; }
-        nav { background-color: #1a2a44; padding: 10px; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); display: flex; justify-content: center; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; }
-        nav a { color: #fff; text-decoration: none; margin: 0 10px; font-size: 16px; font-weight: 500; transition: color 0.3s, transform 0.2s; }
-        nav a:hover { color: #6b48ff; transform: translateY(-2px); }
-        header { margin-top: 60px; padding: 40px 20px; background: linear-gradient(135deg, #1a2a44 0%, #6b48ff 100%); color: #fff; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
-        h1 { font-family: 'Montserrat', Arial, sans-serif; text-transform: uppercase; letter-spacing: 3px; font-size: 2.5em; margin: 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
-        .content { margin: 40px auto; max-width: 800px; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
-        footer { margin-top: auto; padding: 25px; background-color: #1a2a44; color: #fff; font-size: 14px; }
-        footer a { color: #d32f2f; text-decoration: none; }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #34495e;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        nav {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        nav .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #ecf0f1;
+            margin-right: 30px;
+        }
+        nav .logo span {
+            color: #e74c3c;
+        }
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e74c3c;
+        }
+        header {
+            margin-top: 80px;
+            padding: 40px 20px;
+            background: url('https://images.unsplash.com/photo-1502877333142-fbc675705774?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: #fff;
+            text-align: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0,0,0,0.4);
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .content { margin: 20px; padding: 20px; }
+            h1 { font-size: 2em; }
+            nav a { margin: 5px 10px; font-size: 16px; }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="https://cappellomotors.com">Sell Your Car</a>
-        <a href="https://cappellomotors.com/cars-for-sale.html">Cars for Sale</a>
-        <a href="https://cappellomotors.com/dealer-login.html">Dealer Login</a> <!-- Fixed link -->
-        <a href="https://cappellomotors.com/dealer-registration.html">Dealer Registration</a>
-        <a href="https://cappellomotors.com/why-sell-to-us.html">Why Sell to Us</a>
-        <a href="https://cappellomotors.com/contact-us.html">Contact Us</a>
-        <a href="https://cappellomotors.com/racing-game.html">Racing Game</a>
-    </nav>
     <header>
+        <nav>
+            <span class="logo">C<span>M</span></span>
+            <a href="/sell-your-car.html">Sell Your Car</a>
+            <a href="/cars-for-sale.html">Cars for Sale</a>
+            <a href="/dealer-login.html">Dealer Login</a>
+            <a href="/dealer-registration.html">Dealer Registration</a>
+            <a href="/why-sell-to-us.html">Why Sell to Us</a>
+            <a href="/contact-us.html">Contact Us</a>
+            <a href="/racing-game.html">Racing Game</a>
+        </nav>
         <h1>Cars for Sale</h1>
     </header>
     <div class="content">
         <p>Browse our selection of quality used cars available in Metro Detroit.</p>
-        <!-- Add your car listings here -->
+        <!-- Add car listings here -->
     </div>
     <footer>
-        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <p>@cappellomotors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
 </body>
