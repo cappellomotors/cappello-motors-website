@@ -170,6 +170,8 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
+        console.log('dealer-login.html loaded at:', new Date().toISOString());
+
         async function signIn() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -179,13 +181,15 @@
             if (!email || !password) {
                 errorDiv.textContent = 'Please fill in all fields.';
                 errorDiv.style.display = 'block';
+                console.log('Sign-in aborted: Missing fields');
                 return;
             }
 
             try {
-                console.log('Sending sign-in request to:', 'https://cappello-motors-website.onrender.com/signin');
+                const signInUrl = 'https://cappello-motors-website.onrender.com/signin';
+                console.log('Sending sign-in request to:', signInUrl);
                 console.log('Request body:', JSON.stringify({ email, password }));
-                const response = await fetch('https://cappello-motors-website.onrender.com/signin', {
+                const response = await fetch(signInUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -199,8 +203,10 @@
                 }
 
                 if (result.success && result.redirect) {
-                    console.log('Redirecting to:', result.redirect);
+                    console.log('Redirect received from backend:', result.redirect);
+                    console.log('Current URL before redirect:', window.location.href);
                     window.location.href = result.redirect;
+                    console.log('Redirect initiated to:', result.redirect);
                 } else {
                     console.log('Login failed with message:', result.message);
                     errorDiv.textContent = result.message || 'Invalid login attempt.';
