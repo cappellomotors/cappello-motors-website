@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Drag race a Dodge Viper with @cappellomotors - Easy, thrilling Metro Detroit speed!">
-    <meta name="keywords" content="drag racing game Metro Detroit, easy car game Shelby Township, Cappello Motors">
+    <meta name="description" content="Race a sleek sports car with @cappellomotors - Metro Detroit speed unleashed!">
+    <meta name="keywords" content="car racing game, realistic sports cars, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Racing Game | @cappellomotors</title>
@@ -29,7 +29,6 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            flex-wrap: wrap;
         }
         nav .logo {
             font-family: 'Montserrat', sans-serif;
@@ -40,46 +39,81 @@
         nav .logo span {
             color: #e74c3c;
         }
-        nav a {
-            color: #ecf0f1;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s;
+        .nav-menu {
+            position: relative;
+            display: inline-block;
         }
-        nav a:hover {
+        .menu-toggle {
+            color: #ecf0f1;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+        }
+        .menu-toggle:hover {
+            color: #e74c3c;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            background: #34495e;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .nav-menu:hover .dropdown {
+            display: block;
+        }
+        .dropdown a {
+            color: #ecf0f1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .dropdown a:hover {
+            background: #2c3e50;
             color: #e74c3c;
         }
         header {
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #e74c3c 0%, #d32f2f 100%);
             color: #fff;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2em;
+            font-size: 2.5em;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: 3px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
         }
         .game-section {
             position: relative;
             width: 100%;
-            height: calc(100vh - 100px);
-            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            background-blend-mode: overlay;
-            background-color: rgba(0,0,0,0.6);
-            overflow: hidden;
+            height: calc(100vh - 140px);
+            background: linear-gradient(180deg, #34495e 0%, #1a2a44 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
         canvas {
-            border: 2px solid #2c3e50;
+            border: 2px solid #e74c3c;
             border-radius: 5px;
-            background: #333;
+            background: #555;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
         }
         .controls {
             position: absolute;
@@ -103,21 +137,11 @@
             transform: scale(1.1);
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.6);
         }
-        .rpm-gauge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 150px;
-            height: 150px;
-        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
             text-align: center;
             padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
         footer a {
             color: #e74c3c;
@@ -127,10 +151,11 @@
             color: #fff;
         }
         @media (max-width: 768px) {
-            h1 { font-size: 1.5em; }
-            nav a { margin: 5px 10px; font-size: 16px; }
+            h1 { font-size: 1.8em; }
+            p { font-size: 1em; }
             canvas { width: 100%; height: auto; }
-            .rpm-gauge { width: 100px; height: 100px; }
+            .dropdown { display: none; position: static; width: 100%; }
+            .nav-menu.active .dropdown { display: block; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -139,24 +164,27 @@
     <header>
         <nav>
             <span class="logo">C<span>M</span></span>
-            <a href="/sell-your-car.html">Sell Your Car</a>
-            <a href="/cars-for-sale.html">Cars for Sale</a>
-            <a href="/dealer-login.html">Dealer Login</a>
-            <a href="/dealer-registration.html">Dealer Registration</a>
-            <a href="/why-sell-to-us.html">Why Sell to Us</a>
-            <a href="/contact-us.html">Contact Us</a>
-            <a href="/racing-game.html">Racing Game</a>
+            <div class="nav-menu">
+                <button class="menu-toggle">☰</button>
+                <div class="dropdown">
+                    <a href="/sell-your-car.html">Sell Your Car</a>
+                    <a href="/cars-for-sale.html">Cars for Sale</a>
+                    <a href="/dealer-login.html">Dealer Login</a>
+                    <a href="/dealer-registration.html">Dealer Registration</a>
+                    <a href="/why-sell-to-us.html">Why Sell to Us</a>
+                    <a href="/contact-us.html">Contact Us</a>
+                    <a href="/racing-game.html">Racing Game</a>
+                </div>
+            </div>
         </nav>
         <h1>Racing Game</h1>
-        <p>Drag Race a Dodge Viper—Shift Gears and Hit Nitro!</p>
+        <p>Unleash Speed in Metro Detroit—Dodge Obstacles and Win!</p>
     </header>
     <section class="game-section">
         <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <canvas id="rpmGauge" class="rpm-gauge"></canvas>
         <div class="controls">
-            <button onclick="startGame()">Start Race</button>
-            <button onclick="shiftGear()">Shift Gear</button>
-            <button onclick="useNitro()">Nitro</button>
+            <button onclick="restartGame()">Restart Race</button>
+            <button onclick="togglePause()">Pause/Resume</button>
         </div>
     </section>
     <footer>
@@ -166,173 +194,172 @@
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const rpmCanvas = document.getElementById('rpmGauge');
-        const rpmCtx = rpmCanvas.getContext('2d');
 
-        // Game State
-        let player = {
-            x: canvas.width / 4 - 40,
-            y: 0,
-            width: 80,
-            height: 40,
-            speed: 0,
-            gear: 0,
-            rpm: 0,
-            maxRPM: 8000,
-            nitro: 100,
-            distance: 0,
-            color: '#e74c3c' // Viper red
-        };
-        let opponent = {
-            x: 3 * canvas.width / 4 - 40,
-            y: 0,
-            width: 80,
-            height: 40,
-            speed: 2,
-            distance: 0,
-            color: '#3498db'
-        };
-        let gameStarted = false;
+        const cars = [{ name: "Sports Car", speed: 8, handling: 6, color: '#e74c3c', width: 60, height: 100 }];
+        let currentCar = cars[0];
+        let carX = canvas.width / 2 - currentCar.width / 2;
+        let carY = canvas.height - currentCar.height - 50;
+        let velocity = 0;
+        const maxSpeed = currentCar.speed;
+        const acceleration = 0.3;
+        const braking = 0.5;
+        const friction = 0.1;
+        let obstacles = [];
+        let score = 0;
         let gameOver = false;
         let gameWon = false;
-        const stripLength = 1000; // Finish line distance
+        let paused = false;
+        const finishLineY = 50;
 
-        // Draw Car
-        function drawCar(carObj) {
-            ctx.fillStyle = carObj.color;
-            ctx.fillRect(carObj.x, canvas.height - carObj.y - carObj.height, carObj.width, carObj.height);
+        function drawCar() {
+            ctx.fillStyle = currentCar.color;
+            ctx.beginPath();
+            ctx.moveTo(carX, carY + currentCar.height);
+            ctx.lineTo(carX + currentCar.width / 2, carY);
+            ctx.lineTo(carX + currentCar.width, carY + currentCar.height);
+            ctx.closePath();
+            ctx.fill();
             ctx.fillStyle = '#000';
-            ctx.fillRect(carObj.x + 10, canvas.height - carObj.y - carObj.height + 5, carObj.width - 20, 10);
-            ctx.fillStyle = '#666';
-            ctx.fillRect(carObj.x - 5, canvas.height - carObj.y - carObj.height + 10, 10, 20);
-            ctx.fillRect(carObj.x + carObj.width - 5, canvas.height - carObj.y - carObj.height + 10, 10, 20);
+            ctx.fillRect(carX + currentCar.width / 4, carY + currentCar.height / 4, currentCar.width / 2, currentCar.height / 4);
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(carX + currentCar.width / 3, carY + 10, currentCar.width / 3, 10);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(carX - 10, carY + currentCar.height / 3, 10, currentCar.height / 3);
+            ctx.fillRect(carX + currentCar.width, carY + currentCar.height / 3, 10, currentCar.height / 3);
         }
 
-        // Draw Strip
-        function drawStrip() {
-            ctx.fillStyle = '#555';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function createObstacle() {
+            const x = Math.random() * (canvas.width - currentCar.width);
+            obstacles.push({ x, y: -currentCar.height, width: 40, height: 80, color: '#3498db' });
+        }
+
+        function drawBackground() {
+            ctx.fillStyle = '#777';
+            ctx.fillRect(canvas.width / 4, 0, canvas.width / 2, canvas.height);
             ctx.fillStyle = '#fff';
-            for (let y = player.distance % 40; y < canvas.height; y += 40) {
+            for (let y = 0; y < canvas.height; y += 40) {
                 ctx.fillRect(canvas.width / 2 - 5, y, 10, 20);
             }
+            ctx.fillStyle = '#88cc88';
+            ctx.fillRect(0, 0, canvas.width / 4, canvas.height);
+            ctx.fillRect(canvas.width * 3 / 4, 0, canvas.width / 4, canvas.height);
             ctx.fillStyle = '#ff0';
-            ctx.fillRect(canvas.width / 2 - 50, canvas.height - (stripLength - player.distance), 100, 5);
-        }
-
-        // RPM Gauge
-        function drawRPM() {
-            rpmCtx.clearRect(0, 0, rpmCanvas.width, rpmCanvas.height);
-            const centerX = rpmCanvas.width / 2;
-            const centerY = rpmCanvas.height / 2;
-            const radius = rpmCanvas.width / 2 - 10;
-
-            // Background
-            rpmCtx.beginPath();
-            rpmCtx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            rpmCtx.fillStyle = '#2c3e50';
-            rpmCtx.fill();
-
-            // RPM Arc
-            const angle = (player.rpm / player.maxRPM) * 1.5 * Math.PI + 0.75 * Math.PI;
-            rpmCtx.beginPath();
-            rpmCtx.arc(centerX, centerY, radius - 10, 0.75 * Math.PI, angle);
-            rpmCtx.lineTo(centerX, centerY);
-            rpmCtx.fillStyle = player.rpm > 6000 ? '#e74c3c' : '#00ff00';
-            rpmCtx.fill();
-
-            // Text
-            rpmCtx.fillStyle = '#fff';
-            rpmCtx.font = '20px Montserrat';
-            rpmCtx.textAlign = 'center';
-            rpmCtx.fillText(Math.floor(player.rpm), centerX, centerY + 10);
-        }
-
-        // Game Logic
-        function updateGame() {
-            if (gameStarted && !gameOver && !gameWon) {
-                player.distance += player.speed;
-                opponent.distance += opponent.speed;
-                player.rpm = Math.min(player.maxRPM, player.rpm + player.speed * 10);
-                if (player.gear > 0) player.speed = Math.max(0, player.speed - 0.05);
-                if (player.distance >= stripLength) gameWon = true;
-                if (opponent.distance >= stripLength) gameOver = true;
+            ctx.fillRect(0, finishLineY, canvas.width, 10);
+            ctx.fillStyle = '#000';
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.fillRect(i, finishLineY, 10, 10);
             }
         }
 
-        // Game Loop
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawStrip();
-            updateGame();
-            drawCar(player);
-            drawCar(opponent);
-            drawRPM();
+            drawBackground();
+
+            if (paused) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#fff';
+                ctx.font = '40px Montserrat';
+                ctx.fillText('Paused', canvas.width / 2 - 80, canvas.height / 2);
+                return;
+            }
 
             if (gameOver) {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = '#e74c3c';
                 ctx.font = '40px Montserrat';
-                ctx.textAlign = 'center';
-                ctx.fillText('You Lost!', canvas.width / 2, canvas.height / 2);
-            } else if (gameWon) {
+                ctx.fillText('Game Over! Score: ' + score, canvas.width / 2 - 200, canvas.height / 2);
+                return;
+            }
+            if (gameWon) {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = '#00ff00';
                 ctx.font = '40px Montserrat';
-                ctx.textAlign = 'center';
-                ctx.fillText('You Won!', canvas.width / 2, canvas.height / 2);
-            } else if (!gameStarted) {
-                ctx.fillStyle = '#fff';
-                ctx.font = '30px Montserrat';
-                ctx.textAlign = 'center';
-                ctx.fillText('Click Start to Race!', canvas.width / 2, canvas.height / 2);
+                ctx.fillText('You Win! Score: ' + score, canvas.width / 2 - 200, canvas.height / 2);
+                return;
             }
+
+            velocity = Math.min(velocity, maxSpeed);
+            if (velocity > 0) velocity -= friction;
+            if (velocity < 0) velocity = 0;
+            carY -= velocity;
+            drawCar();
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].y += 5;
+                ctx.fillStyle = obstacles[i].color;
+                ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacles[i].width, obstacles[i].height);
+                ctx.fillStyle = '#000';
+                ctx.fillRect(obstacles[i].x + 5, obstacles[i].y + 10, obstacles[i].width - 10, 20);
+
+                if (
+                    carX < obstacles[i].x + obstacles[i].width &&
+                    carX + currentCar.width > obstacles[i].x &&
+                    carY < obstacles[i].y + obstacles[i].height &&
+                    carY + currentCar.height > obstacles[i].y
+                ) {
+                    gameOver = true;
+                }
+
+                if (obstacles[i].y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    score += 10;
+                }
+            }
+
+            if (carY <= finishLineY + 10) {
+                gameWon = true;
+            }
+
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = '25px Montserrat';
+            ctx.fillText('Score: ' + score, 20, 40);
+
+            if (Math.random() < 0.02 && carY > finishLineY + 50) createObstacle();
 
             requestAnimationFrame(gameLoop);
         }
 
-        // Controls
-        function startGame() {
-            player.distance = 0;
-            player.speed = 0;
-            player.gear = 0;
-            player.rpm = 0;
-            player.nitro = 100;
-            opponent.distance = 0;
-            opponent.speed = 2;
-            gameStarted = true;
+        let keys = {};
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            if (e.key === 'ArrowLeft' && carX > 0) carX -= currentCar.handling;
+            if (e.key === 'ArrowRight' && carX < canvas.width - currentCar.width) carX += currentCar.handling;
+            if (e.key === 'ArrowUp') velocity += acceleration;
+            if (e.key === 'ArrowDown') velocity -= braking;
+        });
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+        canvas.addEventListener('touchstart', (e) => {
+            const touchX = e.touches[0].clientX - canvas.offsetLeft;
+            if (touchX < canvas.width / 2 && carX > 0) carX -= currentCar.handling * 2;
+            if (touchX > canvas.width / 2 && carX < canvas.width - currentCar.width) carX += currentCar.handling * 2;
+            velocity += acceleration;
+        });
+
+        function restartGame() {
+            carX = canvas.width / 2 - currentCar.width / 2;
+            carY = canvas.height - currentCar.height - 50;
+            velocity = 0;
+            obstacles = [];
+            score = 0;
             gameOver = false;
             gameWon = false;
+            paused = false;
+            gameLoop();
         }
 
-        function shiftGear() {
-            if (gameStarted && !gameOver && !gameWon) {
-                if (player.rpm > 6000) {
-                    player.gear++;
-                    player.speed += 2;
-                    player.rpm = Math.max(2000, player.rpm - 4000);
-                    opponent.speed += 0.5;
-                } else {
-                    player.speed -= 1;
-                    player.rpm += 1000;
-                }
-            }
+        function togglePause() {
+            paused = !paused;
+            gameLoop();
         }
 
-        function useNitro() {
-            if (gameStarted && !gameOver && !gameWon && player.nitro > 20) {
-                player.speed += 5;
-                player.nitro -= 20;
-                player.rpm += 2000;
-            }
-        }
-
-        canvas.addEventListener('click', shiftGear);
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            shiftGear();
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
         });
 
         gameLoop();
