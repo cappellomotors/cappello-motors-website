@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@cappellomotors - Sell your car fast in Metro Detroit with instant payment and free pickup. Get daily car news!">
+    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup. Get daily car news!">
     <meta name="keywords" content="sell car fast Metro Detroit, instant payment Shelby Township, car buyer Detroit, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
-    <title>@cappellomotors - Sell Fast, Buy Smart</title>
+    <title>Cappello Motors LLC - Sell Fast, Buy Smart</title>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16886493440"></script>
     <script>
@@ -37,6 +37,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
         }
         nav .logo {
             font-family: 'Montserrat', sans-serif;
@@ -47,56 +48,28 @@
         nav .logo span {
             color: #e74c3c;
         }
-        .nav-menu {
-            position: relative;
-            display: inline-block;
-        }
-        .menu-toggle {
+        nav a {
             color: #ecf0f1;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 10px;
-            background: none;
-            border: none;
-        }
-        .menu-toggle:hover {
-            color: #e74c3c;
-        }
-        .dropdown {
-            display: none;
-            position: absolute;
-            background: #34495e;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
-        }
-        .nav-menu:hover .dropdown {
-            display: block;
-        }
-        .dropdown a {
-            color: #ecf0f1;
-            padding: 12px 16px;
             text-decoration: none;
-            display: block;
-            font-size: 16px;
-            transition: background 0.3s;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        .dropdown a:hover {
-            background: #2c3e50;
+        nav a:hover {
             color: #e74c3c;
         }
         header {
             position: relative;
             height: 70vh;
-            background: url('https://images.unsplash.com/photo-1502877333142-fbc675705774?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
             color: #fff;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             background-blend-mode: overlay;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6);
         }
         header h1 {
             font-family: 'Montserrat', sans-serif;
@@ -225,8 +198,7 @@
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
             .input-container { margin: 20px auto; }
-            .dropdown { display: none; position: static; width: 100%; }
-            .nav-menu.active .dropdown { display: block; }
+            .input-container input { width: 100%; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -235,20 +207,15 @@
     <header>
         <nav>
             <span class="logo">C<span>M</span></span>
-            <div class="nav-menu">
-                <button class="menu-toggle">☰</button>
-                <div class="dropdown">
-                    <a href="/sell-your-car.html">Sell Your Car</a>
-                    <a href="/cars-for-sale.html">Cars for Sale</a>
-                    <a href="/dealer-login.html">Dealer Login</a>
-                    <a href="/dealer-registration.html">Dealer Registration</a>
-                    <a href="/why-sell-to-us.html">Why Sell to Us</a>
-                    <a href="/contact-us.html">Contact Us</a>
-                    <a href="/racing-game.html">Racing Game</a>
-                </div>
-            </div>
+            <a href="/sell-your-car.html">Sell Your Car</a>
+            <a href="/cars-for-sale.html">Cars for Sale</a>
+            <a href="/dealer-login.html">Dealer Login</a>
+            <a href="/dealer-registration.html">Dealer Registration</a>
+            <a href="/why-sell-to-us.html">Why Sell to Us</a>
+            <a href="/contact-us.html">Contact Us</a>
+            <a href="/racing-game.html">Racing Game</a>
         </nav>
-        <h1>@cappellomotors</h1>
+        <h1>Cappello Motors LLC</h1>
         <p>Sell Fast, Buy Smart in Metro Detroit</p>
     </header>
     <div class="input-container">
@@ -267,11 +234,11 @@
         </section>
         <aside class="tweets">
             <h2>Latest Updates</h2>
-            <p><strong>@cappellomotors:</strong> Dealers—when wholesaling, spending an extra couple bucks on a detail will bring bigger money every time, making it easier for the next guy to get it front-line ready quicker.</p>
+            <p><strong>@CappelloMotorsMI:</strong> Dealers—when wholesaling, spending an extra couple bucks on a detail will bring bigger money every time, making it easier for the next guy to get it front-line ready quicker.</p>
         </aside>
     </main>
     <footer>
-        <p>@cappellomotors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
@@ -315,11 +282,6 @@
         function continueToSell() {
             window.location.href = `/sell-your-car.html?vin=${encodeURIComponent(lastVin)}`;
         }
-
-        document.querySelector('.menu-toggle').addEventListener('click', () => {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
-        });
     </script>
 </body>
 </html>

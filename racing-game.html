@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Race a realistic Mustang GT with @cappellomotors - Metro Detroit car fun at its finest!">
-    <meta name="keywords" content="racing game Metro Detroit, realistic car game Shelby Township, Cappello Motors">
+    <meta name="description" content="Race a Dodge Charger through Detroit with @cappellomotors - Arcade-style car fun!">
+    <meta name="keywords" content="racing game Metro Detroit, arcade car game Shelby Township, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Racing Game | @cappellomotors</title>
@@ -68,16 +68,13 @@
             position: relative;
             width: 100%;
             height: calc(100vh - 100px);
+            background: #333;
             overflow: hidden;
-            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            background-attachment: fixed;
         }
         canvas {
             display: block;
             margin: 0 auto;
-            border: 2px solid #2c3e50;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.5);
+            background: #444;
         }
         .controls {
             position: absolute;
@@ -135,129 +132,140 @@
             <a href="/racing-game.html">Racing Game</a>
         </nav>
         <h1>Racing Game</h1>
-        <p>Race a Mustang GT through Metro Detroit—feel the power!</p>
+        <p>Race a Dodge Charger through Detroit—use nitro and dodge traffic!</p>
     </header>
     <section class="game-section">
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div class="controls">
             <button onclick="restartGame()">Restart</button>
             <button onclick="togglePause()">Pause/Resume</button>
+            <button onclick="useNitro()">Nitro</button>
         </div>
     </section>
     <footer>
-        <p>@cappellomotors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        
+
         // Game State
         let car = {
             x: canvas.width / 2 - 40,
-            y: canvas.height - 120,
+            y: canvas.height - 100,
             width: 80,
-            height: 120,
-            speed: 0,
-            maxSpeed: 10,
-            acceleration: 0.15,
-            braking: 0.3,
-            friction: 0.05,
+            height: 40,
+            speed: 5,
+            maxSpeed: 12,
+            acceleration: 0.1,
             steer: 0,
             maxSteer: 5,
-            rotation: 0,
-            color: '#e74c3c' // Mustang GT red
+            nitro: 100,
+            color: '#2c3e50' // Charger dark blue
         };
-        let obstacles = [];
-        let roadOffset = 0;
+        let traffic = [];
+        let nitroBoosts = [];
         let score = 0;
         let gameOver = false;
         let gameWon = false;
         let paused = false;
-        const finishLineY = -canvas.height;
+        const checkpointY = -canvas.height;
 
-        // Realistic Car Physics
+        // Car Physics
         function updateCarPhysics() {
             if (!paused && !gameOver && !gameWon) {
-                car.speed = Math.max(0, Math.min(car.maxSpeed, car.speed));
-                car.speed -= car.friction;
-                car.x += car.steer * car.speed * 0.1;
-                car.rotation = car.steer * car.speed * 0.02;
+                car.x += car.steer;
                 car.y -= car.speed;
+                car.speed = Math.min(car.maxSpeed, car.speed + car.acceleration);
 
-                if (car.x < 100) car.x = 100;
-                if (car.x > canvas.width - 100 - car.width) car.x = canvas.width - 100 - car.width;
-                if (car.y < finishLineY + canvas.height) gameWon = true;
+                if (car.x < 50) car.x = 50;
+                if (car.x > canvas.width - 50 - car.width) car.x = canvas.width - 50 - car.width;
+                if (car.y < checkpointY) gameWon = true;
             }
         }
 
-        // Draw Detailed Car
+        // Draw Car
         function drawCar() {
-            ctx.save();
-            ctx.translate(car.x + car.width / 2, car.y + car.height / 2);
-            ctx.rotate(car.rotation * Math.PI / 180);
             ctx.fillStyle = car.color;
-            ctx.fillRect(-car.width / 2, -car.height / 2, car.width, car.height); // Body
-            ctx.fillStyle = '#333';
-            ctx.fillRect(-car.width / 2 + 10, -car.height / 2 + 10, car.width - 20, 20); // Hood
+            ctx.fillRect(car.x, car.y, car.width, car.height); // Body
             ctx.fillStyle = '#000';
-            ctx.fillRect(-car.width / 2 + 10, car.height / 2 - 30, car.width - 20, 20); // Windows
+            ctx.fillRect(car.x + 10, car.y + 5, car.width - 20, 10); // Windows
             ctx.fillStyle = '#666';
-            ctx.fillRect(-car.width / 2 - 5, -car.height / 2 + 40, 10, 40); // Left Wheel
-            ctx.fillRect(car.width / 2 - 5, -car.height / 2 + 40, 10, 40); // Right Wheel
-            ctx.fillStyle = '#fff';
-            ctx.fillRect(-car.width / 2 + 10, -car.height / 2 + 10, car.width - 20, 5); // Hood Stripe
-            ctx.restore();
+            ctx.fillRect(car.x - 5, car.y + 10, 10, 20); // Left Wheels
+            ctx.fillRect(car.x + car.width - 5, car.y + 10, 10, 20); // Right Wheels
+            if (car.nitro < 100) {
+                ctx.fillStyle = 'rgba(231, 76, 60, 0.5)';
+                ctx.fillRect(car.x - 10, car.y - 10, car.width + 20, car.height + 20); // Nitro flame
+            }
         }
 
-        // Road and Environment
+        // Road and Cityscape
         function drawRoad() {
-            roadOffset = (roadOffset + car.speed) % 40;
-            ctx.fillStyle = '#555';
-            ctx.fillRect(100, 0, canvas.width - 200, canvas.height);
+            ctx.fillStyle = '#777';
+            ctx.fillRect(50, 0, canvas.width - 100, canvas.height);
             ctx.fillStyle = '#fff';
-            for (let y = -roadOffset; y < canvas.height; y += 40) {
+            for (let y = 0; y < canvas.height; y += 40) {
                 ctx.fillRect(canvas.width / 2 - 5, y, 10, 20);
             }
-            ctx.fillStyle = '#88cc88';
-            ctx.fillRect(0, 0, 100, canvas.height);
-            ctx.fillRect(canvas.width - 100, 0, 100, canvas.height);
-            ctx.fillStyle = '#fff';
-            ctx.fillRect(0, finishLineY + roadOffset, canvas.width, 10);
-            ctx.fillStyle = '#000';
-            for (let x = 0; x < canvas.width; x += 20) {
-                ctx.fillRect(x, finishLineY + roadOffset, 10, 10);
-            }
+            ctx.fillStyle = '#555';
+            ctx.fillRect(0, 0, 50, canvas.height);
+            ctx.fillRect(canvas.width - 50, 0, 50, canvas.height);
+            ctx.fillStyle = '#00ff00';
+            ctx.fillRect(0, checkpointY, canvas.width, 10);
         }
 
-        // Obstacles (Other Cars)
-        function createObstacle() {
-            const x = 100 + Math.random() * (canvas.width - 200 - 60);
-            obstacles.push({
+        // Traffic
+        function createTraffic() {
+            const x = 50 + Math.random() * (canvas.width - 100 - 60);
+            traffic.push({
                 x,
-                y: -120,
+                y: -60,
                 width: 60,
-                height: 120,
-                color: ['#3498db', '#2ecc71', '#f1c40f'][Math.floor(Math.random() * 3)]
+                height: 40,
+                speed: 3 + Math.random() * 2,
+                color: ['#3498db', '#f1c40f', '#e67e22'][Math.floor(Math.random() * 3)]
             });
         }
 
-        function drawObstacles() {
-            obstacles.forEach((obs, i) => {
-                obs.y += 3;
-                ctx.fillStyle = obs.color;
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-                ctx.fillStyle = '#000';
-                ctx.fillRect(obs.x + 10, obs.y + 20, obs.width - 20, 20);
+        function drawTraffic() {
+            traffic.forEach((veh, i) => {
+                veh.y += veh.speed;
+                ctx.fillStyle = veh.color;
+                ctx.fillRect(veh.x, veh.y, veh.width, veh.height);
                 if (
-                    car.x < obs.x + obs.width &&
-                    car.x + car.width > obs.x &&
-                    car.y < obs.y + obs.height &&
-                    car.y + car.height > obs.y
+                    car.x < veh.x + veh.width &&
+                    car.x + car.width > veh.x &&
+                    car.y < veh.y + veh.height &&
+                    car.y + car.height > veh.y
                 ) {
                     gameOver = true;
                 }
-                if (obs.y > canvas.height) obstacles.splice(i, 1);
+                if (veh.y > canvas.height) traffic.splice(i, 1);
+            });
+        }
+
+        // Nitro Boosts
+        function createNitro() {
+            const x = 50 + Math.random() * (canvas.width - 100 - 20);
+            nitroBoosts.push({ x, y: -20, width: 20, height: 20 });
+        }
+
+        function drawNitro() {
+            nitroBoosts.forEach((nitro, i) => {
+                nitro.y += 4;
+                ctx.fillStyle = '#00ff00';
+                ctx.fillRect(nitro.x, nitro.y, nitro.width, nitro.height);
+                if (
+                    car.x < nitro.x + nitro.width &&
+                    car.x + car.width > nitro.x &&
+                    car.y < nitro.y + nitro.height &&
+                    car.y + car.height > nitro.y
+                ) {
+                    car.nitro = Math.min(100, car.nitro + 50);
+                    nitroBoosts.splice(i, 1);
+                }
+                if (nitro.y > canvas.height) nitroBoosts.splice(i, 1);
             });
         }
 
@@ -267,14 +275,20 @@
             drawRoad();
             updateCarPhysics();
             drawCar();
-            drawObstacles();
+            drawTraffic();
+            drawNitro();
 
-            if (!paused && !gameOver && !gameWon && Math.random() < 0.02) createObstacle();
+            if (!paused && !gameOver && !gameWon) {
+                if (Math.random() < 0.03) createTraffic();
+                if (Math.random() < 0.01) createNitro();
+                score += 1;
+                if (car.nitro > 0) car.nitro -= 0.1;
+            }
 
             ctx.fillStyle = '#fff';
             ctx.font = '20px Montserrat';
             ctx.fillText('Score: ' + score, 20, 40);
-            score += Math.floor(car.speed / 2);
+            ctx.fillText('Nitro: ' + Math.floor(car.nitro) + '%', 20, 70);
 
             if (gameOver) {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
@@ -285,9 +299,9 @@
             } else if (gameWon) {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = '#2ecc71';
+                ctx.fillStyle = '#00ff00';
                 ctx.font = '40px Montserrat';
-                ctx.fillText('You Win! Score: ' + score, canvas.width / 2 - 150, canvas.height / 2);
+                ctx.fillText('Checkpoint! Score: ' + score, canvas.width / 2 - 150, canvas.height / 2);
             }
 
             requestAnimationFrame(gameLoop);
@@ -299,8 +313,7 @@
             keys[e.key] = true;
             if (e.key === 'ArrowLeft') car.steer = -car.maxSteer;
             if (e.key === 'ArrowRight') car.steer = car.maxSteer;
-            if (e.key === 'ArrowUp') car.speed += car.acceleration;
-            if (e.key === 'ArrowDown') car.speed -= car.braking;
+            if (e.key === 'ArrowUp') car.speed = Math.min(car.maxSpeed, car.speed + car.acceleration);
         });
         document.addEventListener('keyup', (e) => {
             keys[e.key] = false;
@@ -310,16 +323,16 @@
             e.preventDefault();
             const touchX = e.touches[0].clientX - canvas.offsetLeft;
             car.steer = (touchX - car.x - car.width / 2) / 10;
-            car.speed += car.acceleration * 0.5;
         });
 
         function restartGame() {
             car.x = canvas.width / 2 - 40;
-            car.y = canvas.height - 120;
-            car.speed = 0;
+            car.y = canvas.height - 100;
+            car.speed = 5;
             car.steer = 0;
-            car.rotation = 0;
-            obstacles = [];
+            car.nitro = 100;
+            traffic = [];
+            nitroBoosts = [];
             score = 0;
             gameOver = false;
             gameWon = false;
@@ -329,6 +342,13 @@
 
         function togglePause() {
             paused = !paused;
+        }
+
+        function useNitro() {
+            if (car.nitro > 10 && !paused) {
+                car.speed = car.maxSpeed * 1.5;
+                car.nitro -= 20;
+            }
         }
 
         gameLoop();
