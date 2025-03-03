@@ -214,7 +214,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .tracker-vin {
-            margin: 0 auto 35px;
+            margin: 35px auto 0;
             max-width: 600px;
             padding: 25px;
             background: #f8fafc;
@@ -269,34 +269,41 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 35px;
+            gap: 40px;
             margin: 30px 0;
         }
         .tracker-item {
-            background: #fff;
-            border: none;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e0e4e7;
             border-radius: 12px;
-            padding: 30px 20px;
-            width: 220px;
+            padding: 35px 25px;
+            width: 240px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            cursor: pointer;
+            position: relative;
         }
         .tracker-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .tracker-item::before {
+            content: '🚗';
+            font-size: 2em;
+            display: block;
+            margin-bottom: 15px;
+            color: #80deea;
         }
         .tracker-item p {
             margin: 0 0 15px;
-            font-size: 1.4em;
+            font-size: 1.5em;
             color: #2c3e50;
             font-weight: 600;
         }
         .tracker-item a {
             color: #80deea;
             text-decoration: none;
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -396,7 +403,8 @@
             .value-tracker h2 { font-size: 2em; }
             .tracker-vin { padding: 20px; }
             .tracker-vin input { width: 100%; max-width: none; margin-bottom: 10px; }
-            .tracker-item { width: 100%; max-width: 300px; padding: 20px; }
+            .tracker-item { width: 100%; max-width: 300px; padding: 25px; }
+            .tracker-item::before { font-size: 1.8em; }
             .modal-content { padding: 20px; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
@@ -437,11 +445,6 @@
     </div>
     <div class="value-tracker">
         <h2>Your Car’s Value Tracker</h2>
-        <div class="tracker-vin">
-            <input type="text" id="trackerVinInput" placeholder="Enter VIN for Market Insights">
-            <button onclick="checkTrackerVin()">Check Details</button>
-            <div id="trackerVinInfo"></div>
-        </div>
         <div class="tracker-box">
             <div class="tracker-item">
                 <p>Kelley Blue Book</p>
@@ -455,6 +458,11 @@
                 <p>Edmunds</p>
                 <a href="https://www.edmunds.com/appraisal/" target="_blank">Check Value</a>
             </div>
+        </div>
+        <div class="tracker-vin">
+            <input type="text" id="trackerVinInput" placeholder="Enter VIN for Market Insights">
+            <button onclick="checkTrackerVin()">Check Details</button>
+            <div id="trackerVinInfo"></div>
         </div>
         <div class="value-chart">
             <h3>Used Car Value Trends</h3>
