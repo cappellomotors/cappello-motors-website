@@ -121,14 +121,27 @@
             box-shadow: 0 6px 25px rgba(52, 73, 94, 0.5);
             text-align: center;
             transition: transform 0.3s;
+            position: relative;
         }
         .input-container:hover {
             transform: scale(1.05);
         }
+        .input-cta {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            color: #2c3e50;
+            margin: -60px 0 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .input-cta span {
+            color: #80deea;
+        }
         .input-container p {
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: #2c3e50;
             margin: 0 0 20px;
+            font-weight: 400;
         }
         .input-container input {
             padding: 15px;
@@ -141,8 +154,8 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         .input-container input:focus {
-            border-color: #e57373;
-            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+            border-color: #80deea;
+            box-shadow: 0 0 20px rgba(128, 222, 234, 0.5);
             outline: none;
         }
         .input-container button {
@@ -367,6 +380,7 @@
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
             .input-container { margin: 20px auto; }
+            .input-cta { font-size: 1.5em; margin: -40px 0 15px; }
             .input-container input { width: 100%; }
             .value-tracker { margin: 20px auto; padding: 25px; }
             .value-tracker h2 { font-size: 2em; }
@@ -402,7 +416,8 @@
         <p>Sell Fast, Buy Smart in Metro Detroit</p>
     </header>
     <div class="input-container">
-        <p>Start now—enter your VIN or license plate!</p>
+        <h2 class="input-cta">Get Your <span>Free Estimate</span> Now</h2>
+        <p>Enter your VIN or license plate below</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
         <button onclick="checkVin()">Submit</button>
         <p class="error" id="vinError">Please enter a VIN or license plate.</p>
