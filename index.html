@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup.">
-    <meta name="keywords" content="sell car fast Metro Detroit, instant payment Shelby Township, car buyer Detroit, Cappello Motors">
+    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup. Check your car's value with top tools!">
+    <meta name="keywords" content="sell car fast Metro Detroit, instant payment Shelby Township, car buyer Detroit, car value tracker, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Cappello Motors LLC - Sell Fast, Buy Smart</title>
@@ -171,6 +171,54 @@
             color: #2c3e50;
             margin-top: 15px;
         }
+        .value-tracker {
+            margin: 40px auto;
+            max-width: 900px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .value-tracker h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: #2c3e50;
+            margin: 0 0 20px;
+            text-transform: uppercase;
+        }
+        .tracker-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .tracker-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            width: 160px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .tracker-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .tracker-item p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #7f8c8d;
+        }
+        .tracker-item a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .tracker-item a:hover {
+            color: #2c3e50;
+        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
@@ -185,29 +233,15 @@
         footer a:hover {
             color: #fff;
         }
-        .car-logos {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .car-logos img {
-            height: 40px;
-            filter: grayscale(100%);
-            transition: filter 0.3s;
-        }
-        .car-logos img:hover {
-            filter: grayscale(0%);
-        }
         @media (max-width: 768px) {
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
             .input-container { margin: 20px auto; }
             .input-container input { width: 100%; }
+            .value-tracker { margin: 20px auto; }
+            .tracker-item { width: 140px; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
-            .car-logos img { height: 30px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -240,21 +274,34 @@
         <div id="vinInfo"></div>
         <button id="continueButton" style="display: none;" onclick="continueToSell()">Continue to Sell</button>
     </div>
+    <div class="value-tracker">
+        <h2>Your Car’s Value Tracker</h2>
+        <div class="tracker-box">
+            <div class="tracker-item">
+                <p>Kelley Blue Book</p>
+                <a href="https://www.kbb.com/car-values/" target="_blank">Check Value</a>
+            </div>
+            <div class="tracker-item">
+                <p>NADA Guides</p>
+                <a href="https://www.nadaguides.com/Cars" target="_blank">Check Value</a>
+            </div>
+            <div class="tracker-item">
+                <p>Black Book</p>
+                <a href="https://www.blackbook.com" target="_blank">Learn More</a>
+            </div>
+            <div class="tracker-item">
+                <p>Edmunds</p>
+                <a href="https://www.edmunds.com/appraisal/" target="_blank">Check Value</a>
+            </div>
+            <div class="tracker-item">
+                <p>CarGurus</p>
+                <a href="https://www.cargurus.com/Cars/sell-car/" target="_blank">Check Value</a>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
-        <div class="car-logos">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154818/ford-logo.png" alt="Ford">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154824/gm-logo.png" alt="GM">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154835/tesla-logo.png" alt="Tesla">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154803/bmw-logo.png" alt="BMW">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154829/mercedes-benz-logo.png" alt="Mercedes-Benz">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154841/toyota-logo.png" alt="Toyota">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154817/honda-logo.png" alt="Honda">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154838/toyota-logo-1.png" alt="Porsche">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154807/chevrolet-logo.png" alt="Chevrolet">
-            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154812/dodge-logo.png" alt="Dodge">
-        </div>
     </footer>
     <script>
         let lastVin = '';
