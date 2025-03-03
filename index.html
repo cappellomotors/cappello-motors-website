@@ -103,10 +103,19 @@
         header h1 {
             font-family: 'Montserrat', sans-serif;
             font-size: 4em;
-            margin: 0;
+            margin: 0 0 5px;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        .family-owned {
+            font-size: 1em;
+            color: #ecf0f1;
+            margin: 0 0 10px;
+            font-style: italic;
+        }
+        .family-owned span {
+            color: #80deea;
         }
         header p {
             font-size: 1.8em;
@@ -376,18 +385,10 @@
         footer a:hover {
             color: #fff;
         }
-        .family-owned {
-            font-size: 0.9em;
-            color: #ecf0f1;
-            margin-top: 10px;
-            font-style: italic;
-        }
-        .family-owned span {
-            color: #80deea;
-        }
         @media (max-width: 768px) {
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
+            .family-owned { font-size: 0.9em; }
             .input-container { margin: 20px auto; }
             .input-cta { font-size: 1.5em; margin: -40px 0 15px; }
             .input-container input { width: 100%; }
@@ -422,6 +423,7 @@
             </div>
         </nav>
         <h1>Cappello Motors LLC</h1>
+        <p class="family-owned">Proudly <span>Family Owned</span> & Operated</p>
         <p>Sell Fast, Buy Smart in Metro Detroit</p>
     </header>
     <div class="input-container">
@@ -469,7 +471,6 @@
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
-        <p class="family-owned">Proudly <span>Family Owned</span> & Operated</p>
     </footer>
     <script>
         let lastVin = '';
