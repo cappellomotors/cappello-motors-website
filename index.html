@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup. Get daily car news!">
+    <meta name="description" content="Cappello Motors LLC - Sell your car fast in Metro Detroit with instant payment and free pickup.">
     <meta name="keywords" content="sell car fast Metro Detroit, instant payment Shelby Township, car buyer Detroit, Cappello Motors">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
@@ -26,6 +26,8 @@
             color: #34495e;
             line-height: 1.6;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         nav {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -169,41 +171,12 @@
             color: #2c3e50;
             margin-top: 15px;
         }
-        main {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        section {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin: 0 0 15px;
-        }
-        .daily-post p {
-            color: #7f8c8d;
-            font-size: 1.2em;
-        }
-        .daily-post a {
-            color: #e74c3c;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .daily-post a:hover {
-            text-decoration: underline;
-        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
             text-align: center;
             padding: 20px;
-            margin-top: 40px;
+            margin-top: auto;
         }
         footer a {
             color: #e74c3c;
@@ -212,6 +185,21 @@
         footer a:hover {
             color: #fff;
         }
+        .car-logos {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .car-logos img {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        .car-logos img:hover {
+            filter: grayscale(0%);
+        }
         @media (max-width: 768px) {
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
@@ -219,6 +207,7 @@
             .input-container input { width: 100%; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
+            .car-logos img { height: 30px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -251,16 +240,21 @@
         <div id="vinInfo"></div>
         <button id="continueButton" style="display: none;" onclick="continueToSell()">Continue to Sell</button>
     </div>
-    <main>
-        <section class="daily-post">
-            <h2>Daily News Update - March 3, 2025</h2>
-            <p>Selling your car? Snap pics at dusk—golden light hides flaws and makes your ride pop for buyers.</p>
-            <a href="/helpful-info.html">Explore Past Updates</a>
-        </section>
-    </main>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+        <div class="car-logos">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154818/ford-logo.png" alt="Ford">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154824/gm-logo.png" alt="GM">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154835/tesla-logo.png" alt="Tesla">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154803/bmw-logo.png" alt="BMW">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154829/mercedes-benz-logo.png" alt="Mercedes-Benz">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154841/toyota-logo.png" alt="Toyota">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154817/honda-logo.png" alt="Honda">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154838/toyota-logo-1.png" alt="Porsche">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154807/chevrolet-logo.png" alt="Chevrolet">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20200506154812/dodge-logo.png" alt="Dodge">
+        </div>
     </footer>
     <script>
         let lastVin = '';
