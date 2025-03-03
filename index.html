@@ -173,111 +173,125 @@
         }
         .value-tracker {
             margin: 40px auto;
-            max-width: 900px;
+            max-width: 1000px;
             padding: 40px;
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
             text-align: center;
-            border: 1px solid #eceff1;
+            border: 1px solid #e0e4e7;
+            font-family: 'Poppins', sans-serif;
         }
         .value-tracker h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2em;
+            font-size: 2.4em;
             color: #2c3e50;
-            margin: 0 0 25px;
+            margin: 0 0 30px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .tracker-vin {
-            margin: 0 auto 30px;
-            max-width: 500px;
-            padding: 20px;
-            background: #f7f9fa;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin: 0 auto 35px;
+            max-width: 600px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
         .tracker-vin input {
-            padding: 12px;
+            padding: 14px;
             width: 70%;
-            max-width: 300px;
+            max-width: 350px;
             font-size: 1.1em;
             border: 2px solid #2c3e50;
             border-radius: 8px;
-            margin-right: 10px;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
         .tracker-vin input:focus {
-            border-color: #e57373;
+            border-color: #80deea;
+            box-shadow: 0 0 15px rgba(128, 222, 234, 0.3);
             outline: none;
         }
         .tracker-vin button {
-            padding: 12px 20px;
+            padding: 14px 25px;
             font-size: 1.1em;
-            background: #e57373;
+            background: linear-gradient(135deg, #80deea 0%, #4dd0e1 100%);
             border: none;
             border-radius: 8px;
-            color: #fff;
+            color: #2c3e50;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.3s;
+            font-weight: 500;
         }
         .tracker-vin button:hover {
-            background: #ef5350;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(128, 222, 234, 0.4);
         }
         #trackerVinInfo {
             font-size: 1.2em;
             color: #2c3e50;
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: 500;
+            width: 100%;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .tracker-box {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            margin: 25px 0;
+            gap: 35px;
+            margin: 30px 0;
         }
         .tracker-item {
-            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 25px;
-            width: 200px;
+            background: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 30px 20px;
+            width: 220px;
+            text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            cursor: pointer;
         }
         .tracker-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
         .tracker-item p {
-            margin: 0 0 10px;
-            font-size: 1.3em;
+            margin: 0 0 15px;
+            font-size: 1.4em;
             color: #2c3e50;
             font-weight: 600;
         }
         .tracker-item a {
-            color: #e57373;
+            color: #80deea;
             text-decoration: none;
+            font-size: 1.1em;
             font-weight: 500;
             transition: color 0.3s;
         }
         .tracker-item a:hover {
-            color: #ef5350;
+            color: #4dd0e1;
+            text-decoration: underline;
         }
         .value-chart {
-            margin: 30px auto;
-            max-width: 800px;
-            padding: 25px;
+            margin: 35px auto;
+            max-width: 850px;
+            padding: 30px;
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
         .value-chart h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.6em;
+            font-size: 1.7em;
             color: #2c3e50;
             margin: 0 0 20px;
             text-transform: uppercase;
@@ -354,16 +368,17 @@
             header p { font-size: 1.2em; }
             .input-container { margin: 20px auto; }
             .input-container input { width: 100%; }
-            .value-tracker { margin: 20px auto; padding: 20px; }
-            .value-tracker h2 { font-size: 1.8em; }
-            .tracker-vin input { width: 60%; }
-            .tracker-item { width: 160px; padding: 20px; }
+            .value-tracker { margin: 20px auto; padding: 25px; }
+            .value-tracker h2 { font-size: 2em; }
+            .tracker-vin { padding: 20px; }
+            .tracker-vin input { width: 100%; max-width: none; margin-bottom: 10px; }
+            .tracker-item { width: 100%; max-width: 300px; padding: 20px; }
             .modal-content { padding: 20px; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -397,7 +412,7 @@
     <div class="value-tracker">
         <h2>Your Car’s Value Tracker</h2>
         <div class="tracker-vin">
-            <input type="text" id="trackerVinInput" placeholder="Enter VIN">
+            <input type="text" id="trackerVinInput" placeholder="Enter VIN for Market Insights">
             <button onclick="checkTrackerVin()">Check Details</button>
             <div id="trackerVinInfo"></div>
         </div>
@@ -524,7 +539,6 @@
             navMenu.classList.toggle('active');
         });
 
-        // Chart.js for Used Car Value Trends
         const ctx = document.getElementById('valueChart').getContext('2d');
         const valueChart = new Chart(ctx, {
             type: 'line',
@@ -533,8 +547,8 @@
                 datasets: [{
                     label: 'Used Car Values (Avg % Change)',
                     data: [-5, -2, 3, 1, -1, 2],
-                    borderColor: '#e57373',
-                    backgroundColor: 'rgba(229, 115, 115, 0.2)',
+                    borderColor: '#80deea',
+                    backgroundColor: 'rgba(128, 222, 234, 0.2)',
                     fill: true,
                     tension: 0.4
                 }]
