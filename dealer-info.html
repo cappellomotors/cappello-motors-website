@@ -8,6 +8,11 @@
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="noindex, follow">
     <title>Dealer Info | Cappello Motors LLC</title>
+    <script>
+        if (localStorage.getItem('dealerAuth') !== 'true') {
+            window.location.href = '/dealer-login.html';
+        }
+    </script>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -183,9 +188,9 @@
 <body>
     <div class="background-overlay"></div>
     <nav>
-        <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
-        <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
+        <a href="/dealer-main.html">Dealer Main</a>
+        <a href="/dealer-auction.html">Dealer Auction</a>
+        <a href="/dealer-info.html">Dealer Info</a>
     </nav>
     <marquee class="news-ticker" behavior="scroll" direction="left">
         SOS ALERT: ELT mandatory for lienholders as of Oct 1, 2023 | File titles within 15 days (MCL 257.217) | Check e-Services for updates!

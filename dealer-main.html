@@ -8,6 +8,11 @@
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="noindex, follow">
     <title>Dealer Main | Cappello Motors LLC</title>
+    <script>
+        if (localStorage.getItem('dealerAuth') !== 'true') {
+            window.location.href = '/dealer-login.html';
+        }
+    </script>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -182,9 +187,9 @@
 <body>
     <div class="background-overlay"></div>
     <nav>
-        <a href="https://cappellomotors.com/dealer-main.html">Dealer Main</a>
-        <a href="https://cappellomotors.com/dealer-auction.html">Dealer Auction</a>
-        <a href="https://cappellomotors.com/dealer-info.html">Dealer Info</a>
+        <a href="/dealer-main.html">Dealer Main</a>
+        <a href="/dealer-auction.html">Dealer Auction</a>
+        <a href="/dealer-info.html">Dealer Info</a>
     </nav>
     <header>
         <h1>Dealer Main</h1>
@@ -231,7 +236,7 @@
                     <p>Time: 2:45</p>
                 </div>
             </div>
-            <button onclick="window.location.href='https://cappellomotors.com/dealer-auction.html'">Go to Auctions</button>
+            <button onclick="window.location.href='/dealer-auction.html'">Go to Auctions</button>
         </div>
         <div class="section">
             <h2>Stock Tickers (Daily)</h2>
