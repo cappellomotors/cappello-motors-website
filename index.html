@@ -123,13 +123,6 @@
         .input-container:hover {
             transform: scale(1.05);
         }
-        .cta {
-            font-size: 2em;
-            color: #e74c3c;
-            font-weight: 700;
-            margin: 0 0 20px;
-            text-transform: uppercase;
-        }
         .input-container p {
             font-size: 1.5em;
             color: #2c3e50;
@@ -180,11 +173,8 @@
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
         }
-        section, aside {
+        section {
             background: #fff;
             padding: 25px;
             border-radius: 10px;
@@ -196,7 +186,7 @@
             font-size: 1.8em;
             margin: 0 0 15px;
         }
-        .daily-post p, .tweets p {
+        .daily-post p {
             color: #7f8c8d;
             font-size: 1.2em;
         }
@@ -207,11 +197,6 @@
         }
         .daily-post a:hover {
             text-decoration: underline;
-        }
-        .tweets p {
-            margin: 10px 0;
-            border-left: 3px solid #e74c3c;
-            padding-left: 15px;
         }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -228,12 +213,10 @@
             color: #fff;
         }
         @media (max-width: 768px) {
-            main { grid-template-columns: 1fr; }
             header h1 { font-size: 2.5em; }
             header p { font-size: 1.2em; }
             .input-container { margin: 20px auto; }
             .input-container input { width: 100%; }
-            .cta { font-size: 1.5em; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
         }
@@ -261,7 +244,6 @@
         <p>Sell Fast, Buy Smart in Metro Detroit</p>
     </header>
     <div class="input-container">
-        <div class="cta">Sell Your Car Today - Instant Cash!</div>
         <p>Start now—enter your VIN or license plate!</p>
         <input type="text" placeholder="VIN or License Plate" id="carInput">
         <button onclick="checkVin()">Submit</button>
@@ -271,14 +253,10 @@
     </div>
     <main>
         <section class="daily-post">
-            <h2>Daily News Update - March 1, 2025</h2>
-            <p>Why Metro Detroit Sellers Get More with Us: Instant cash and free pickup beat the big guys—skip the hassle!</p>
+            <h2>Daily News Update - March 3, 2025</h2>
+            <p>Selling your car? Snap pics at dusk—golden light hides flaws and makes your ride pop for buyers.</p>
             <a href="/helpful-info.html">Explore Past Updates</a>
         </section>
-        <aside class="tweets">
-            <h2>Latest Updates</h2>
-            <p><strong>@CappelloMotorsMI:</strong> Dealers—when wholesaling, spending an extra couple bucks on a detail will bring bigger money every time, making it easier for the next guy to get it front-line ready quicker.</p>
-        </aside>
     </main>
     <footer>
         <p>Cappello Motors LLC<br>49170 Van Dyke, Shelby Township, MI 48317<br>
