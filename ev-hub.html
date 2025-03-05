@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers nationwide, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
+    <meta name="keywords" content="EV charger map, best EVs 2025, DIY EV upgrades, electric vehicle guide, Cappello Motors, Metro Detroit EV">
+    <meta name="author" content="Cappello Motors LLC">
+    <meta name="robots" content="index, follow">
+    <title>EV Hub | Cappello Motors - Your Electric Vehicle Destination</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #34495e;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        nav {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        nav .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #ecf0f1;
+            margin-right: 30px;
+        }
+        nav .logo span {
+            color: #e74c3c;
+        }
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e74c3c;
+        }
+        header {
+            margin-top: 80px;
+            padding: 40px 20px;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: #fff;
+            text-align: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0,0,0,0.4);
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3em;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        .content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        /* Charger Map */
+        .charger-map {
+            margin: 20px 0;
+        }
+        .charger-map h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .map-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .map-search input {
+            padding: 12px;
+            width: 70%;
+            max-width: 400px;
+            font-size: 1.1em;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        .map-search input:focus {
+            border-color: #e74c3c;
+            outline: none;
+        }
+        .map-search button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .map-search button:hover {
+            transform: scale(1.05);
+        }
+        /* Buying Guide */
+        .buying-guide {
+            margin: 40px 0;
+        }
+        .buying-guide h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .guide-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .guide-item {
+            background: #f8fafc;
+            border: 1px solid #e0e4e7;
+            border-radius: 10px;
+            padding: 20px;
+            width: 280px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+        .guide-item:hover {
+            transform: scale(1.03);
+        }
+        .guide-item h3 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin: 0 0 10px;
+        }
+        .guide-item p {
+            font-size: 1em;
+            margin: 0;
+        }
+        /* DIY Upgrades */
+        .diy-upgrades {
+            margin: 40px 0;
+        }
+        .diy-upgrades h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .diy-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .diy-item {
+            background: #f8fafc;
+            border: 1px solid #e0e4e7;
+            border-radius: 10px;
+            padding: 20px;
+            width: 280px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+        .diy-item:hover {
+            transform: scale(1.03);
+        }
+        .diy-item h3 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin: 0 0 10px;
+        }
+        .diy-item p {
+            font-size: 1em;
+            margin: 0 0 10px;
+        }
+        .diy-item a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .diy-item a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .content { margin: 20px; padding: 20px; }
+            h1 { font-size: 2em; }
+            nav a { margin: 5px 10px; font-size: 16px; }
+            .guide-item, .diy-item { width: 100%; max-width: 300px; }
+            .map-search input { width: 100%; }
+            #map { height: 300px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <span class="logo">C<span>M</span></span>
+            <a href="/sell-your-car.html">Sell Your Car</a>
+            <a href="/cars-for-sale.html">Cars for Sale</a>
+            <a href="/dealer-login.html">Dealer Login</a>
+            <a href="/dealer-registration.html">Dealer Registration</a>
+            <a href="/why-sell-to-us.html">Why Sell to Us</a>
+            <a href="/contact-us.html">Contact Us</a>
+            <a href="/racing-game.html">Racing Game</a>
+            <a href="/ev-hub.html">EV Hub</a>
+        </nav>
+        <h1>EV Hub</h1>
+    </header>
+    <div class="content">
+        <p>Your one-stop destination for electric vehicles—find chargers, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
+        
+        <!-- Charger Map -->
+        <div class="charger-map">
+            <h2>EV Charger Map</h2>
+            <div class="map-search">
+                <input type="text" id="mapSearch" placeholder="Enter city or zip (e.g., Detroit, MI)">
+                <button onclick="searchChargers()">Find Chargers</button>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <!-- Buying Guide -->
+        <div class="buying-guide">
+            <h2>EV Buying Guide</h2>
+            <div class="guide-list">
+                <div class="guide-item">
+                    <h3>Best EVs Under $40K</h3>
+                    <p>Top picks like the Chevy Bolt and Nissan Leaf—affordable and reliable for 2025.</p>
+                </div>
+                <div class="guide-item">
+                    <h3>Range Matters</h3>
+                    <p>Look for 250+ miles—Tesla Model 3 or Hyundai Ioniq 6 lead the pack.</p>
+                </div>
+                <div class="guide-item">
+                    <h3>Charging at Home</h3>
+                    <p>Level 2 chargers save time—install one for under $500 with our guide.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIY Upgrades -->
+        <div class="diy-upgrades">
+            <h2>DIY EV Upgrades</h2>
+            <div class="diy-list">
+                <div class="diy-item">
+                    <h3>Boost Your Range</h3>
+                    <p>Tweak tire pressure and software for 10-20 extra miles.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="diy-item">
+                    <h3>Home Charger Install</h3>
+                    <p>Step-by-step to wire a Level 2 charger yourself.</p>
+                    <a href="#">Read More</a>
+                </div>
+                <div class="diy-item">
+                    <h3>Tesla Performance Hack</h3>
+                    <p>Unlock hidden power with a $50 tool.</p>
+                    <a href="#">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Cappello Motors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
+        <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
+    </footer>
+    <script>
+        let map, service, infowindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 42.6703, lng: -83.0329 }, // Shelby Township, MI
+                zoom: 10
+            });
+            infowindow = new google.maps.InfoWindow();
+            searchChargers(); // Load initial chargers
+        }
+
+        function searchChargers() {
+            const search = document.getElementById('mapSearch').value || 'Shelby Township, MI';
+            const request = {
+                query: `${search} electric vehicle charging stations`,
+                fields: ['name', 'geometry', 'formatted_address'],
+                type: ['electric_vehicle_charging_station']
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    results.forEach(place => {
+                        const marker = new google.maps.Marker({
+                            position: place.geometry.location,
+                            map,
+                            title: place.name
+                        });
+                        marker.addListener('click', () => {
+                            infowindow.setContent(`${place.name}<br>${place.formatted_address}`);
+                            infowindow.open(map, marker);
+                        });
+                    });
+                } else {
+                    console.error('Places search failed:', status);
+                }
+            });
+        }
+
+        // WebSocket for real-time charger updates (placeholder)
+        const ws = new WebSocket('wss://cappellomotors.com');
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === 'chargers') {
+                // Future: Update map with real-time charger status
+                console.log('Real-time charger data:', data);
+            }
+        };
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>
