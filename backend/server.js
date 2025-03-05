@@ -34,20 +34,10 @@ app.get('/ev-hub.html', (req, res) => {
 });
 
 app.get('/api/google-maps-key', (req, res) => {
-    const key = process.env.GOOGLE_MAPS_API_KEY || 'MISSING_GOOGLE_MAPS_KEY';
-    res.json({ key });
+    res.json({ key: process.env.GOOGLE_MAPS_API_KEY || 'MISSING_GOOGLE_MAPS_KEY' });
 });
 
-const dealers = [{ email: 'dealer1@cappellomotors.com', password: bcrypt.hashSync('password123', 10) }];
-let auctions = [
-    { id: 1, name: '2021 BMW M5', currentBid: 55000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
-    { id: 2, name: '2020 Mercedes-Benz S-Class', currentBid: 65000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
-    { id: 3, name: '2019 Porsche 911 Turbo', currentBid: 95000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
-    { id: 4, name: '2022 Ford Mustang GT', currentBid: 40000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
-    { id: 5, name: '2023 Tesla Model X', currentBid: 85000, endTime: Date.now() + 24 * 60 * 60 * 1000 }
-];
-
-// Charger API endpoint
+// Charger API endpoint with real-time status
 app.get('/api/chargers', async (req, res) => {
     const { location } = req.query;
     try {
@@ -58,14 +48,24 @@ app.get('/api/chargers', async (req, res) => {
             lat: charger.AddressInfo.Latitude,
             lng: charger.AddressInfo.Longitude,
             address: charger.AddressInfo.AddressLine1,
-            status: charger.StatusType?.Title || 'Unknown'
+            status: charger.StatusType?.IsOperational ? 'Available' : 'Unavailable' // Real-time status
         }));
         res.json(chargers);
+        broadcast({ type: 'chargers', data: chargers }); // Send to WebSocket clients
     } catch (error) {
         console.error('Charger fetch error:', error.message);
         res.status(500).json({ error: 'Failed to fetch chargers' });
     }
 });
+
+const dealers = [{ email: 'dealer1@cappellomotors.com', password: bcrypt.hashSync('password123', 10) }];
+let auctions = [
+    { id: 1, name: '2021 BMW M5', currentBid: 55000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
+    { id: 2, name: '2020 Mercedes-Benz S-Class', currentBid: 65000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
+    { id: 3, name: '2019 Porsche 911 Turbo', currentBid: 95000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
+    { id: 4, name: '2022 Ford Mustang GT', currentBid: 40000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
+    { id: 5, name: '2023 Tesla Model X', currentBid: 85000, endTime: Date.now() + 24 * 60 * 60 * 1000 }
+];
 
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body || {};

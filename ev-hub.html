@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers nationwide, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
+    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers nationwide, compare EVs, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
     <meta name="keywords" content="EV charger map, best EVs 2025, DIY EV upgrades, electric vehicle guide, Cappello Motors, Metro Detroit EV">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
@@ -127,6 +127,61 @@
         .map-search button:hover {
             transform: scale(1.05);
         }
+        /* EV Comparison Tool */
+        .ev-comparison {
+            margin: 40px 0;
+        }
+        .ev-comparison h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .comparison-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .comparison-form select {
+            padding: 12px;
+            width: 200px;
+            font-size: 1.1em;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+        }
+        .comparison-form button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .comparison-form button:hover {
+            transform: scale(1.05);
+        }
+        #comparisonResult {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            display: none;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 10px;
+            border: 1px solid #e0e4e7;
+            text-align: left;
+        }
+        .comparison-table th {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
         /* Buying Guide */
         .buying-guide {
             margin: 40px 0;
@@ -226,7 +281,7 @@
             h1 { font-size: 2em; }
             nav a { margin: 5px 10px; font-size: 16px; }
             .guide-item, .diy-item { width: 100%; max-width: 300px; }
-            .map-search input { width: 100%; }
+            .map-search input, .comparison-form select { width: 100%; }
             #map { height: 300px; }
         }
     </style>
@@ -249,16 +304,48 @@
         <h1>EV Hub</h1>
     </header>
     <div class="content">
-        <p>Your one-stop destination for electric vehicles—find chargers, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
+        <p>Your one-stop destination for electric vehicles—find chargers, compare EVs, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
         
         <!-- Charger Map -->
         <div class="charger-map">
-            <h2>EV Charger Map</h2>
+            <h2>EV Charger Map (Live Status)</h2>
             <div class="map-search">
                 <input type="text" id="mapSearch" placeholder="Enter city or zip (e.g., Detroit, MI)">
                 <button onclick="searchChargers()">Find Chargers</button>
             </div>
             <div id="map"></div>
+        </div>
+
+        <!-- EV Comparison Tool -->
+        <div class="ev-comparison">
+            <h2>Compare EVs</h2>
+            <div class="comparison-form">
+                <select id="ev1">
+                    <option value="tesla3">Tesla Model 3</option>
+                    <option value="fordme">Ford Mustang Mach-E</option>
+                    <option value="chevybolt">Chevy Bolt EV</option>
+                    <option value="ioniq5">Hyundai Ioniq 5</option>
+                </select>
+                <select id="ev2">
+                    <option value="tesla3">Tesla Model 3</option>
+                    <option value="fordme">Ford Mustang Mach-E</option>
+                    <option value="chevybolt">Chevy Bolt EV</option>
+                    <option value="ioniq5">Hyundai Ioniq 5</option>
+                </select>
+                <button onclick="compareEVs()">Compare</button>
+            </div>
+            <div id="comparisonResult">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th id="ev1Name"></th>
+                            <th id="ev2Name"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody"></tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Buying Guide -->
@@ -320,42 +407,66 @@
 
         function searchChargers() {
             const search = document.getElementById('mapSearch').value || 'Shelby Township, MI';
-            const request = {
-                query: `${search} electric vehicle charging stations`,
-                fields: ['name', 'geometry', 'formatted_address'],
-                type: ['electric_vehicle_charging_station']
-            };
-
-            service = new google.maps.places.PlacesService(map);
-            service.textSearch(request, (results, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    results.forEach(place => {
+            fetch(`/api/chargers?location=${encodeURIComponent(search)}`)
+                .then(response => response.json())
+                .then(chargers => {
+                    if (chargers.error) throw new Error(chargers.error);
+                    map.setCenter({ lat: chargers[0].lat, lng: chargers[0].lng });
+                    chargers.forEach(charger => {
                         const marker = new google.maps.Marker({
-                            position: place.geometry.location,
+                            position: { lat: charger.lat, lng: charger.lng },
                             map,
-                            title: place.name
+                            title: charger.name,
+                            icon: charger.status === 'Available' ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
                         });
                         marker.addListener('click', () => {
-                            infowindow.setContent(`${place.name}<br>${place.formatted_address}`);
+                            infowindow.setContent(`${charger.name}<br>${charger.address}<br>Status: ${charger.status}`);
                             infowindow.open(map, marker);
                         });
                     });
-                } else {
-                    console.error('Places search failed:', status);
-                }
-            });
+                })
+                .catch(error => console.error('Charger fetch failed:', error));
         }
 
-        // WebSocket for real-time charger updates (placeholder)
-        const ws = new WebSocket('wss://cappellomotors.com');
+        // WebSocket for real-time updates
+        const ws = new WebSocket(`wss://${window.location.hostname}`);
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data.type === 'chargers') {
-                // Future: Update map with real-time charger status
-                console.log('Real-time charger data:', data);
+                console.log('Real-time charger update:', data.data);
+                // Future: Refresh map markers dynamically
             }
         };
+
+        // EV Comparison Tool
+        const evData = {
+            tesla3: { name: 'Tesla Model 3', range: '358 mi', price: '$42,990', chargeSpeed: '200 mi/15 min' },
+            fordme: { name: 'Ford Mustang Mach-E', range: '314 mi', price: '$43,995', chargeSpeed: '61 mi/10 min' },
+            chevybolt: { name: 'Chevy Bolt EV', range: '259 mi', price: '$31,000', chargeSpeed: '100 mi/30 min' },
+            ioniq5: { name: 'Hyundai Ioniq 5', range: '303 mi', price: '$41,650', chargeSpeed: '80% in 18 min' }
+        };
+
+        function compareEVs() {
+            const ev1 = document.getElementById('ev1').value;
+            const ev2 = document.getElementById('ev2').value;
+            if (ev1 === ev2) {
+                alert('Please select different EVs to compare.');
+                return;
+            }
+            const result = document.getElementById('comparisonResult');
+            const ev1Name = document.getElementById('ev1Name');
+            const ev2Name = document.getElementById('ev2Name');
+            const body = document.getElementById('comparisonBody');
+
+            ev1Name.textContent = evData[ev1].name;
+            ev2Name.textContent = evData[ev2].name;
+            body.innerHTML = `
+                <tr><td>Range</td><td>${evData[ev1].range}</td><td>${evData[ev2].range}</td></tr>
+                <tr><td>Price</td><td>${evData[ev1].price}</td><td>${evData[ev2].price}</td></tr>
+                <tr><td>Charge Speed</td><td>${evData[ev1].chargeSpeed}</td><td>${evData[ev2].chargeSpeed}</td></tr>
+            `;
+            result.style.display = 'block';
+        }
 
         window.onload = initMap;
     </script>
