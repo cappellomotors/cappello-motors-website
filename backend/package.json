@@ -12,7 +12,8 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.21.2",
-    "ws": "^8.18.1"
+    "ws": "^8.18.1",
+    "axios": "^1.6.7"
   },
   "description": ""
 }
