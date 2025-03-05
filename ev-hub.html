@@ -322,15 +322,79 @@
             <div class="comparison-form">
                 <select id="ev1">
                     <option value="tesla3">Tesla Model 3</option>
+                    <option value="teslay">Tesla Model Y</option>
+                    <option value="teslax">Tesla Model X</option>
+                    <option value="teslas">Tesla Model S</option>
+                    <option value="teslacyber">Tesla Cybertruck</option>
                     <option value="fordme">Ford Mustang Mach-E</option>
+                    <option value="f150lightning">Ford F-150 Lightning</option>
                     <option value="chevybolt">Chevy Bolt EV</option>
+                    <option value="chevyeuv">Chevy Bolt EUV</option>
+                    <option value="chevyblazer">Chevy Blazer EV</option>
+                    <option value="chevysilverado">Chevy Silverado EV</option>
                     <option value="ioniq5">Hyundai Ioniq 5</option>
+                    <option value="ioniq6">Hyundai Ioniq 6</option>
+                    <option value="kiaev6">Kia EV6</option>
+                    <option value="kiaev9">Kia EV9</option>
+                    <option value="kianiro">Kia Niro EV</option>
+                    <option value="nissanleaf">Nissan Leaf</option>
+                    <option value="nissanariya">Nissan Ariya</option>
+                    <option value="vwid4">Volkswagen ID.4</option>
+                    <option value="vwidbuzz">Volkswagen ID. Buzz</option>
+                    <option value="bmwi4">BMW i4</option>
+                    <option value="bmwix">BMW iX</option>
+                    <option value="bmwi7">BMW i7</option>
+                    <option value="audietron">Audi e-tron</option>
+                    <option value="audiq8etron">Audi Q8 e-tron</option>
+                    <option value="audia6etron">Audi A6 e-tron</option>
+                    <option value="porschete">Porsche Taycan</option>
+                    <option value="rivianr1t">Rivian R1T</option>
+                    <option value="rivianr1s">Rivian R1S</option>
+                    <option value="lucidair">Lucid Air</option>
+                    <option value="polestar2">Polestar 2</option>
+                    <option value="polestar3">Polestar 3</option>
+                    <option value="vinfastvf8">VinFast VF 8</option>
+                    <option value="vinfastvf9">VinFast VF 9</option>
+                    <option value="mercedeseqs">Mercedes-Benz EQS</option>
+                    <option value="mercedeseqesuv">Mercedes-Benz EQE SUV</option>
                 </select>
                 <select id="ev2">
                     <option value="tesla3">Tesla Model 3</option>
+                    <option value="teslay">Tesla Model Y</option>
+                    <option value="teslax">Tesla Model X</option>
+                    <option value="teslas">Tesla Model S</option>
+                    <option value="teslacyber">Tesla Cybertruck</option>
                     <option value="fordme">Ford Mustang Mach-E</option>
+                    <option value="f150lightning">Ford F-150 Lightning</option>
                     <option value="chevybolt">Chevy Bolt EV</option>
+                    <option value="chevyeuv">Chevy Bolt EUV</option>
+                    <option value="chevyblazer">Chevy Blazer EV</option>
+                    <option value="chevysilverado">Chevy Silverado EV</option>
                     <option value="ioniq5">Hyundai Ioniq 5</option>
+                    <option value="ioniq6">Hyundai Ioniq 6</option>
+                    <option value="kiaev6">Kia EV6</option>
+                    <option value="kiaev9">Kia EV9</option>
+                    <option value="kianiro">Kia Niro EV</option>
+                    <option value="nissanleaf">Nissan Leaf</option>
+                    <option value="nissanariya">Nissan Ariya</option>
+                    <option value="vwid4">Volkswagen ID.4</option>
+                    <option value="vwidbuzz">Volkswagen ID. Buzz</option>
+                    <option value="bmwi4">BMW i4</option>
+                    <option value="bmwix">BMW iX</option>
+                    <option value="bmwi7">BMW i7</option>
+                    <option value="audietron">Audi e-tron</option>
+                    <option value="audiq8etron">Audi Q8 e-tron</option>
+                    <option value="audia6etron">Audi A6 e-tron</option>
+                    <option value="porschete">Porsche Taycan</option>
+                    <option value="rivianr1t">Rivian R1T</option>
+                    <option value="rivianr1s">Rivian R1S</option>
+                    <option value="lucidair">Lucid Air</option>
+                    <option value="polestar2">Polestar 2</option>
+                    <option value="polestar3">Polestar 3</option>
+                    <option value="vinfastvf8">VinFast VF 8</option>
+                    <option value="vinfastvf9">VinFast VF 9</option>
+                    <option value="mercedeseqs">Mercedes-Benz EQS</option>
+                    <option value="mercedeseqesuv">Mercedes-Benz EQE SUV</option>
                 </select>
                 <button onclick="compareEVs()">Compare</button>
             </div>
@@ -434,16 +498,47 @@
             const data = JSON.parse(event.data);
             if (data.type === 'chargers') {
                 console.log('Real-time charger update:', data.data);
-                // Future: Refresh map markers dynamically
             }
         };
 
-        // EV Comparison Tool
+        // EV Comparison Data
         const evData = {
             tesla3: { name: 'Tesla Model 3', range: '358 mi', price: '$42,990', chargeSpeed: '200 mi/15 min' },
+            teslay: { name: 'Tesla Model Y', range: '330 mi', price: '$47,990', chargeSpeed: '200 mi/15 min' },
+            teslax: { name: 'Tesla Model X', range: '348 mi', price: '$79,990', chargeSpeed: '200 mi/15 min' },
+            teslas: { name: 'Tesla Model S', range: '405 mi', price: '$89,990', chargeSpeed: '200 mi/15 min' },
+            teslacyber: { name: 'Tesla Cybertruck', range: '320 mi', price: '$60,990', chargeSpeed: '200 mi/15 min' },
             fordme: { name: 'Ford Mustang Mach-E', range: '314 mi', price: '$43,995', chargeSpeed: '61 mi/10 min' },
+            f150lightning: { name: 'Ford F-150 Lightning', range: '320 mi', price: '$55,974', chargeSpeed: '150 mi/15 min' },
             chevybolt: { name: 'Chevy Bolt EV', range: '259 mi', price: '$31,000', chargeSpeed: '100 mi/30 min' },
-            ioniq5: { name: 'Hyundai Ioniq 5', range: '303 mi', price: '$41,650', chargeSpeed: '80% in 18 min' }
+            chevyeuv: { name: 'Chevy Bolt EUV', range: '247 mi', price: '$33,500', chargeSpeed: '100 mi/30 min' },
+            chevyblazer: { name: 'Chevy Blazer EV', range: '324 mi', price: '$47,595', chargeSpeed: '78 mi/10 min' },
+            chevysilverado: { name: 'Chevy Silverado EV', range: '450 mi', price: '$77,905', chargeSpeed: '100 mi/10 min' },
+            ioniq5: { name: 'Hyundai Ioniq 5', range: '303 mi', price: '$41,650', chargeSpeed: '80% in 18 min' },
+            ioniq6: { name: 'Hyundai Ioniq 6', range: '361 mi', price: '$42,450', chargeSpeed: '80% in 18 min' },
+            kiaev6: { name: 'Kia EV6', range: '310 mi', price: '$43,975', chargeSpeed: '80% in 18 min' },
+            kiaev9: { name: 'Kia EV9', range: '304 mi', price: '$56,395', chargeSpeed: '80% in 24 min' },
+            kianiro: { name: 'Kia Niro EV', range: '253 mi', price: '$39,600', chargeSpeed: '100 mi/30 min' },
+            nissanleaf: { name: 'Nissan Leaf', range: '212 mi', price: '$28,140', chargeSpeed: '100 mi/30 min' },
+            nissanariya: { name: 'Nissan Ariya', range: '304 mi', price: '$43,190', chargeSpeed: '130 mi/30 min' },
+            vwid4: { name: 'Volkswagen ID.4', range: '275 mi', price: '$38,995', chargeSpeed: '140 mi/30 min' },
+            vwidbuzz: { name: 'Volkswagen ID. Buzz', range: '260 mi', price: '$59,995', chargeSpeed: '170 mi/30 min' },
+            bmwi4: { name: 'BMW i4', range: '307 mi', price: '$52,200', chargeSpeed: '108 mi/10 min' },
+            bmwix: { name: 'BMW iX', range: '324 mi', price: '$87,100', chargeSpeed: '95 mi/10 min' },
+            bmwi7: { name: 'BMW i7', range: '321 mi', price: '$105,700', chargeSpeed: '101 mi/10 min' },
+            audietron: { name: 'Audi e-tron', range: '226 mi', price: '$65,900', chargeSpeed: '95 mi/10 min' },
+            audiq8etron: { name: 'Audi Q8 e-tron', range: '285 mi', price: '$74,400', chargeSpeed: '114 mi/10 min' },
+            audia6etron: { name: 'Audi A6 e-tron', range: '391 mi', price: '$80,000', chargeSpeed: '135 mi/10 min' },
+            porschete: { name: 'Porsche Taycan', range: '246 mi', price: '$86,700', chargeSpeed: '93 mi/15 min' },
+            rivianr1t: { name: 'Rivian R1T', range: '314 mi', price: '$73,000', chargeSpeed: '140 mi/20 min' },
+            rivianr1s: { name: 'Rivian R1S', range: '316 mi', price: '$78,000', chargeSpeed: '140 mi/20 min' },
+            lucidair: { name: 'Lucid Air', range: '520 mi', price: '$77,400', chargeSpeed: '300 mi/20 min' },
+            polestar2: { name: 'Polestar 2', range: '270 mi', price: '$49,900', chargeSpeed: '130 mi/30 min' },
+            polestar3: { name: 'Polestar 3', range: '300 mi', price: '$83,900', chargeSpeed: '111 mi/10 min' },
+            vinfastvf8: { name: 'VinFast VF 8', range: '264 mi', price: '$46,000', chargeSpeed: '70 mi/31 min' },
+            vinfastvf9: { name: 'VinFast VF 9', range: '330 mi', price: '$69,000', chargeSpeed: '80 mi/35 min' },
+            mercedeseqs: { name: 'Mercedes-Benz EQS', range: '350 mi', price: '$104,400', chargeSpeed: '124 mi/15 min' },
+            mercedeseqesuv: { name: 'Mercedes-Benz EQE SUV', range: '305 mi', price: '$77,900', chargeSpeed: '108 mi/15 min' }
         };
 
         function compareEVs() {
