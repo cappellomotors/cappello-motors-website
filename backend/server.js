@@ -2,6 +2,7 @@ const express = require('express');
 const WebSocket = require('ws');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,16 +16,22 @@ app.use((req, res, next) => {
     next();
 });
 
+// Serve static files from the parent directory
 app.use(express.static(path.join(__dirname, '../')));
 
 app.get('/', (req, res) => {
-    console.log('Serving dealer-login.html');
-    res.sendFile(path.join(__dirname, '../dealer-login.html'));
+    console.log('Serving index.html');
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.get('/dealer-auction.html', (req, res) => {
     console.log('Serving dealer-auction.html');
     res.sendFile(path.join(__dirname, '../dealer-auction.html'));
+});
+
+app.get('/ev-hub.html', (req, res) => {
+    console.log('Serving ev-hub.html');
+    res.sendFile(path.join(__dirname, '../ev-hub.html'));
 });
 
 const dealers = [{ email: 'dealer1@cappellomotors.com', password: bcrypt.hashSync('password123', 10) }];
@@ -36,53 +43,55 @@ let auctions = [
     { id: 5, name: '2023 Tesla Model X', currentBid: 85000, endTime: Date.now() + 24 * 60 * 60 * 1000 }
 ];
 
-app.post('/signin', async (req, res) => {
-    console.log('Sign-in attempt:', req.body);
-    const { email, password } = req.body || {};
-    if (!email || !password) {
-        console.log('Missing credentials');
-        return res.status(400).json({ success: false, message: 'Missing email or password' });
+// Charger API endpoint
+app.get('/api/chargers', async (req, res) => {
+    const { location } = req.query; // e.g., "Detroit, MI"
+    try {
+        // Use OpenChargeMap API (get key from openchargemap.org)
+        const response = await axios.get(`https://api.openchargemap.io/v3/poi/?output=json&key=YOUR_OPENCHARGEMAP_KEY&location=${location}&maxresults=50`);
+        const chargers = response.data.map(charger => ({
+            name: charger.AddressInfo.Title,
+            lat: charger.AddressInfo.Latitude,
+            lng: charger.AddressInfo.Longitude,
+            address: charger.AddressInfo.AddressLine1,
+            status: charger.StatusType?.Title || 'Unknown'
+        }));
+        res.json(chargers);
+    } catch (error) {
+        console.error('Charger fetch error:', error);
+        res.status(500).json({ error: 'Failed to fetch chargers' });
     }
+});
+
+app.post('/signin', async (req, res) => {
+    const { email, password } = req.body || {};
+    if (!email || !password) return res.status(400).json({ success: false, message: 'Missing email or password' });
     try {
         const dealer = dealers.find(d => d.email === email);
         if (dealer && await bcrypt.compare(password, dealer.password)) {
-            console.log('Sign-in successful:', email);
             res.json({ success: true, redirect: '/dealer-auction.html' });
         } else {
-            console.log('Sign-in failed:', email);
             res.status(401).json({ success: false, message: 'Invalid email or password' });
         }
     } catch (error) {
-        console.error('Sign-in error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
 app.post('/place-bid', (req, res) => {
-    console.log('Bid attempt:', req.body);
     const { carId, bid } = req.body || {};
-    if (!carId || !bid || isNaN(bid)) {
-        console.log('Bid failed: Invalid data', { carId, bid });
-        return res.status(400).json({ success: false, message: 'Invalid carId or bid' });
-    }
+    if (!carId || !bid || isNaN(bid)) return res.status(400).json({ success: false, message: 'Invalid carId or bid' });
     try {
-        console.log('Processing bid for carId:', carId);
         const auction = auctions.find(a => a.id === carId);
-        if (!auction) {
-            console.log('Bid failed: Car not found');
-            return res.status(404).json({ success: false, message: 'Car not found' });
-        }
+        if (!auction) return res.status(404).json({ success: false, message: 'Car not found' });
         if (bid > auction.currentBid && auction.endTime > Date.now()) {
             auction.currentBid = bid;
-            console.log('Bid successful:', { carId, bid });
             broadcast({ type: 'bid', carId, bid });
             res.json({ success: true, newBid: bid });
         } else {
-            console.log('Bid failed: Invalid bid amount or time');
             res.status(400).json({ success: false, message: 'Bid too low or auction ended' });
         }
     } catch (error) {
-        console.error('Bid error:', error);
         res.status(500).json({ success: false, message: 'Server error: ' + error.message });
     }
 });
@@ -97,7 +106,6 @@ wss.on('connection', (ws) => {
 });
 
 function broadcast(data) {
-    console.log('Broadcasting:', data);
     wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(data));
