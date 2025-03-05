@@ -33,6 +33,11 @@ app.get('/ev-hub.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../ev-hub.html'));
 });
 
+app.get('/api/google-maps-key', (req, res) => {
+    const key = process.env.GOOGLE_MAPS_API_KEY || 'MISSING_GOOGLE_MAPS_KEY';
+    res.json({ key });
+});
+
 const dealers = [{ email: 'dealer1@cappellomotors.com', password: bcrypt.hashSync('password123', 10) }];
 let auctions = [
     { id: 1, name: '2021 BMW M5', currentBid: 55000, endTime: Date.now() + 24 * 60 * 60 * 1000 },
@@ -44,10 +49,10 @@ let auctions = [
 
 // Charger API endpoint
 app.get('/api/chargers', async (req, res) => {
-    const { location } = req.query; // e.g., "Detroit, MI"
+    const { location } = req.query;
     try {
-        // Use OpenChargeMap API (get key from openchargemap.org)
-        const response = await axios.get(`https://api.openchargemap.io/v3/poi/?output=json&key=YOUR_OPENCHARGEMAP_KEY&location=${location}&maxresults=50`);
+        const apiKey = process.env.OPENCHARGEMAP_KEY || 'MISSING_OPENCHARGEMAP_KEY';
+        const response = await axios.get(`https://api.openchargemap.io/v3/poi/?output=json&key=${apiKey}&location=${location}&maxresults=50`);
         const chargers = response.data.map(charger => ({
             name: charger.AddressInfo.Title,
             lat: charger.AddressInfo.Latitude,
@@ -57,7 +62,7 @@ app.get('/api/chargers', async (req, res) => {
         }));
         res.json(chargers);
     } catch (error) {
-        console.error('Charger fetch error:', error);
+        console.error('Charger fetch error:', error.message);
         res.status(500).json({ error: 'Failed to fetch chargers' });
     }
 });
