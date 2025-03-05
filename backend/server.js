@@ -16,7 +16,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Serve static files from the parent directory
 app.use(express.static(path.join(__dirname, '../')));
 
 app.get('/', (req, res) => {

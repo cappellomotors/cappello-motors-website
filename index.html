@@ -378,6 +378,35 @@
         .modal-content button:hover {
             background: #ef5350;
         }
+        /* EV Hub Teaser */
+        .ev-hub-teaser {
+            margin: 40px auto;
+            max-width: 1000px;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #e0e4e7;
+        }
+        .ev-hub-teaser h2 {
+            font-size: 2.4em;
+            color: #2c3e50;
+            margin: 0 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .ev-hub-teaser p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin: 0 0 20px;
+        }
+        #evMap {
+            height: 300px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
@@ -408,10 +437,13 @@
             .modal-content { padding: 20px; }
             .dropdown { display: none; position: static; width: 100%; }
             .nav-menu.active .dropdown { display: block; }
+            .ev-hub-teaser { padding: 20px; }
+            #evMap { height: 200px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
 </head>
 <body>
     <header>
@@ -427,6 +459,7 @@
                     <a href="/why-sell-to-us.html">Why Sell to Us</a>
                     <a href="/contact-us.html">Contact Us</a>
                     <a href="/racing-game.html">Racing Game</a>
+                    <a href="/ev-hub.html">EV Hub</a>
                 </div>
             </div>
         </nav>
@@ -468,6 +501,13 @@
             <h3>Used Car Value Trends</h3>
             <canvas id="valueChart"></canvas>
         </div>
+    </div>
+    <!-- EV Hub Teaser -->
+    <div class="ev-hub-teaser">
+        <h2>Explore Our EV Hub</h2>
+        <p>Find EV chargers nationwide and level up your electric ride—check it out!</p>
+        <div id="evMap"></div>
+        <a href="/ev-hub.html" style="display: inline-block; margin-top: 20px; padding: 12px 25px; background: linear-gradient(135deg, #e57373 0%, #c0392b 100%); color: #fff; text-decoration: none; border-radius: 8px;">Visit EV Hub</a>
     </div>
     <div id="vinModal" class="modal">
         <div class="modal-content">
@@ -599,6 +639,37 @@
                 }
             }
         });
+
+        // EV Map Teaser
+        let evMap, evInfowindow;
+        function initEVMap() {
+            evMap = new google.maps.Map(document.getElementById('evMap'), {
+                center: { lat: 42.6703, lng: -83.0329 }, // Shelby Township, MI
+                zoom: 10
+            });
+            evInfowindow = new google.maps.InfoWindow();
+            const service = new google.maps.places.PlacesService(evMap);
+            service.textSearch({
+                query: 'Shelby Township, MI electric vehicle charging stations',
+                fields: ['name', 'geometry', 'formatted_address'],
+                type: ['electric_vehicle_charging_station']
+            }, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(place => {
+                        const marker = new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: evMap,
+                            title: place.name
+                        });
+                        marker.addListener('click', () => {
+                            evInfowindow.setContent(`${place.name}<br>${place.formatted_address}`);
+                            evInfowindow.open(evMap, marker);
+                        });
+                    });
+                }
+            });
+        }
+        window.onload = () => initEVMap();
     </script>
 </body>
 </html>
