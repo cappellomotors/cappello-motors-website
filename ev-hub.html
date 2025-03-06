@@ -449,22 +449,23 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        let map, service, infowindow;
+        let map, infowindow, geocoder;
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 42.6703, lng: -83.0329 },
-                zoom: 10
+                center: { lat: 39.8283, lng: -98.5795 }, // Center of contiguous US
+                zoom: 4 // Zoom out to show US
             });
             infowindow = new google.maps.InfoWindow();
-            searchChargers();
+            geocoder = new google.maps.Geocoder(); // Add Geocoder for zip searches
+            searchChargers(); // Default to Shelby Township
         }
 
         fetch('/api/google-maps-key')
             .then(response => response.json())
             .then(data => {
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&callback=initMap&loading=async`;
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&callback=initMap&loading=async&libraries=geocoding`;
                 script.async = true;
                 script.defer = true;
                 document.head.appendChild(script);
@@ -473,25 +474,39 @@
 
         function searchChargers() {
             const search = document.getElementById('mapSearch').value || 'Shelby Township, MI';
-            fetch(`/api/chargers?location=${encodeURIComponent(search)}`)
-                .then(response => response.json())
-                .then(chargers => {
-                    if (chargers.error) throw new Error(chargers.error);
-                    map.setCenter({ lat: chargers[0].lat, lng: chargers[0].lng });
-                    chargers.forEach(charger => {
-                        const marker = new google.maps.Marker({
-                            position: { lat: charger.lat, lng: charger.lng },
-                            map,
-                            title: charger.name,
-                            icon: charger.status === 'Available' ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                        });
-                        marker.addListener('click', () => {
-                            infowindow.setContent(`${charger.name}<br>${charger.address}<br>Status: ${charger.status}`);
-                            infowindow.open(map, marker);
-                        });
-                    });
-                })
-                .catch(error => console.error('Charger fetch failed:', error));
+            geocoder.geocode({ address: search }, (results, status) => {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location);
+                    map.setZoom(10); // Zoom in for local view
+                    fetch(`/api/chargers?location=${encodeURIComponent(search)}`)
+                        .then(response => response.json())
+                        .then(chargers => {
+                            if (chargers.error) throw new Error(chargers.error);
+                            // Clear existing markers
+                            if (window.markers) {
+                                window.markers.forEach(marker => marker.setMap(null));
+                            }
+                            window.markers = [];
+                            chargers.forEach(charger => {
+                                const marker = new google.maps.Marker({
+                                    position: { lat: charger.lat, lng: charger.lng },
+                                    map,
+                                    title: charger.name,
+                                    icon: charger.status === 'Available' ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                                });
+                                marker.addListener('click', () => {
+                                    infowindow.setContent(`${charger.name}<br>${charger.address}<br>Status: ${charger.status}`);
+                                    infowindow.open(map, marker);
+                                });
+                                window.markers.push(marker);
+                            });
+                        })
+                        .catch(error => console.error('Charger fetch failed:', error));
+                } else {
+                    console.error('Geocode failed:', status);
+                }
+            });
         }
 
         const evData = {
