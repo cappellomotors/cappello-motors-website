@@ -649,7 +649,7 @@
                 fields: ['name', 'geometry', 'formatted_address'],
                 type: ['electric_vehicle_charging_station']
             }, (results, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
                     results.forEach(place => {
                         const marker = new google.maps.Marker({
                             position: place.geometry.location,
@@ -661,17 +661,23 @@
                             evInfowindow.open(evMap, marker);
                         });
                     });
+                } else {
+                    console.error('Places API failed:', status, 'Results:', results);
                 }
             });
         }
 
         fetch('/api/google-maps-key')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to fetch API key');
+                return response.json();
+            })
             .then(data => {
                 const script = document.createElement('script');
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initEVMap&loading=async`;
                 script.async = true;
                 script.defer = true;
+                script.onerror = () => console.error('Failed to load Maps API script');
                 document.head.appendChild(script);
             })
             .catch(error => console.error('Failed to fetch Google Maps key:', error));
