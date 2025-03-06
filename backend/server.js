@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const axios = require('axios');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../')));
 app.use((req, res, next) => {
-    console.log('Request:', req.method, req.url, 'Origin:', req.headers.origin, 'Body:', req.body);
+    console.log('Request:', req.method, req.url);
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -16,45 +17,30 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, '../')));
-
-app.get('/', (req, res) => {
-    console.log('Serving index.html');
-    res.sendFile(path.join(__dirname, '../index.html'));
-});
-
-app.get('/dealer-auction.html', (req, res) => {
-    console.log('Serving dealer-auction.html');
-    res.sendFile(path.join(__dirname, '../dealer-auction.html'));
-});
-
-app.get('/ev-hub.html', (req, res) => {
-    console.log('Serving ev-hub.html');
-    res.sendFile(path.join(__dirname, '../ev-hub.html'));
-});
-
 app.get('/api/google-maps-key', (req, res) => {
-    res.json({ key: process.env.GOOGLE_MAPS_API_KEY || 'MISSING_GOOGLE_MAPS_KEY' });
+    const key = process.env.GOOGLE_MAPS_API_KEY;
+    if (!key) return res.status(500).json({ error: 'Missing Google Maps API key' });
+    res.json({ key });
 });
 
-// Charger API endpoint with real-time status
 app.get('/api/chargers', async (req, res) => {
     const { location } = req.query;
     try {
-        const apiKey = process.env.OPENCHARGEMAP_KEY || 'MISSING_OPENCHARGEMAP_KEY';
-        const response = await axios.get(`https://api.openchargemap.io/v3/poi/?output=json&key=${apiKey}&location=${location}&maxresults=50`);
+        const apiKey = process.env.OPENCHARGEMAP_KEY;
+        if (!apiKey) throw new Error('Missing OpenChargeMap API key');
+        const url = `https://api.openchargemap.io/v3/poi/?output=json&key=${apiKey}&location=${encodeURIComponent(location || 'Shelby Township, MI')}&maxresults=50`;
+        const response = await axios.get(url);
         const chargers = response.data.map(charger => ({
             name: charger.AddressInfo.Title,
             lat: charger.AddressInfo.Latitude,
             lng: charger.AddressInfo.Longitude,
             address: charger.AddressInfo.AddressLine1,
-            status: charger.StatusType?.IsOperational ? 'Available' : 'Unavailable' // Real-time status
+            status: charger.StatusType?.IsOperational ? 'Available' : 'Unavailable'
         }));
         res.json(chargers);
-        broadcast({ type: 'chargers', data: chargers }); // Send to WebSocket clients
     } catch (error) {
         console.error('Charger fetch error:', error.message);
-        res.status(500).json({ error: 'Failed to fetch chargers' });
+        res.status(500).json({ error: 'Failed to fetch chargers: ' + error.message });
     }
 });
 

@@ -53,7 +53,7 @@
         header {
             margin-top: 80px;
             padding: 40px 20px;
-            background: url('https://images.unsplash.com/photo-1561583534-144bbc90e829?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: url('https://cdn.pixabay.com/photo/2020/03/09/17/51/tesla-4916268_1280.jpg') center/cover;
             color: #fff;
             text-align: center;
             background-blend-mode: overlay;
@@ -80,7 +80,6 @@
             color: #7f8c8d;
             margin-bottom: 20px;
         }
-        /* Charger Map */
         .charger-map {
             margin: 20px 0;
         }
@@ -127,7 +126,6 @@
         .map-search button:hover {
             transform: scale(1.05);
         }
-        /* EV Comparison Tool */
         .ev-comparison {
             margin: 40px 0;
         }
@@ -182,7 +180,6 @@
             background: #2c3e50;
             color: #ecf0f1;
         }
-        /* Buying Guide */
         .buying-guide {
             margin: 40px 0;
         }
@@ -218,7 +215,6 @@
             font-size: 1em;
             margin: 0;
         }
-        /* DIY Upgrades */
         .diy-upgrades {
             margin: 40px 0;
         }
@@ -286,7 +282,6 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7vyFC4HeuwqWXYcX804sq8QP-g4kXDdE&libraries=places"></script>
 </head>
 <body>
     <header>
@@ -306,7 +301,6 @@
     <div class="content">
         <p>Your one-stop destination for electric vehicles—find chargers, compare EVs, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
         
-        <!-- Charger Map -->
         <div class="charger-map">
             <h2>EV Charger Map (Live Status)</h2>
             <div class="map-search">
@@ -316,7 +310,6 @@
             <div id="map"></div>
         </div>
 
-        <!-- EV Comparison Tool -->
         <div class="ev-comparison">
             <h2>Compare EVs</h2>
             <div class="comparison-form">
@@ -412,7 +405,6 @@
             </div>
         </div>
 
-        <!-- Buying Guide -->
         <div class="buying-guide">
             <h2>EV Buying Guide</h2>
             <div class="guide-list">
@@ -431,7 +423,6 @@
             </div>
         </div>
 
-        <!-- DIY Upgrades -->
         <div class="diy-upgrades">
             <h2>DIY EV Upgrades</h2>
             <div class="diy-list">
@@ -462,12 +453,22 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 42.6703, lng: -83.0329 }, // Shelby Township, MI
+                center: { lat: 42.6703, lng: -83.0329 },
                 zoom: 10
             });
             infowindow = new google.maps.InfoWindow();
-            searchChargers(); // Load initial chargers
+            searchChargers();
         }
+
+        fetch('/api/google-maps-key')
+            .then(response => response.json())
+            .then(data => {
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initMap`;
+                script.async = true;
+                document.head.appendChild(script);
+            })
+            .catch(error => console.error('Failed to fetch Google Maps key:', error));
 
         function searchChargers() {
             const search = document.getElementById('mapSearch').value || 'Shelby Township, MI';
@@ -492,16 +493,6 @@
                 .catch(error => console.error('Charger fetch failed:', error));
         }
 
-        // WebSocket for real-time updates
-        const ws = new WebSocket(`wss://${window.location.hostname}`);
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data.type === 'chargers') {
-                console.log('Real-time charger update:', data.data);
-            }
-        };
-
-        // EV Comparison Data
         const evData = {
             tesla3: { name: 'Tesla Model 3', range: '358 mi', price: '$42,990', chargeSpeed: '200 mi/15 min' },
             teslay: { name: 'Tesla Model Y', range: '330 mi', price: '$47,990', chargeSpeed: '200 mi/15 min' },
@@ -562,8 +553,6 @@
             `;
             result.style.display = 'block';
         }
-
-        window.onload = initMap;
     </script>
 </body>
 </html>

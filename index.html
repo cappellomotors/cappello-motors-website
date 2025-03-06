@@ -8,7 +8,6 @@
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>Cappello Motors LLC - Sell Fast, Buy Smart</title>
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16886493440"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -378,7 +377,6 @@
         .modal-content button:hover {
             background: #ef5350;
         }
-        /* EV Hub Teaser */
         .ev-hub-teaser {
             margin: 40px auto;
             max-width: 1000px;
@@ -443,7 +441,6 @@
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7vyFC4HeuwqWXYcX804sq8QP-g4kXDdE&libraries=places"></script>
 </head>
 <body>
     <header>
@@ -502,7 +499,6 @@
             <canvas id="valueChart"></canvas>
         </div>
     </div>
-    <!-- EV Hub Teaser -->
     <div class="ev-hub-teaser">
         <h2>Explore Our EV Hub</h2>
         <p>Find EV chargers nationwide and level up your electric ride—check it out!</p>
@@ -640,11 +636,10 @@
             }
         });
 
-        // EV Map Teaser
         let evMap, evInfowindow;
         function initEVMap() {
             evMap = new google.maps.Map(document.getElementById('evMap'), {
-                center: { lat: 42.6703, lng: -83.0329 }, // Shelby Township, MI
+                center: { lat: 42.6703, lng: -83.0329 },
                 zoom: 10
             });
             evInfowindow = new google.maps.InfoWindow();
@@ -669,7 +664,16 @@
                 }
             });
         }
-        window.onload = () => initEVMap();
+
+        fetch('/api/google-maps-key')
+            .then(response => response.json())
+            .then(data => {
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initEVMap`;
+                script.async = true;
+                document.head.appendChild(script);
+            })
+            .catch(error => console.error('Failed to fetch Google Maps key:', error));
     </script>
 </body>
 </html>
