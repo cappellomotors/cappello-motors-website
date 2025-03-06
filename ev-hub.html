@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers nationwide, compare EVs, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
-    <meta name="keywords" content="EV charger map, best EVs 2025, DIY EV upgrades, electric vehicle guide, Cappello Motors, Metro Detroit EV">
+    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers and Tesla Superchargers nationwide, compare EVs, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
+    <meta name="keywords" content="EV charger map, Tesla Superchargers, best EVs 2025, DIY EV upgrades, electric vehicle guide, Cappello Motors, Metro Detroit EV">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>EV Hub | Cappello Motors - Your Electric Vehicle Destination</title>
@@ -99,6 +99,7 @@
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            align-items: center;
         }
         .map-search input {
             padding: 12px;
@@ -125,6 +126,17 @@
         }
         .map-search button:hover {
             transform: scale(1.05);
+        }
+        .map-search label {
+            font-size: 1.1em;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        .map-search input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
         }
         .ev-comparison {
             margin: 40px 0;
@@ -299,13 +311,14 @@
         <h1>EV Hub</h1>
     </header>
     <div class="content">
-        <p>Your one-stop destination for electric vehicles—find chargers, compare EVs, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
+        <p>Your one-stop destination for electric vehicles—find chargers and Tesla Superchargers nationwide, compare EVs, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
         
         <div class="charger-map">
             <h2>EV Charger Map (Live Status)</h2>
             <div class="map-search">
                 <input type="text" id="mapSearch" placeholder="Enter city or zip (e.g., Detroit, MI)">
                 <button onclick="searchChargers()">Find Chargers</button>
+                <label>Tesla Superchargers: <input type="checkbox" id="teslaToggle" onchange="toggleTeslaSuperchargers()"></label>
             </div>
             <div id="map"></div>
         </div>
@@ -449,7 +462,15 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        let map, infowindow, geocoder;
+        let map, infowindow, geocoder, teslaMarkers = [];
+        const teslaSuperchargers = [
+            { lat: 36.1699, lng: -115.1398, name: "Las Vegas, NV Supercharger" },
+            { lat: 40.7128, lng: -74.0060, name: "New York, NY Supercharger" },
+            { lat: 41.8781, lng: -87.6298, name: "Chicago, IL Supercharger" },
+            { lat: 25.7617, lng: -80.1918, name: "Miami, FL Supercharger" },
+            { lat: 47.6062, lng: -122.3321, name: "Seattle, WA Supercharger" },
+            // Add more Tesla Supercharger locations as needed
+        ];
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -457,7 +478,7 @@
                 zoom: 4 // Zoom out to show US
             });
             infowindow = new google.maps.InfoWindow();
-            geocoder = new google.maps.Geocoder(); // Add Geocoder for zip searches
+            geocoder = new google.maps.Geocoder();
             searchChargers(); // Default to Shelby Township
         }
 
@@ -478,12 +499,11 @@
                 if (status === google.maps.GeocoderStatus.OK) {
                     const location = results[0].geometry.location;
                     map.setCenter(location);
-                    map.setZoom(10); // Zoom in for local view
+                    map.setZoom(10);
                     fetch(`/api/chargers?location=${encodeURIComponent(search)}`)
                         .then(response => response.json())
                         .then(chargers => {
                             if (chargers.error) throw new Error(chargers.error);
-                            // Clear existing markers
                             if (window.markers) {
                                 window.markers.forEach(marker => marker.setMap(null));
                             }
@@ -493,7 +513,7 @@
                                     position: { lat: charger.lat, lng: charger.lng },
                                     map,
                                     title: charger.name,
-                                    icon: charger.status === 'Available' ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                                    icon: charger.status === 'Available' ? 'https://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
                                 });
                                 marker.addListener('click', () => {
                                     infowindow.setContent(`${charger.name}<br>${charger.address}<br>Status: ${charger.status}`);
@@ -507,6 +527,28 @@
                     console.error('Geocode failed:', status);
                 }
             });
+        }
+
+        function toggleTeslaSuperchargers() {
+            const toggle = document.getElementById('teslaToggle').checked;
+            if (toggle) {
+                teslaMarkers = teslaSuperchargers.map(location => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map,
+                        title: location.name,
+                        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    });
+                    marker.addListener('click', () => {
+                        infowindow.setContent(`${location.name}<br>Tesla Supercharger`);
+                        infowindow.open(map, marker);
+                    });
+                    return marker;
+                });
+            } else {
+                teslaMarkers.forEach(marker => marker.setMap(null));
+                teslaMarkers = [];
+            }
         }
 
         const evData = {
