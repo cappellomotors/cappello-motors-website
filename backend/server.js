@@ -13,17 +13,23 @@ app.get('/api/google-maps-key', (req, res) => {
 
 // EV Chargers endpoint using OpenChargeMap
 app.get('/api/chargers', async (req, res) => {
-    const location = req.query.location || 'Shelby Township, MI';
-    const openChargeMapKey = 'b5ae75a9-c0c2-414c-9311-5c204f5672c5'; // Your key
+    const location = req.query.location || 'Michigan';
+    const openChargeMapKey = 'b5ae75a9-c0c2-414c-9311-5c204f5672c5';
     try {
-        // Geocode location to lat/lng
-        const geoResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=AIzaSyB7vyFC4HeuwqWXYcX804sq8QP-g4kXDdE`);
-        const geoData = await geoResponse.json();
-        if (geoData.status !== 'OK') throw new Error(`Geocoding failed: ${geoData.status}`);
-        const { lat, lng } = geoData.results[0].geometry.location;
+        let url;
+        if (location.toLowerCase() === 'michigan') {
+            // Fetch all Michigan chargers
+            url = `https://api.openchargemap.io/v3/poi?output=json&countrycode=US&state=Michigan&maxresults=500&key=${openChargeMapKey}`;
+        } else {
+            // Geocode specific location within Michigan
+            const geoResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)},%20Michigan&key=AIzaSyB7vyFC4HeuwqWXYcX804sq8QP-g4kXDdE`);
+            const geoData = await geoResponse.json();
+            if (geoData.status !== 'OK') throw new Error(`Geocoding failed: ${geoData.status}`);
+            const { lat, lng } = geoData.results[0].geometry.location;
+            url = `https://api.openchargemap.io/v3/poi?output=json&latitude=${lat}&longitude=${lng}&maxresults=500&distance=50&key=${openChargeMapKey}`;
+        }
 
-        // Fetch chargers from OpenChargeMap
-        const response = await fetch(`https://api.openchargemap.io/v3/poi?output=json&latitude=${lat}&longitude=${lng}&maxresults=50&key=${openChargeMapKey}`);
+        const response = await fetch(url);
         if (!response.ok) throw new Error('OpenChargeMap request failed');
         const data = await response.json();
         const chargers = data.map(charger => ({
