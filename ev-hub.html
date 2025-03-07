@@ -300,7 +300,7 @@
             cursor: pointer;
         }
         .shop-item:hover {
-            transform: scale(1.05);
+            transform还没来得完成transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         .shop-item.featured::after {
@@ -315,12 +315,18 @@
             font-size: 0.9em;
             font-weight: 600;
         }
-        .shop-item img {
+        .shop-placeholder {
             width: 100%;
             height: 160px;
-            object-fit: cover;
+            background: #2c3e50;
             border-radius: 8px;
             margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: #80deea;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
         }
         .shop-item h3 {
@@ -584,31 +590,31 @@
             <h2>Shop EV Charging Accessories</h2>
             <div class="shop-container">
                 <div class="shop-item featured" onclick="showProductModal('level2')">
-                    <img src="https://images.unsplash.com/photo-1612902376491-7a8a99b42470?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Level 2 Charger">
+                    <div class="shop-placeholder">⚡ Coming Soon</div>
                     <h3>Portable Level 2 Charger</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('level2')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('ccs')">
-                    <img src="https://images.unsplash.com/photo-1626092030939-20d4e2e75775?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="CCS Adapter">
+                    <div class="shop-placeholder">⚡ Coming Soon</div>
                     <h3>CCS to Tesla Adapter</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('ccs')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('level1')">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Level 1 Charger">
+                    <div class="shop-placeholder">⚡ Coming Soon</div>
                     <h3>Portable Level 1 Charger</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('level1')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('mount')">
-                    <img src="https://images.unsplash.com/photo-1629236849870-eee7810c16c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Wall Mount">
+                    <div class="shop-placeholder">⚡ Coming Soon</div>
                     <h3>Charger Wall Mount</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('mount')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('j1772')">
-                    <img src="https://images.unsplash.com/photo-1601923982832-789a02d0a0e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="J1772 Adapter">
+                    <div class="shop-placeholder">⚡ Coming Soon</div>
                     <h3>J1772 to Tesla Adapter</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('j1772')">Buy Now</button>
