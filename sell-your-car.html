@@ -17,23 +17,16 @@
         nav a:hover { color: #e74c3c; }
         header { padding: 40px 20px; background: url('https://cdn.pixabay.com/photo/2016/11/21/15/38/car-1845650_1280.jpg') center/cover; color: #fff; text-align: center; background-blend-mode: overlay; background-color: rgba(0,0,0,0.4); }
         h1 { font-family: 'Montserrat', sans-serif; font-size: 3em; margin: 0; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
-        .sell-form { max-width: 800px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .sell-form { max-width: 700px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
         .sell-form h2 { font-size: 2em; color: #2c3e50; margin: 0 0 20px; }
         .sell-form p { font-size: 1.2em; color: #7f8c8d; margin: 0 0 20px; }
-        .vin-input { margin: 0 0 30px; }
-        .vin-input input { padding: 12px; width: 70%; max-width: 400px; font-size: 1.1em; border: 2px solid #2c3e50; border-radius: 8px; transition: border-color 0.3s; }
-        .vin-input input:focus { border-color: #e74c3c; outline: none; }
-        .vin-input button { padding: 12px 25px; font-size: 1.1em; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.3s; margin-left: 10px; }
-        .vin-input button:hover { transform: scale(1.05); }
-        #vinInfo { font-size: 1.1em; color: #2c3e50; margin-top: 10px; }
         .sell-form label { display: block; text-align: left; font-size: 1.1em; color: #2c3e50; margin: 10px 0 5px; }
         .sell-form label span { color: #e74c3c; font-size: 0.9em; }
-        .sell-form input, .sell-form select, .sell-form textarea { width: 100%; padding: 12px; font-size: 1.1em; border: 2px solid #2c3e50; border-radius: 8px; box-sizing: border-box; transition: border-color 0.3s; }
-        .sell-form textarea { height: 100px; resize: vertical; }
-        .sell-form input:focus, .sell-form select:focus, .sell-form textarea:focus { border-color: #e74c3c; outline: none; }
+        .sell-form input, .sell-form select { width: 100%; padding: 12px; font-size: 1.1em; border: 2px solid #2c3e50; border-radius: 8px; box-sizing: border-box; transition: border-color 0.3s; }
+        .sell-form input:focus, .sell-form select:focus { border-color: #e74c3c; outline: none; }
         .sell-form input[type="file"] { padding: 5px; }
-        .sell-form button[type="submit"] { padding: 12px 25px; font-size: 1.2em; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.3s; margin-top: 20px; }
-        .sell-form button[type="submit"]:hover { transform: scale(1.05); box-shadow: 0 6px 15px rgba(231,76,60,0.5); }
+        .sell-form button { padding: 12px 25px; font-size: 1.2em; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.3s; margin-top: 20px; }
+        .sell-form button:hover { transform: scale(1.05); box-shadow: 0 6px 15px rgba(231,76,60,0.5); }
         .error { color: #e74c3c; font-size: 1.1em; display: none; margin-top: 10px; }
         #successMessage { font-size: 1.2em; color: #2c3e50; display: none; margin-top: 20px; }
         .trust-signals { margin: 40px auto; max-width: 1000px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
@@ -46,8 +39,6 @@
         @media (max-width: 768px) {
             h1 { font-size: 2em; }
             .sell-form { margin: 20px; padding: 20px; }
-            .vin-input input { width: 100%; }
-            .vin-input button { margin: 10px 0 0 0; }
             .trust-item { width: 100%; max-width: 300px; }
         }
     </style>
@@ -70,15 +61,11 @@
         <h1>Sell Your Car Fast</h1>
     </header>
     <div class="sell-form">
-        <h2>Get Your Cash Offer Now</h2>
-        <p>Enter your VIN to start—we’ll fill in what we can!</p>
-        <div class="vin-input">
-            <input type="text" id="carInput" placeholder="VIN or License Plate" required>
-            <button onclick="checkVin()">Decode VIN</button>
-            <p class="error" id="vinError">Please enter a VIN or license plate.</p>
-            <div id="vinInfo"></div>
-        </div>
+        <h2>Get Your Cash Offer</h2>
+        <p>Tell us about your car—we’ll make you an offer!</p>
         <form id="sellForm" onsubmit="submitSellForm(event)" enctype="multipart/form-data">
+            <label for="vin">VIN or License Plate <span>(Required)</span></label>
+            <input type="text" id="vin" name="vin" placeholder="Enter VIN or Plate" required>
             <label for="year">Year</label>
             <input type="number" id="year" name="year" placeholder="e.g., 2020" min="1900" max="2025">
             <label for="make">Make</label>
@@ -90,53 +77,11 @@
             <label for="condition">Condition</label>
             <select id="condition" name="condition">
                 <option value="">Select Condition (Optional)</option>
-                <option value="excellent">Excellent (Like New)</option>
-                <option value="good">Good (Minor Wear)</option>
-                <option value="fair">Fair (Some Issues)</option>
-                <option value="poor">Poor (Major Repairs Needed)</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
             </select>
-            <label for="engine">Engine</label>
-            <select id="engine" name="engine">
-                <option value="">Select Engine (Optional)</option>
-                <option value="4cyl">4-Cylinder</option>
-                <option value="6cyl">6-Cylinder</option>
-                <option value="8cyl">8-Cylinder</option>
-                <option value="electric">Electric</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="other">Other</option>
-            </select>
-            <label for="transmission">Transmission</label>
-            <select id="transmission" name="transmission">
-                <option value="">Select Transmission (Optional)</option>
-                <option value="automatic">Automatic</option>
-                <option value="manual">Manual</option>
-            </select>
-            <label for="windshield">Windshield Condition</label>
-            <select id="windshield" name="windshield">
-                <option value="">Select Condition (Optional)</option>
-                <option value="intact">Intact (No Cracks/Chips)</option>
-                <option value="minor">Minor Cracks/Chips</option>
-                <option value="major">Major Damage (Needs Replacement)</option>
-            </select>
-            <label for="tires">Tire Condition</label>
-            <select id="tires" name="tires">
-                <option value="">Select Condition (Optional)</option>
-                <option value="good">Good (Plenty of Tread)</option>
-                <option value="worn">Worn (Needs Replacement Soon)</option>
-                <option value="flat">Flat or Damaged</option>
-            </select>
-            <label for="oilLeaks">Oil Leaks</label>
-            <select id="oilLeaks" name="oilLeaks" onchange="toggleOilLeakDetails(this)">
-                <option value="">Select Option (Optional)</option>
-                <option value="no">No Oil Leaks</option>
-                <option value="yes">Yes, Has Oil Leaks</option>
-            </select>
-            <div id="oilLeakDetails" style="display:none;">
-                <label for="oilLeakInfo">Oil Leak Details</label>
-                <textarea id="oilLeakInfo" name="oilLeakInfo" placeholder="e.g., small drip under engine"></textarea>
-            </div>
-            <label for="notes">Anything Else We Should Know?</label>
-            <textarea id="notes" name="notes" placeholder="e.g., dents, scratches, mechanical issues"></textarea>
             <label for="photos">Upload Photos</label>
             <input type="file" id="photos" name="photos" accept="image/*" multiple>
             <label for="name">Your Name <span>(Required)</span></label>
@@ -169,56 +114,10 @@
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
     <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const vin = urlParams.get('vin');
-            if (vin) {
-                document.getElementById('carInput').value = vin;
-                checkVin();
-            }
-        };
-
-        async function checkVin() {
-            const carInput = document.getElementById('carInput').value.trim();
-            const vinError = document.getElementById('vinError');
-            const vinInfo = document.getElementById('vinInfo');
-            if (!carInput) {
-                vinError.style.display = 'block';
-                vinInfo.textContent = '';
-                return;
-            }
-            vinError.style.display = 'none';
-            try {
-                const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/${carInput}?format=json`);
-                if (!response.ok) throw new Error('API request failed');
-                const data = await response.json();
-                const result = data.Results[0];
-                if (result && result.Make && result.Model && result.ModelYear) {
-                    vinInfo.textContent = `Decoded: ${result.ModelYear} ${result.Make} ${result.Model}`;
-                    document.getElementById('year').value = result.ModelYear || '';
-                    document.getElementById('make').value = result.Make || '';
-                    document.getElementById('model').value = result.Model || '';
-                    document.getElementById('engine').value = result.EngineCylinders ? (result.FuelTypePrimary === 'Electric' ? 'electric' : result.FuelTypePrimary === 'Gasoline/Electricity' ? 'hybrid' : `${result.EngineCylinders}cyl`) : '';
-                    document.getElementById('transmission').value = result.TransmissionStyle ? result.TransmissionStyle.toLowerCase().includes('auto') ? 'automatic' : 'manual' : '';
-                } else {
-                    vinInfo.textContent = 'Couldn’t decode VIN—please fill in details below.';
-                }
-            } catch (error) {
-                console.error('VIN Decoder Error:', error);
-                vinInfo.textContent = 'Error decoding VIN—enter details manually.';
-            }
-        }
-
-        function toggleOilLeakDetails(select) {
-            const oilLeakDetails = document.getElementById('oilLeakDetails');
-            oilLeakDetails.style.display = select.value === 'yes' ? 'block' : 'none';
-        }
-
         function submitSellForm(event) {
             event.preventDefault();
             const form = document.getElementById('sellForm');
             const formData = new FormData(form);
-            formData.append('vin', document.getElementById('carInput').value.trim());
 
             const vin = formData.get('vin');
             const name = formData.get('name');
@@ -245,9 +144,6 @@
             .then(() => {
                 successMessage.style.display = 'block';
                 form.reset();
-                document.getElementById('carInput').value = '';
-                document.getElementById('vinInfo').textContent = '';
-                document.getElementById('oilLeakDetails').style.display = 'none';
             })
             .catch(error => {
                 console.error('Error:', error);
