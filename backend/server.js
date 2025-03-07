@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const path = require('path');
 const app = express();
 
-// Serve static files from parent directory
+// Serve static files from the parent directory
 app.use(express.static(path.join(__dirname, '../')));
 
 // Google Maps API key endpoint
@@ -18,10 +18,8 @@ app.get('/api/chargers', async (req, res) => {
     try {
         let url;
         if (location.toLowerCase() === 'michigan') {
-            // Fetch all Michigan chargers
             url = `https://api.openchargemap.io/v3/poi?output=json&countrycode=US&state=Michigan&maxresults=500&key=${openChargeMapKey}`;
         } else {
-            // Geocode specific location within Michigan
             const geoResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)},%20Michigan&key=AIzaSyB7vyFC4HeuwqWXYcX804sq8QP-g4kXDdE`);
             const geoData = await geoResponse.json();
             if (geoData.status !== 'OK') throw new Error(`Geocoding failed: ${geoData.status}`);
@@ -46,5 +44,13 @@ app.get('/api/chargers', async (req, res) => {
     }
 });
 
-// Start server
-app.listen(10000, () => console.log('Server running on port 10000'));
+// Health check endpoint to ensure Render detects the service
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+// Start server with dynamic port
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
