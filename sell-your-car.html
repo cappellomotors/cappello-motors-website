@@ -25,7 +25,7 @@
         .vin-input input:focus { border-color: #e74c3c; outline: none; }
         .vin-input button { padding: 12px 25px; font-size: 1.1em; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: transform 0.3s; margin-left: 10px; }
         .vin-input button:hover { transform: scale(1.05); }
-        # Pangolin Info { font-size: 1.1em; color: #2c3e50; margin-top: 10px; }
+        #vinInfo { font-size: 1.1em; color: #2c3e50; margin-top: 10px; }
         .sell-form label { display: block; text-align: left; font-size: 1.1em; color: #2c3e50; margin: 10px 0 5px; }
         .sell-form label span { color: #e74c3c; font-size: 0.9em; }
         .sell-form input, .sell-form select, .sell-form textarea { width: 100%; padding: 12px; font-size: 1.1em; border: 2px solid #2c3e50; border-radius: 8px; box-sizing: border-box; transition: border-color 0.3s; }
@@ -79,17 +79,17 @@
             <div id="vinInfo"></div>
         </div>
         <form id="sellForm" onsubmit="submitSellForm(event)" enctype="multipart/form-data">
-            <label for="year">Year <span>(Required)</span></label>
-            <input type="number" id="year" name="year" placeholder="e.g., 2020" min="1900" max="2025" required>
-            <label for="make">Make <span>(Required)</span></label>
-            <input type="text" id="make" name="make" placeholder="e.g., Toyota" required>
-            <label for="model">Model <span>(Required)</span></label>
-            <input type="text" id="model" name="model" placeholder="e.g., Camry" required>
-            <label for="mileage">Mileage <span>(Required)</span></label>
-            <input type="number" id="mileage" name="mileage" placeholder="e.g., 50000" min="0" required>
-            <label for="condition">Condition <span>(Required)</span></label>
-            <select id="condition" name="condition" required>
-                <option value="">Select Condition</option>
+            <label for="year">Year</label>
+            <input type="number" id="year" name="year" placeholder="e.g., 2020" min="1900" max="2025">
+            <label for="make">Make</label>
+            <input type="text" id="make" name="make" placeholder="e.g., Toyota">
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model" placeholder="e.g., Camry">
+            <label for="mileage">Mileage</label>
+            <input type="number" id="mileage" name="mileage" placeholder="e.g., 50000" min="0">
+            <label for="condition">Condition</label>
+            <select id="condition" name="condition">
+                <option value="">Select Condition (Optional)</option>
                 <option value="excellent">Excellent (Like New)</option>
                 <option value="good">Good (Minor Wear)</option>
                 <option value="fair">Fair (Some Issues)</option>
@@ -105,47 +105,40 @@
                 <option value="hybrid">Hybrid</option>
                 <option value="other">Other</option>
             </select>
-            <label for="transmission">Transmission <span>(Required)</span></label>
-            <select id="transmission" name="transmission" required>
-                <option value="">Select Transmission</option>
+            <label for="transmission">Transmission</label>
+            <select id="transmission" name="transmission">
+                <option value="">Select Transmission (Optional)</option>
                 <option value="automatic">Automatic</option>
                 <option value="manual">Manual</option>
             </select>
-            <label for="windshield">Windshield Condition <span>(Required)</span></label>
-            <select id="windshield" name="windshield" required>
-                <option value="">Select Condition</option>
+            <label for="windshield">Windshield Condition</label>
+            <select id="windshield" name="windshield">
+                <option value="">Select Condition (Optional)</option>
                 <option value="intact">Intact (No Cracks/Chips)</option>
                 <option value="minor">Minor Cracks/Chips</option>
                 <option value="major">Major Damage (Needs Replacement)</option>
             </select>
-            <label for="tires">Tire Condition <span>(Required)</span></label>
-            <select id="tires" name="tires" required>
-                <option value="">Select Condition</option>
+            <label for="tires">Tire Condition</label>
+            <select id="tires" name="tires">
+                <option value="">Select Condition (Optional)</option>
                 <option value="good">Good (Plenty of Tread)</option>
                 <option value="worn">Worn (Needs Replacement Soon)</option>
                 <option value="flat">Flat or Damaged</option>
             </select>
-            <label for="oilLeaks">Oil Leaks <span>(Required)</span></label>
-            <select id="oilLeaks" name="oilLeaks" onchange="toggleOilLeakDetails(this)" required>
-                <option value="">Select Option</option>
+            <label for="oilLeaks">Oil Leaks</label>
+            <select id="oilLeaks" name="oilLeaks" onchange="toggleOilLeakDetails(this)">
+                <option value="">Select Option (Optional)</option>
                 <option value="no">No Oil Leaks</option>
                 <option value="yes">Yes, Has Oil Leaks</option>
             </select>
             <div id="oilLeakDetails" style="display:none;">
-                <label for="oilLeakInfo">Oil Leak Details <span>(Required if Yes)</span></label>
+                <label for="oilLeakInfo">Oil Leak Details</label>
                 <textarea id="oilLeakInfo" name="oilLeakInfo" placeholder="e.g., small drip under engine"></textarea>
             </div>
-            <label for="mechanicalIssues">Mechanical Issues <span>(Required)</span></label>
-            <select id="mechanicalIssues" name="mechanicalIssues" required>
-                <option value="">Select Issues</option>
-                <option value="none">None</option>
-                <option value="minor">Minor (e.g., check engine light)</option>
-                <option value="major">Major (e.g., won’t start, transmission slipping)</option>
-            </select>
             <label for="notes">Anything Else We Should Know?</label>
-            <textarea id="notes" name="notes" placeholder="e.g., dents, scratches, additional details"></textarea>
-            <label for="photos">Upload Photos <span>(Required)</span></label>
-            <input type="file" id="photos" name="photos" accept="image/*" multiple required>
+            <textarea id="notes" name="notes" placeholder="e.g., dents, scratches, mechanical issues"></textarea>
+            <label for="photos">Upload Photos</label>
+            <input type="file" id="photos" name="photos" accept="image/*" multiple>
             <label for="name">Your Name <span>(Required)</span></label>
             <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
             <label for="phone">Phone Number <span>(Required)</span></label>
@@ -219,7 +212,6 @@
         function toggleOilLeakDetails(select) {
             const oilLeakDetails = document.getElementById('oilLeakDetails');
             oilLeakDetails.style.display = select.value === 'yes' ? 'block' : 'none';
-            document.getElementById('oilLeakInfo').required = select.value === 'yes';
         }
 
         function submitSellForm(event) {
@@ -229,32 +221,13 @@
             formData.append('vin', document.getElementById('carInput').value.trim());
 
             const vin = formData.get('vin');
-            const year = formData.get('year');
-            const make = formData.get('make');
-            const model = formData.get('model');
-            const mileage = formData.get('mileage');
-            const condition = formData.get('condition');
-            const transmission = formData.get('transmission');
-            const windshield = formData.get('windshield');
-            const tires = formData.get('tires');
-            const oilLeaks = formData.get('oilLeaks');
-            const mechanicalIssues = formData.get('mechanicalIssues');
-            const photos = formData.get('photos');
             const name = formData.get('name');
             const phone = formData.get('phone');
             const email = formData.get('email');
             const formError = document.getElementById('formError');
             const successMessage = document.getElementById('successMessage');
 
-            if (!vin || !year || !make || !model || !mileage || !condition || !transmission || !windshield || !tires || !oilLeaks || !mechanicalIssues || !photos || !name || !phone || !email) {
-                formError.textContent = 'Please fill out all required fields.';
-                formError.style.display = 'block';
-                successMessage.style.display = 'none';
-                return;
-            }
-
-            if (oilLeaks === 'yes' && !formData.get('oilLeakInfo').trim()) {
-                formError.textContent = 'Please provide oil leak details.';
+            if (!vin || !name || !phone || !email) {
                 formError.style.display = 'block';
                 successMessage.style.display = 'none';
                 return;
