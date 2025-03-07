@@ -639,17 +639,17 @@
         let evMap, evInfowindow;
         function initEVMap() {
             evMap = new google.maps.Map(document.getElementById('evMap'), {
-                center: { lat: 42.6703, lng: -83.0329 },
+                center: { lat: 42.6703, lng: -83.0329 }, // Shelby Township
                 zoom: 10
             });
             evInfowindow = new google.maps.InfoWindow();
             const service = new google.maps.places.PlacesService(evMap);
             service.textSearch({
-                query: 'Shelby Township, MI electric vehicle charging stations',
-                fields: ['name', 'geometry', 'formatted_address'],
-                type: ['electric_vehicle_charging_station']
+                query: 'electric vehicle charging stations near Shelby Township, MI',
+                location: { lat: 42.6703, lng: -83.0329 },
+                radius: 10000 // 10km radius
             }, (results, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+                if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
                     results.forEach(place => {
                         const marker = new google.maps.Marker({
                             position: place.geometry.location,
@@ -657,7 +657,7 @@
                             title: place.name
                         });
                         marker.addListener('click', () => {
-                            evInfowindow.setContent(`${place.name}<br>${place.formatted_address}`);
+                            evInfowindow.setContent(`${place.name}<br>${place.formatted_address || 'No address available'}`);
                             evInfowindow.open(evMap, marker);
                         });
                     });
