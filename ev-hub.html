@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers across Michigan, compare EVs, get buying guides, and master DIY upgrades. Metro Detroit’s EV experts.">
-    <meta name="keywords" content="EV charger map Michigan, best EVs 2025, DIY EV upgrades, electric vehicle guide, Cappello Motors, Metro Detroit EV">
+    <meta name="description" content="Cappello Motors EV Hub - Find EV chargers across Michigan, compare EVs, get buying guides, and shop top charging accessories. Metro Detroit’s EV experts.">
+    <meta name="keywords" content="EV charger map Michigan, best EVs 2025, DIY EV upgrades, electric vehicle guide, EV charging accessories, Cappello Motors, Metro Detroit EV">
     <meta name="author" content="Cappello Motors LLC">
     <meta name="robots" content="index, follow">
     <title>EV Hub | Cappello Motors - Your Electric Vehicle Destination</title>
@@ -258,6 +258,141 @@
         .diy-item a:hover {
             text-decoration: underline;
         }
+        .ev-shop {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 30px;
+            background: #2c3e50;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            overflow: hidden;
+        }
+        .ev-shop h2 {
+            font-size: 2.5em;
+            color: #ecf0f1;
+            margin: 0 0 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .shop-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .shop-container::-webkit-scrollbar {
+            display: none;
+        }
+        .shop-item {
+            display: inline-block;
+            width: 240px;
+            margin: 0 15px;
+            background: #34495e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        .shop-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .shop-item.featured::after {
+            content: 'Featured Deal';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #e74c3c;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .shop-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+        .shop-item h3 {
+            font-size: 1.4em;
+            color: #ecf0f1;
+            margin: 0 0 10px;
+            font-weight: 600;
+        }
+        .shop-item p {
+            font-size: 1.2em;
+            color: #80deea;
+            margin: 0 0 15px;
+        }
+        .shop-item button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #e57373 0%, #c0392b 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .shop-item button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(229,115,115,0.5);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #34495e;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            color: #ecf0f1;
+            text-align: left;
+        }
+        .modal-content h3 {
+            font-size: 1.8em;
+            margin: 0 0 15px;
+            color: #80deea;
+        }
+        .modal-content p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #d1d8e0;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            background: #e57373;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+        .modal-content button:hover {
+            background: #c0392b;
+        }
         footer {
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: #ecf0f1;
@@ -276,9 +411,10 @@
             .content { margin: 20px; padding: 20px; }
             h1 { font-size: 2em; }
             nav a { margin: 5px 10px; font-size: 16px; }
-            .guide-item, .diy-item { width: 100%; max-width: 300px; }
+            .guide-item, .diy-item, .shop-item { width: 100%; max-width: 300px; }
             .map-search input, .comparison-form select { width: 100%; }
             #map { height: 300px; }
+            .shop-item { width: 200px; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -299,7 +435,7 @@
         <h1>EV Hub</h1>
     </header>
     <div class="content">
-        <p>Your one-stop destination for electric vehicles—find chargers across Michigan, compare EVs, buy smart, and upgrade your ride with Cappello Motors, Metro Detroit’s EV experts.</p>
+        <p>Your one-stop destination for electric vehicles—find chargers across Michigan, compare EVs, buy smart, and shop top-tier charging accessories with Cappello Motors, Metro Detroit’s EV experts.</p>
         
         <div class="charger-map">
             <h2>EV Charger Map (Michigan)</h2>
@@ -443,22 +579,69 @@
                 </div>
             </div>
         </div>
+
+        <div class="ev-shop">
+            <h2>Shop EV Charging Accessories</h2>
+            <div class="shop-container">
+                <div class="shop-item featured" onclick="showProductModal('level2')">
+                    <img src="https://via.placeholder.com/240x160?text=Level+2+Charger" alt="Level 2 Charger">
+                    <h3>Portable Level 2 Charger</h3>
+                    <p>Coming Soon</p>
+                    <button onclick="buyNow('level2')">Buy Now</button>
+                </div>
+                <div class="shop-item" onclick="showProductModal('ccs')">
+                    <img src="https://via.placeholder.com/240x160?text=CCS+Adapter" alt="CCS Adapter">
+                    <h3>CCS to Tesla Adapter</h3>
+                    <p>Coming Soon</p>
+                    <button onclick="buyNow('ccs')">Buy Now</button>
+                </div>
+                <div class="shop-item" onclick="showProductModal('level1')">
+                    <img src="https://via.placeholder.com/240x160?text=Level+1+Charger" alt="Level 1 Charger">
+                    <h3>Portable Level 1 Charger</h3>
+                    <p>Coming Soon</p>
+                    <button onclick="buyNow('level1')">Buy Now</button>
+                </div>
+                <div class="shop-item" onclick="showProductModal('mount')">
+                    <img src="https://via.placeholder.com/240x160?text=Wall+Mount" alt="Wall Mount">
+                    <h3>Charger Wall Mount</h3>
+                    <p>Coming Soon</p>
+                    <button onclick="buyNow('mount')">Buy Now</button>
+                </div>
+                <div class="shop-item" onclick="showProductModal('j1772')">
+                    <img src="https://via.placeholder.com/240x160?text=J1772+Adapter" alt="J1772 Adapter">
+                    <h3>J1772 to Tesla Adapter</h3>
+                    <p>Coming Soon</p>
+                    <button onclick="buyNow('j1772')">Buy Now</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+            <p id="modalPrice"></p>
+            <button onclick="closeProductModal()">Close</button>
+        </div>
+    </div>
+
     <footer>
         <p>Cappello Motors<br>49170 Van Dyke, Shelby Township, MI 48317<br>
         <a href="mailto:cappellomotorsllc@gmail.com">cappellomotorsllc@gmail.com</a> | 586-453-5924</p>
     </footer>
+
     <script>
         let map, infowindow, geocoder;
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 44.3148, lng: -85.6024 }, // Center of Michigan
-                zoom: 6 // Zoom to show all of Michigan
+                zoom: 6
             });
             infowindow = new google.maps.InfoWindow();
             geocoder = new google.maps.Geocoder();
-            searchChargers(); // Load Michigan chargers
+            searchChargers();
         }
 
         fetch('/api/google-maps-key')
@@ -482,7 +665,7 @@
                 if (status === google.maps.GeocoderStatus.OK) {
                     const location = results[0].geometry.location;
                     map.setCenter(location);
-                    map.setZoom(search === 'Michigan' ? 6 : 10); // Zoom 6 for state, 10 for cities
+                    map.setZoom(search === 'Michigan' ? 6 : 10);
                     fetch(`/api/chargers?location=${encodeURIComponent(search)}`)
                         .then(response => {
                             if (!response.ok) throw new Error('Failed to fetch chargers');
@@ -511,7 +694,6 @@
                         .catch(error => console.error('Charger fetch failed:', error));
                 } else {
                     console.error('Geocode failed:', status);
-                    // Fallback to Michigan-wide if search fails
                     fetch('/api/chargers?location=Michigan')
                         .then(response => response.json())
                         .then(chargers => {
@@ -593,6 +775,49 @@
                 <tr><td>Charge Speed</td><td>${evData[ev1].chargeSpeed}</td><td>${evData[ev2].chargeSpeed}</td></tr>
             `;
             result.style.display = 'block';
+        }
+
+        const productDetails = {
+            level2: { title: 'Portable Level 2 Charger', description: '32A, 240V, 25ft cable - Charges at 20 mi/hr. Perfect for home or travel.', price: 'Coming Soon' },
+            ccs: { title: 'CCS to Tesla Adapter', description: '150kW compatible - Use Tesla Superchargers with CCS EVs like Ford or Chevy.', price: 'Coming Soon' },
+            level1: { title: 'Portable Level 1 Charger', description: '16A, 120V, 20ft - Emergency backup, plugs into any outlet.', price: 'Coming Soon' },
+            mount: { title: 'Charger Wall Mount', description: 'Organize your Level 2 cable - Sleek, durable design for garage use.', price: 'Coming Soon' },
+            j1772: { title: 'J1772 to Tesla Adapter', description: 'Charge your Tesla at public Level 2 stations - Compact and reliable.', price: 'Coming Soon' }
+        };
+
+        function showProductModal(productId) {
+            const modal = document.getElementById('productModal');
+            const title = document.getElementById('modalTitle');
+            const desc = document.getElementById('modalDescription');
+            const price = document.getElementById('modalPrice');
+            title.textContent = productDetails[productId].title;
+            desc.textContent = productDetails[productId].description;
+            price.textContent = `Price: ${productDetails[productId].price}`;
+            modal.style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        async function buyNow(productId) {
+            alert('Coming Soon! Check back once we’re signed up with our supplier.');
+            // Uncomment below once Spocket is set up
+            // try {
+            //     const response = await fetch('/api/order', {
+            //         method: 'POST',
+            //         headers: { 'Content-Type': 'application/json' },
+            //         body: JSON.stringify({ productId })
+            //     });
+            //     const data = await response.json();
+            //     if (data.success) {
+            //         window.location.href = data.checkoutUrl;
+            //     } else {
+            //         alert('Order failed: ' + data.message);
+            //     }
+            // } catch (error) {
+            //     alert('Error placing order: ' + error.message);
+            // }
         }
     </script>
 </body>
