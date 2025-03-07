@@ -584,31 +584,31 @@
             <h2>Shop EV Charging Accessories</h2>
             <div class="shop-container">
                 <div class="shop-item featured" onclick="showProductModal('level2')">
-                    <img src="https://via.placeholder.com/240x160?text=Level+2+Charger" alt="Level 2 Charger">
+                    <img src="https://images.unsplash.com/photo-1612902376491-7a8a99b42470?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Level 2 Charger">
                     <h3>Portable Level 2 Charger</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('level2')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('ccs')">
-                    <img src="https://via.placeholder.com/240x160?text=CCS+Adapter" alt="CCS Adapter">
+                    <img src="https://images.unsplash.com/photo-1626092030939-20d4e2e75775?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="CCS Adapter">
                     <h3>CCS to Tesla Adapter</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('ccs')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('level1')">
-                    <img src="https://via.placeholder.com/240x160?text=Level+1+Charger" alt="Level 1 Charger">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Level 1 Charger">
                     <h3>Portable Level 1 Charger</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('level1')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('mount')">
-                    <img src="https://via.placeholder.com/240x160?text=Wall+Mount" alt="Wall Mount">
+                    <img src="https://images.unsplash.com/photo-1629236849870-eee7810c16c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="Wall Mount">
                     <h3>Charger Wall Mount</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('mount')">Buy Now</button>
                 </div>
                 <div class="shop-item" onclick="showProductModal('j1772')">
-                    <img src="https://via.placeholder.com/240x160?text=J1772+Adapter" alt="J1772 Adapter">
+                    <img src="https://images.unsplash.com/photo-1601923982832-789a02d0a0e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=240&h=160&q=80" alt="J1772 Adapter">
                     <h3>J1772 to Tesla Adapter</h3>
                     <p>Coming Soon</p>
                     <button onclick="buyNow('j1772')">Buy Now</button>
@@ -802,22 +802,6 @@
 
         async function buyNow(productId) {
             alert('Coming Soon! Check back once we’re signed up with our supplier.');
-            // Uncomment below once Spocket is set up
-            // try {
-            //     const response = await fetch('/api/order', {
-            //         method: 'POST',
-            //         headers: { 'Content-Type': 'application/json' },
-            //         body: JSON.stringify({ productId })
-            //     });
-            //     const data = await response.json();
-            //     if (data.success) {
-            //         window.location.href = data.checkoutUrl;
-            //     } else {
-            //         alert('Order failed: ' + data.message);
-            //     }
-            // } catch (error) {
-            //     alert('Error placing order: ' + error.message);
-            // }
         }
     </script>
 </body>
