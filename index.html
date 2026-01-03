@@ -7,120 +7,351 @@
 <meta name="keywords" content="sell car Detroit, cash for cars Michigan, luxury car buyer, supercar seller, Cappello Motors">
 <title>Cappello Motors – Top Cash for All Cars, Specializing in Luxury & Supercars</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16886493440"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-16886493440');</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-16886493440');
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
 <style>
-html{height:100%}
-body{font-family:Roboto,Arial,sans-serif;margin:0;background:#f8f9fa;color:#222;line-height:1.6;display:flex;flex-direction:column}
-nav{background:linear-gradient(135deg,#111,#333);padding:1rem;position:sticky;top:0;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,.4);display:flex;justify-content:center;align-items:center}
-.logo{font-family:Montserrat,sans-serif;font-size:2rem;color:#ffd700}.logo span{color:#ff0000}
-.dropdown{position:absolute;background:#222;min-width:180px;box-shadow:0 8px 16px rgba(0,0,0,.5);border-radius:6px;left:50%;transform:translateX(-50%);display:none}
-.nav-menu{position:relative;display:inline-block}
-.dropdown a{color:#ffd700;display:block;padding:.8rem 1.2rem;text-decoration:none}
-.dropdown a:hover{background:#111;color:#ff0000}
-.menu-toggle{color:#ffd700;font-size:1.8rem;border:none;background:none;cursor:pointer;display:none}
-@media(max-width:768px){.menu-toggle{display:block}.dropdown{left:auto;transform:none;position:absolute;top:100%;right:0}}
-header{min-height:80vh;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80') center/cover no-repeat;color:#fff;text-align:center;display:flex;flex-direction:column;justify-content:center;padding:0 1.5rem}
-h1{font-family:Montserrat,sans-serif;font-size:4.2rem;margin:0;text-transform:uppercase;letter-spacing:4px;text-shadow:0 3px 12px rgba(0,0,0,.7)}
-header p{font-size:1.8rem;margin:1rem 0}
-.phone-cta{font-size:2.2rem;margin:1.5rem 0}
-.phone-cta a{color:#ffd700;text-decoration:none}
-.trust-bullets{max-width:900px;margin:2rem auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;font-size:1.3rem}
-.trust-bullets li{background:rgba(255,255,255,.15);padding:.8rem 1.5rem;border-radius:8px}
-.input-container{margin:4rem auto;max-width:700px;padding:3rem;background:rgba(255,255,255,.97);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center}
-.input-cta{font-size:2.4rem;color:#111;margin-bottom:1rem}
-.input-cta span{color:#ff0000}
-input,button{width:90%;max-width:420px;padding:1rem;margin:.5rem 0;font-size:1.2rem;border-radius:8px}
-input{border:2px solid #222}
-button{background:#ff0000;color:#fff;border:none;font-weight:bold;cursor:pointer}
-.floating-phone{position:fixed;bottom:1.5rem;right:1.5rem;background:#ff0000;color:#fff;padding:1rem 1.8rem;border-radius:50px;font-size:1.1rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:999;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.value-tracker{margin:3rem auto;max-width:1100px;padding:3rem;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.1);text-align:center}
-.value-tracker-images{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin:2rem 0}
-.value-tracker-images img{width:140px;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
-canvas{max-width:100%;height:300px!important}
-footer{background:linear-gradient(135deg,#111,#333);color:#ffd700;text-align:center;padding:1.5rem;margin-top:auto}
-@media(max-width:768px){h1{font-size:3rem}header p{font-size:1.4rem}.value-tracker-images img{width:110px}.nav-menu:hover .dropdown{display:none}.input-container{margin:2rem auto;padding:2rem}}
+html {
+  height: 100%;
+  overflow-y: scroll; /* Ensures scrollbar is always available on desktop */
+  scroll-behavior: smooth;
+}
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  background: #f8f9fa;
+  color: #222;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+nav {
+  background: linear-gradient(135deg, #111, #333);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  font-family: Montserrat, sans-serif;
+  font-size: 2.8rem;
+  color: #ffd700;
+  margin-right: 2rem;
+}
+.logo span {
+  color: #ff0000;
+}
+.nav-menu {
+  position: relative;
+}
+.dropdown {
+  position: absolute;
+  background: #222;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.5);
+  border-radius: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  margin-top: 8px;
+  display: none;
+  padding: 0.5rem 0;
+}
+.nav-menu:hover .dropdown {
+  display: block;           /* ← MAIN FIX: show on hover on desktop */
+}
+.dropdown a {
+  color: #ffd700;
+  display: block;
+  padding: 0.9rem 1.4rem;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+.dropdown a:hover {
+  background: #111;
+  color: #ff0000;
+}
+.menu-toggle {
+  color: #ffd700;
+  font-size: 2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: none;
+}
+@media(max-width: 768px) {
+  .menu-toggle { display: block; }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: auto;
+    right: 0;
+    transform: none;
+    width: 240px;
+  }
+  .nav-menu:hover .dropdown {
+    display: none;          /* disable hover on mobile – use click instead */
+  }
+}
+header {
+  min-height: 80vh;
+  background: linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+  url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.5rem;
+  padding-bottom: 8rem;
+}
+h1 {
+  font-family: Montserrat, sans-serif;
+  font-size: 4.2rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 3px 12px rgba(0,0,0,.7);
+}
+header p {
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}
+.phone-cta {
+  font-size: 2.2rem;
+  margin: 1.5rem 0;
+}
+.phone-cta a {
+  color: #ffd700;
+  text-decoration: none;
+}
+.trust-bullets {
+  max-width: 900px;
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.3rem;
+  list-style: none;
+  padding: 0;
+}
+.trust-bullets li {
+  background: rgba(255,255,255,.15);
+  padding: .8rem 1.5rem;
+  border-radius: 8px;
+}
+.input-container {
+  margin: 4rem auto;
+  max-width: 700px;
+  padding: 3rem;
+  background: rgba(255,255,255,.97);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  text-align: center;
+}
+.input-cta {
+  font-size: 2.4rem;
+  color: #111;
+  margin-bottom: 1rem;
+}
+.input-cta span {
+  color: #ff0000;
+}
+input, button {
+  width: 90%;
+  max-width: 420px;
+  padding: 1rem;
+  margin: .5rem 0;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+input {
+  border: 2px solid #222;
+}
+button {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  background: #d60000;
+}
+.floating-phone {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #ff0000;
+  color: #fff;
+  padding: 1rem 1.8rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.4);
+  z-index: 999;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+.value-tracker {
+  margin: 3rem auto;
+  max-width: 1100px;
+  padding: 3rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.1);
+  text-align: center;
+}
+.value-tracker-images {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+.value-tracker-images img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+}
+canvas {
+  max-width: 100%;
+  height: 300px !important;
+}
+footer {
+  background: linear-gradient(135deg, #111, #333);
+  color: #ffd700;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+@media(max-width:768px) {
+  h1 { font-size: 3rem; }
+  header p { font-size: 1.4rem; }
+  .value-tracker-images img { width: 110px; }
+  .input-container { margin: 2rem auto; padding: 2rem; }
+}
 </style>
 </head>
 <body>
 <header>
 <nav>
-<span class="logo">C<span>M</span></span>
-<div class="nav-menu">
-<button class="menu-toggle">☰</button>
-<div class="dropdown">
-<a href="/sell-your-car.html">Sell Your Car</a>
-<a href="/cars-for-sale.html">Cars for Sale</a>
-<a href="/why-sell-to-us.html">Why Sell to Us</a>
-<a href="/contact-us.html">Contact Us</a>
-</div>
-</div>
+  <span class="logo">C<span>M</span></span>
+  <div class="nav-menu">
+    <button class="menu-toggle">☰</button>
+    <div class="dropdown">
+      <a href="/sell-your-car.html">Sell Your Car</a>
+      <a href="/cars-for-sale.html">Cars for Sale</a>
+      <a href="/why-sell-to-us.html">Why Sell to Us</a>
+      <a href="/contact-us.html">Contact Us</a>
+    </div>
+  </div>
 </nav>
+
 <h1>Top Dollar for Your Car</h1>
 <p>Specializing in Luxury & Supercars: Ferrari • Lamborghini • Aston Martin • Mercedes • Audi • BMW • Porsche • McLaren & More</p>
 <p>We Buy All Makes and Models – Any Condition!</p>
 <p class="phone-cta">Call/Text: <a href="tel:586-453-5924">(586) 453-5924</a></p>
 <ul class="trust-bullets">
-<li>Instant Offers</li>
-<li>Free Secure Pickup – Michigan Wide</li>
-<li>No Hassle – Best Market Deals</li>
-<li>Trusted Service</li>
+  <li>Instant Offers</li>
+  <li>Free Secure Pickup – Michigan Wide</li>
+  <li>No Hassle – Best Market Deals</li>
+  <li>Trusted Service</li>
 </ul>
 </header>
+
 <div class="input-container">
 <h2 class="input-cta">Get Your <span>Free Offer</span> Today</h2>
 <form action="https://formspree.io/f/your-form-id" method="POST">
-<input type="text" name="name" placeholder="Name" required>
-<input type="tel" name="phone" placeholder="Phone (Required)" required>
-<input type="email" name="email" placeholder="Email (Optional)">
-<input type="text" name="vin" placeholder="VIN / Plate (Optional – Faster Quote)">
-<button type="submit">Get Offer →</button>
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="tel" name="phone" placeholder="Phone (Required)" required>
+  <input type="email" name="email" placeholder="Email (Optional)">
+  <input type="text" name="vin" placeholder="VIN / Plate (Optional – Faster Quote)">
+  <button type="submit">Get Offer →</button>
 </form>
 </div>
+
 <div class="value-tracker">
 <h2>We Buy All Cars – Top Cash for Luxury & Supercars</h2>
 <div class="value-tracker-images">
-<img src="https://pngimg.com/d/ferrari_PNG102815.png" alt="Ferrari">
-<img src="https://fabrikbrands.com/wp-content/uploads/Lamborgini-Logo-1.png" alt="Lamborghini">
-<img src="https://www.pngkey.com/png/detail/143-1438846_aston-martin-logo-aston-martin-logo-png.png" alt="Aston Martin">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Mercedes_benz_logo1989.png" alt="Mercedes">
-<img src="https://www.freepnglogos.com/uploads/audi-logo-2.png" alt="Audi">
-<img src="https://i.pinimg.com/originals/9b/98/fe/9b98fe7973d0cb009e68fee1a586417a.jpg" alt="BMW">
-<img src="https://www.freepnglogos.com/uploads/porsche-logo-16.png" alt="Porsche">
+  <img src="https://pngimg.com/d/ferrari_PNG102815.png" alt="Ferrari">
+  <img src="https://fabrikbrands.com/wp-content/uploads/Lamborgini-Logo-1.png" alt="Lamborghini">
+  <img src="https://www.pngkey.com/png/detail/143-1438846_aston-martin-logo-aston-martin-logo-png.png" alt="Aston Martin">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Mercedes_benz_logo1989.png" alt="Mercedes">
+  <img src="https://www.freepnglogos.com/uploads/audi-logo-2.png" alt="Audi">
+  <img src="https://i.pinimg.com/originals/9b/98/fe/9b98fe7973d0cb009e68fee1a586417a.jpg" alt="BMW">
+  <img src="https://www.freepnglogos.com/uploads/porsche-logo-16.png" alt="Porsche">
 </div>
 <p style="font-size:1.3rem;color:#ff0000;margin:1.5rem 0">Top dollar for pristine, used or salvage vehicles – sell now while values remain strong!</p>
 <div style="margin-top:2rem">
-<h3>Luxury/Supercar Value Trend (YoY Avg. Index)</h3>
-<canvas id="luxuryChart"></canvas>
+  <h3>Luxury/Supercar Value Trend (YoY Avg. Index)</h3>
+  <canvas id="luxuryChart"></canvas>
 </div>
 </div>
+
 <footer>
 <p>Cappello Motors LLC • 49170 Van Dyke, Shelby Township, MI 48317<br>
-<a href="mailto:cappellomotorsllc@gmail.com" style="color:#ffd700">cappellomotorsllc@gmail.com</a> | <a href="tel:586-453-5924" style="color:#ffd700">586-453-5924</a></p>
+<a href="mailto:cappellomotorsllc@gmail.com" style="color:#ffd700">cappellomotorsllc@gmail.com</a> |
+<a href="tel:586-453-5924" style="color:#ffd700">586-453-5924</a></p>
 </footer>
+
 <a href="tel:586-453-5924" class="floating-phone">📞 (586) 453-5924 – Instant Offer</a>
+
 <script>
-const ctx=document.getElementById('luxuryChart').getContext('2d');
-new Chart(ctx,{
-type:'line',
-data:{
-labels:['2022','2023','2024','2025'],
-datasets:[{label:'Luxury/Supercar Avg. Value Index',data:[100,92,95,102],borderColor:'#ff0000',tension:0.2,backgroundColor:'rgba(255,0,0,0.1)'}]
-},
-options:{scales:{y:{beginAtZero:false,title:{display:true,text:'Relative Value Index (2022=100)'}}}}
+// Chart
+const ctx = document.getElementById('luxuryChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['2022','2023','2024','2025'],
+    datasets: [{
+      label: 'Luxury/Supercar Avg. Value Index',
+      data: [100, 92, 95, 102],
+      borderColor: '#ff0000',
+      tension: 0.2,
+      backgroundColor: 'rgba(255,0,0,0.1)'
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: false,
+        title: { display: true, text: 'Relative Value Index (2022=100)' }
+      }
+    }
+  }
 });
+
+// Mobile menu toggle
 const menuToggle = document.querySelector('.menu-toggle');
 const dropdown = document.querySelector('.dropdown');
-menuToggle.addEventListener('click', () => {
+
+menuToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 });
-window.addEventListener('click', (event) => {
-  if (!event.target.matches('.menu-toggle')) {
-    if (dropdown.style.display === 'block') {
-      dropdown.style.display = 'none';
-    }
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-menu')) {
+    dropdown.style.display = 'none';
   }
 });
 </script>
